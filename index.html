@@ -15,6 +15,7 @@
 		Tastiness: <span id="sandwichTastiness">0</span><br>
 		Sell Value: $<span id="sandwichSV">0</span><br>
 	<hr>
+	<h3>Crafting Station</h3>
 		<form id="sandwichForm"> <!-- Sandwich Creation -->
 			<label>Sandwich Name:</label>
 			<input type="text" id="sname" autocomplete="off" required><br>
@@ -24,7 +25,7 @@
 		<span id="newRecipe"> </span>
 		</form>
 	<hr> <!-- recipe book section -->
-	Recipe Book <select id="recipeBookSelection" oninput="swapRecipeBook(recipeBookSelection.value)">
+	<h3>Recipe Book</h3><select id="recipeBookSelection" oninput="swapRecipeBook(recipeBookSelection.value)">
 		<option value='0'>Breadwich</option>
 	</select><br>
 	<span id="recipeOutput">0</span>
