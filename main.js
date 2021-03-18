@@ -87,7 +87,7 @@ function load(){
 	sandwichCost = savegame.sandwichCost;
 	selectedSandwich = savegame.selectedSandwich;
 	ingredients = savegame.ingredients;
-		updateRecipe(selectedSandwich,sandwichTastiness,sandwichCost);
+		updateRecipe(String(selectedSandwich),sandwichTastiness,sandwichCost);
 };
 // loop
 window.setInterval(function(){ //looping thing
