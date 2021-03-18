@@ -12,6 +12,8 @@ var ingredients = [
 ["Cheese", 2, 0.50],
 ["Turkey", 1.5, 1],
 ["Tomato", 2, 0.50],
+["Bacon",1,1.5],
+["Fried Egg",3,0.2]
 ]
 function makeSandwich(amnt){
 	if(money >= sandwichCost){ //check if can afford sandwich
@@ -69,9 +71,14 @@ form.onsubmit = function() { //when submit buton is pressed
 		}
 		//everything calculated, now it's setting time
 		var bns = calculateBonus(ingrListForBook);
-		recipeTastiness *= bns[1] //add bonus
-		document.getElementById("bonusOutput").innerHTML = bns[0].join("<br>");
-	recipeBook.unshift([form.sname.value, Number(recipeCost.toFixed(2)),Number(recipeTastiness.toFixed(2)), ingrListForBook]) //adds array to recipeBook
+		console.log(recipeTastiness)
+		recipeTastiness = recipeTastiness * Number(bns[1]) //add bonus
+		console.log(recipeTastiness)
+		console.log(bns)
+		console.log(bns[0])
+		document.getElementById("bonusOutput").innerHTML = bns[0];
+	recipeBook.unshift([form.sname.value, Number(recipeTastiness.toFixed(2)),Number(recipeCost.toFixed(2)), ingrListForBook]) //adds array to recipeBook
+	console.log(recipeBook)
 	updateRecipe(form.sname.value, recipeCost.toFixed(2),recipeTastiness.toFixed(2)); //updates values for html
 		refreshBook();
 	// document.getElementById("newRecipe").innerHTML = "Sandwich Name: " + form.sname.value + "<br>tastiness: " + sandwichTastiness + "<br>cost: " + sandwichCost + "<br>sell value: " + document.getElementById('sandwichSV').innerHTML;
@@ -85,9 +92,9 @@ function updateRecipe(name,tastiness,cost){ //update stats
 	document.getElementById("currentSandwich").innerHTML = sanitizeHTML(name);
 	document.getElementById("sandwichSV").innerHTML = (sandwichCost * 8/7).toFixed(2);
 	document.getElementById("peopleTick").innerHTML = Math.floor(sandwichTastiness);
-	document.getElementById("secondTick").innerHTML = +((2500/(sandwichTastiness/3))/1000).toFixed(2);
+	document.getElementById("secondTick").innerHTML = Number((2500/(sandwichTastiness/3))/1000).toFixed(2);
 	sandwiches = 0;
-}; updateRecipe("Breadwich", 1.05, 1.95);
+}; //updateRecipe("Breadwich", 1.05, 1.95);
 //saving & loading
 function save(){
 	var saveData = {
@@ -134,17 +141,6 @@ function swapRecipeBook(e){
 swapRecipeBook(0);
 
 // loop
-function calculateBonus(ingrArray){  //get bonus values et names
-	console.log(ingrArray);
-	var bonuses = new Array;
-	var bonusTastiness = 1;
-		if(ingrArray.indexOf("Bread") === 0 && ingrArray.indexOf("Bread",-1) === ingrArray.length - 1){
-				//if bread is first and bread is last
-				bonuses += "Traditional bonus! (x1.5 Tastiness)";
-				bonusTastiness *= 1.5;
-		}
-	return [bonuses,bonusTastiness]
-}
 window.setInterval(function(){ //looping thing
 			for(i=0;i<Math.floor(sandwichTastiness);i++){
 				if(sandwiches > 0){

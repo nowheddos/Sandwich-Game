@@ -37,7 +37,7 @@
 
 			<div class="row">
 				<div class="column" style="border:none;font-size:70%"><span id="ingredientSelect"></span></div>
-				<div class="column" id="bonusOutput" style="border:none"></div>
+				<span class="rainbow-text"><div class="column"  id="bonusOutput" style="border:none"></div></span>
 			</div>		
 <!--				<span>Tastiness: </span><span id="tastinessReplace">?</span><br><br> do this later-->
 		  <input type="submit" value="Craft" class="button"><br>
@@ -56,5 +56,6 @@
 		<div class="bottomScreen"><button class="button" onClick="save()">Save</button> <button class="button" onClick="load()">Load</button> <button style="background-color: darkred;color:white" class="button" onClick="if(confirm('Are you sure you want to Hard Reset? This cannot be undone.')){localStorage.removeItem(`saveData`);window.location.reload()}">Hard Reset</button>
 		<input id="autosaveBox" type="checkbox" oninput="autosaveEnabled = !autosaveEnabled;" checked>Autosave</div>
 			<script type="text/javascript" src="main.js" ></script>
+			<script type="text/javascript" src="bonuscheck.js" ></script>
 	</body>
 </html>
