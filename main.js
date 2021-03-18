@@ -26,6 +26,7 @@ var fullOptions = new Array;
 		console.log(fullOptions);
 		fullOptions += "<option value='" + i + "'>" + recipeBook[i][0] + "</option><br>"
 }; document.getElementById("recipeBookSelection").innerHTML = fullOptions;
+swapRecipeBook(0);
 }
 // form shit
 
@@ -92,6 +93,8 @@ function save(){
 	}; 
 	localStorage.setItem("saveData",JSON.stringify(saveData));
 	console.log("Game saved");
+	var d = new Date();
+	document.getElementById("alertsBox").innerHTML = "Saved at " + d.getMinutes() + ":" + d.getSeconds() + ":" + d.getMilliseconds();
 };
 function load(){
 	var savegame = JSON.parse(localStorage.getItem("saveData"));
@@ -104,9 +107,13 @@ function load(){
 	recipeBook = savegame.recipeBook; 
 	console.log(recipeBook);
 	console.log(savegame.recipeBook);
+		document.getElementById("sandwichCount").innerHTML = sandwiches;
+		document.getElementById("moneyCount").innerHTML = money.toFixed(2);
 		refreshBook();
 		updateRecipe(String(selectedSandwich),sandwichTastiness,sandwichCost);
 		console.log("game loaded successfully, money: " + money);
+	var d = new Date();
+	document.getElementById("alertsBox").innerHTML = "Loaded at " + d.getMinutes() + ":" + d.getSeconds() + ":" + d.getMilliseconds();
 }; if(localStorage.getItem("saveData") !== null){window.onload = load();};
 //recipe book shit
 function swapRecipeBook(e){
@@ -124,3 +131,7 @@ window.setInterval(function(){ //looping thing
 	document.getElementById("sandwichCount").innerHTML = sandwiches;
 	document.getElementById("moneyCount").innerHTML = money.toFixed(2);
 }, 2500/(sandwichTastiness/3)); //1000 = 1000ms = 1s
+
+window.setInterval(function(){
+	save();
+}, 30000);

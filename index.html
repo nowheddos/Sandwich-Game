@@ -1,36 +1,54 @@
 <!DOCTYPE HTML>
-
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="interface.css" />
 		<title>Sandwich-Game by Nowhed</title>
+		<h1 class="column" style="position:50%;font-size:185%">Sandwich-Game</h1>
 	</head>
-	<body>
-		<div class="box">Money: $<span id="moneyCount">5.00</span><br>
+
+<body>
+<div class="row">
+	<div class="column"> <!-- money/sandwich section -->
+		Money: $<span id="moneyCount">5.00</span><br>
 		Sandwiches in stock: <span id="sandwichCount">0</span><br>
 		Store traffic: <span id="peopleTick">0</span> people every <span id="secondTick">0</span> seconds.<br>
-		<button onClick="makeSandwich(1)">Make Sandwich</button><br></div>
-		Currently selected sandwich: <span id="currentSandwich">Breadwich</span><br>
+		<button class="button" onClick="makeSandwich(1)">Make Sandwich</button></div><br>
+	<!-- currently selected + stats -->
+	<div class="column">Currently selected sandwich: <span id="currentSandwich">Breadwich</span><br>
 		Cost: $<span id="sandwichCost">0</span><br>
 		Tastiness: <span id="sandwichTastiness">0</span><br>
-		Sell Value: $<span id="sandwichSV">0</span><br>
-	<hr>
+		Sell Value: $<span id="sandwichSV">0</span>
+		</div>
+		<!-- Alerts Log -->
+		<div class="column">Log
+			<p id="alertsBox">This is where logs go</p>
+		</div>
+</div> <!-- End of Row -->
+<hr>
+
+
+
+<div class="row">
+	<div class="column">
 	<h3>Crafting Station</h3>
 		<form id="sandwichForm"> <!-- Sandwich Creation -->
 			<label>Sandwich Name:</label>
 			<input type="text" id="sname" autocomplete="off" required><br>
 				<span id="ingredientSelect"></span><br>
 <!--				<span>Tastiness: </span><span id="tastinessReplace">?</span><br><br> do this later-->
-		<input type="submit" value="Craft"><br>
-		<span id="newRecipe"> </span>
+		<input type="submit" value="Craft" class="button"><br>
+		<span id="bonusOutput"> </span>
 		</form>
-	<hr> <!-- recipe book section -->
+	</div><div class="column">
+ 		<!-- recipe book section -->
 	<h3>Recipe Book</h3><select id="recipeBookSelection" oninput="swapRecipeBook(recipeBookSelection.value)">
 		<option value='0'>Breadwich</option>
 	</select><br>
 	<span id="recipeOutput">0</span>
+	</div>
+</div>
 	<hr><!-- end recipe book section -->
-		<button onClick="save()">Save</button><button onClick="load()">Load</button><button onClick="if(confirm('Are you sure you want to Hard Reset? This cannot be undone.')){localStorage.removeItem(`saveData`)}">Hard Reset</button>
-	<script type="text/javascript" src="main.js"></script>
+		<div class="bottomScreen"><button class="button" onClick="save()">Save</button> <button class="button" onClick="load()">Load</button> <button style="background-color: darkred;color:white" class="button" onClick="if(confirm('Are you sure you want to Hard Reset? This cannot be undone.')){localStorage.removeItem(`saveData`);window.location.reload()}">Hard Reset</button></div>
+			<script type="text/javascript" src="main.js"></script>
 	</body>
 </html>

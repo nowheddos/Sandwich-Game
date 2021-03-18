@@ -1,5 +1,37 @@
-div.box {
+*  {
+    font-size: 115%;
+   }
+div.rightSideFixed {
     float: right;
+    right: 40%;
     position: fixed;
-    right: 40%
-};
+}
+.row {
+    display: flex;
+}
+.column {
+    border-style: double;
+    padding: 4px;
+    flex: 50%;
+}
+.button {
+    outline: none;
+    padding: 10px 15px;
+    font-size: 80%;
+    border:none;
+    background-color: rgb(189, 189, 189);
+    transition-duration: 0.2s;
+    cursor: pointer;
+}
+.button:hover {
+    background-color: rgb(255, 255, 255);
+    border:none;
+}
+.button:active {
+    border:none;
+    background-color:darkgray;
+}
+.bottomScreen {
+    bottom: 1px;
+    position: fixed;
+}
