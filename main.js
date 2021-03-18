@@ -1,4 +1,5 @@
 var sandwiches = 0;
+var autosaveEnabled = true;
 var money = 5;
 var sandwichTastiness = 1;
 var sandwichCost = 1;
@@ -63,6 +64,8 @@ form.onsubmit = function() { //when submit buton is pressed
 			ingrListForBook.unshift(recipeStats[i][0])
 		}
 		//everything calculated, now it's setting time
+		var bns = calculateBonus(ingrListForBook);
+		recipeTastiness *= bns[1] //add bonus
 	recipeBook.unshift([form.sname.value, Number(recipeCost.toFixed(2)),Number(recipeTastiness.toFixed(2)), ingrListForBook]) //adds array to recipeBook
 	updateRecipe(form.sname.value, recipeCost.toFixed(2),recipeTastiness.toFixed(2)); //updates values for html
 		refreshBook();
@@ -89,7 +92,8 @@ function save(){
 		sandwichCost: sandwichCost,
 		selectedSandwich: selectedSandwich,
 		ingredients: ingredients,
-		recipeBook: recipeBook
+		recipeBook: recipeBook,
+		autosaveEnabled: autosaveEnabled
 	}; 
 	localStorage.setItem("saveData",JSON.stringify(saveData));
 	console.log("Game saved");
@@ -105,6 +109,8 @@ function load(){
 	selectedSandwich = savegame.selectedSandwich;
 	ingredients = savegame.ingredients;
 	recipeBook = savegame.recipeBook; 
+	autosaveEnabled = savegame.autosaveEnabled; 
+	if(!autosaveEnabled){document.getElementById("autosaveBox").outerHTML = '<input id="autosaveBox" type="checkbox" oninput="autosaveEnabled = !autosaveEnabled;">'}; //check if autosave is disabled, replace if it is
 	console.log(recipeBook);
 	console.log(savegame.recipeBook);
 		document.getElementById("sandwichCount").innerHTML = sandwiches;
@@ -119,8 +125,21 @@ function load(){
 function swapRecipeBook(e){
 	updateRecipe(recipeBook[e][0],recipeBook[e][1],recipeBook[e][2])
 	document.getElementById("recipeOutput").innerHTML = recipeBook[e].slice(0,3).join('<br>') + "<br>Raw ingredients: " + recipeBook[e][3].join(', ');
-}; swapRecipeBook(0);
+};
+swapRecipeBook(0);
 // loop
+function calculateBonus(ingrArray){ 
+	console.log(ingrArray);
+	var bonuses = new Array;
+	var bonusTastiness = 1;
+		if(ingrArray.indexOf("Bread") === 0 && ingrArray.indexOf("Bread",-1) === ingrArray.length - 1){
+				//if bread is first and bread is last
+				bonuses += "Bread bonus! (x1.5 Tastiness)";
+				bonusTastiness *= 1.5;
+		}
+	return [bonuses,bonusTastiness]
+
+}
 window.setInterval(function(){ //looping thing
 			for(i=0;i<Math.floor(sandwichTastiness);i++){
 				if(sandwiches > 0){
