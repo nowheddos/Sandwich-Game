@@ -9,6 +9,7 @@ function calculateBonus(ingrArray){  //get bonus values et names
 				bonusTastiness *= 1.25;
 		}
         if(ingrArray.includes("Bacon" && "Fried Egg" && "Cheese")){ //contains BEC
+            console.log(ingrArray.includes("Bacon" && "Fried Egg" && "Cheese"))
             bonuses += "Bacon, egg, and cheese bonus! (x1.5 Tastiness)";
             bonusTastiness *= 1.5;  
         }
