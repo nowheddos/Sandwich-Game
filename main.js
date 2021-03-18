@@ -4,7 +4,7 @@ var sandwichTastiness = 1;
 var sandwichCost = 1;
 var selectedSandwich = "Breadwich";
 var maxIngredientSelection = 3;
-var recipieBook = new Array;
+var recipeBook = new Array;
 //Ingrediets: name, tastiness, cost
 var ingredients = [
 ["Bread", 1.25, 0.35],
@@ -51,10 +51,10 @@ form.onsubmit = function() { //when submit buton is pressed
 			recipeTastiness*=recipeStats[i][1]
 			recipeCost+=recipeStats[i][2]
 		}
+	recipeBook.unshift(form.sname.value, recipeCost.toFixed(2),recipeTastiness.toFixed(2))
 	updateRecipe(form.sname.value, recipeCost.toFixed(2),recipeTastiness.toFixed(2));
 	document.getElementById("newRecipe").innerHTML = "Sandwich Name: " + form.sname.value + "<br>tastiness: " + sandwichTastiness + "<br>cost: " + sandwichCost + "<br>sell value: " + document.getElementById('sandwichSV').innerHTML;
 };
-
 function updateRecipe(name,tastiness,cost){ //update stats
 	sandwichTastiness = tastiness;
 	sandwichCost = cost;
@@ -63,7 +63,7 @@ function updateRecipe(name,tastiness,cost){ //update stats
 	document.getElementById("sandwichCost").innerHTML = cost;
 	document.getElementById("currentSandwich").innerHTML = name;
 	document.getElementById("sandwichSV").innerHTML = (sandwichCost * 8/7).toFixed(2);
-	document.getElementById("peopleTick").innerHTML = Math.floor(sandwichTastiness).toFixed(2);
+	document.getElementById("peopleTick").innerHTML = Math.floor(sandwichTastiness);
 	document.getElementById("secondTick").innerHTML = +((2500/sandwichTastiness)/1000).toFixed(2);
 	sandwiches = 0;
 }; updateRecipe("Breadwich", 1.05, 1.95);
@@ -75,7 +75,8 @@ function save(){
 		sandwichTastiness: sandwichTastiness,
 		sandwichCost: sandwichCost,
 		selectedSandwich: selectedSandwich,
-		ingredients: ingredients
+		ingredients: ingredients,
+		recipeBook: recipeBook
 	}; 
 	localStorage.setItem("saveData",JSON.stringify(saveData));
 	       };
@@ -87,6 +88,7 @@ function load(){
 	sandwichCost = savegame.sandwichCost;
 	selectedSandwich = savegame.selectedSandwich;
 	ingredients = savegame.ingredients;
+	recipeBook = savegame.recipeBook;
 		updateRecipe(String(selectedSandwich),sandwichTastiness,sandwichCost);
 };
 // loop
