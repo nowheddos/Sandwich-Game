@@ -79,7 +79,9 @@ function save(){
 	}; 
 	localStorage.setItem("saveData",JSON.stringify(saveData));
 	       };
-var savegame = JSON.parse(localStorage.getItem("save"));
+function load(){
+	var savegame = JSON.parse(localStorage.getItem("saveData"));
+};
 // loop
 window.setInterval(function(){ //looping thing
 			for(i=0;i<Math.floor(sandwichTastiness);i++){
