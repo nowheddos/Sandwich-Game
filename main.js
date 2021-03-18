@@ -83,6 +83,8 @@ form.onsubmit = function() { //when submit buton is pressed
 	// document.getElementById("newRecipe").innerHTML = "Sandwich Name: " + form.sname.value + "<br>tastiness: " + sandwichTastiness + "<br>cost: " + sandwichCost + "<br>sell value: " + document.getElementById('sandwichSV').innerHTML;
 }; //MEATY SHITE RIGHT HERE
 function updateRecipe(name,tastiness,cost){ //update stats
+	money += sandwiches * sandwichCost;
+	sandwiches = 0;
 	sandwichTastiness = tastiness;
 	sandwichCost = cost;
 	selectedSandwich = name;
@@ -92,7 +94,8 @@ function updateRecipe(name,tastiness,cost){ //update stats
 	document.getElementById("sandwichSV").innerHTML = (sandwichCost * 8/7).toFixed(2);
 	document.getElementById("peopleTick").innerHTML = Math.floor(Math.cbrt(sandwichTastiness));
 	document.getElementById("secondTick").innerHTML = Number(5000/timeSpeed^sandwichTastiness).toFixed(2)/1000;
-	sandwiches = 0;
+	document.getElementById("sandwichCount").innerHTML = sandwiches;
+	document.getElementById("moneyCount").innerHTML = money.toFixed(2);
 }; //updateRecipe("Breadwich", 1.05, 1.95);
 //saving & loading
 function save(){
