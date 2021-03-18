@@ -45,7 +45,7 @@ div.rightSideFixed {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: rainbow 8s ease infinite;
-    font-size:60%
+    font-size:70%
   }
   @keyframes rainbow { 
     0%{background-position:0% 50%}

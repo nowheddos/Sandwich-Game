@@ -1,10 +1,11 @@
 var sandwiches = 0;
+var gameStage = 0;
 var autosaveEnabled = true;
 var money = 5;
 var sandwichTastiness = 1;
 var sandwichCost = 1;
 var selectedSandwich = "Breadwich";
-var maxIngredientSelection = 3;
+var maxIngredientSelection = 5;
 var recipeBook = new Array(["Breadwich", 1.05, 1.95,["Bread", "Bread", "Bread"]]);
 //Ingrediets: name, tastiness, cost
 var ingredients = [
@@ -91,8 +92,8 @@ function updateRecipe(name,tastiness,cost){ //update stats
 	document.getElementById("sandwichCost").innerHTML = cost;
 	document.getElementById("currentSandwich").innerHTML = sanitizeHTML(name);
 	document.getElementById("sandwichSV").innerHTML = (sandwichCost * 8/7).toFixed(2);
-	document.getElementById("peopleTick").innerHTML = Math.floor(sandwichTastiness);
-	document.getElementById("secondTick").innerHTML = Number((2500/(sandwichTastiness/3))/1000).toFixed(2);
+	document.getElementById("peopleTick").innerHTML = Math.floor(Math.sqrt(sandwichTastiness));
+	document.getElementById("secondTick").innerHTML = Number((3000/Math.sqrt(sandwichTastiness/20))/1000).toFixed(2);
 	sandwiches = 0;
 }; //updateRecipe("Breadwich", 1.05, 1.95);
 //saving & loading
@@ -105,7 +106,8 @@ function save(){
 		selectedSandwich: selectedSandwich,
 		ingredients: ingredients,
 		recipeBook: recipeBook,
-		autosaveEnabled: autosaveEnabled
+		autosaveEnabled: autosaveEnabled,
+		gameStage:gameStage
 	}; 
 	localStorage.setItem("saveData",JSON.stringify(saveData));
 	console.log("Game saved");
@@ -122,6 +124,7 @@ function load(){
 	ingredients = savegame.ingredients;
 	recipeBook = savegame.recipeBook; 
 	autosaveEnabled = savegame.autosaveEnabled; 
+	gameStage = savegame.gameStage;
 	if(!autosaveEnabled){document.getElementById("autosaveBox").outerHTML = '<input id="autosaveBox" type="checkbox" oninput="autosaveEnabled = !autosaveEnabled;">'}; //check if autosave is disabled, replace if it is
 	console.log(recipeBook);
 	console.log(savegame.recipeBook);
@@ -136,13 +139,13 @@ function load(){
 //recipe book shit
 function swapRecipeBook(e){
 	updateRecipe(recipeBook[e][0],recipeBook[e][1],recipeBook[e][2])
-	document.getElementById("recipeOutput").innerHTML = sanitizeHTML(recipeBook[e][0]) + "<hr>" + recipeBook[e].slice(1,3).join('<br>') + "<br>Raw ingredients: " + recipeBook[e][3].join(', ');
+	document.getElementById("recipeOutput").innerHTML = sanitizeHTML(recipeBook[e][0]) + "<hr>" + recipeBook[e].slice(1,3).join('<br>') + "<br>Raw ingredients: " + recipeBook[e][3].join(', ' ) + "<br>Bonuses:<br><div class='rainbow-text'>" + calculateBonus(recipeBook[e][3])[0] + "</div>";
 };
 swapRecipeBook(0);
 
 // loop
 window.setInterval(function(){ //looping thing
-			for(i=0;i<Math.floor(sandwichTastiness);i++){
+			for(i=0;i<Math.floor(Math.sqrt(sandwichTastiness));i++){
 				if(sandwiches > 0){
 		    		sandwiches--
 					money += +(sandwichCost * 8/7).toFixed(2); //money += a little higher than cost, multiplied by floortastiness because more people want it
@@ -150,7 +153,7 @@ window.setInterval(function(){ //looping thing
 			};
 	document.getElementById("sandwichCount").innerHTML = sandwiches;
 	document.getElementById("moneyCount").innerHTML = money.toFixed(2);
-}, 2500/(sandwichTastiness/3)); //1000 = 1000ms = 1s
+}, 3000/Math.sqrt(sandwichTastiness/20))/1000; //1000 = 1000ms = 1s
 
 window.setInterval(function(){
 	save();
