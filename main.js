@@ -67,14 +67,20 @@ function updateRecipe(name,tastiness,cost){ //update stats
 	document.getElementById("secondTick").innerHTML = +((2500/sandwichTastiness)/1000).toFixed(2);
 	sandwiches = 0;
 }; updateRecipe("Breadwich", 1.05, 1.95);
-var save = {
-	sandwiches: sandwiches,
-	money: money,
-	sandwichTastiness: sandwichTastiness,
-	sandwichCost: sandwichCost,
-	selectedSandwich: selectedSandwich,
-	ingredients: ingredients
-}; localStorage.setItem("save",JSON.stringify(save));
+//saving & loading
+function save(){
+	var saveData = {
+		sandwiches: sandwiches,
+		money: money,
+		sandwichTastiness: sandwichTastiness,
+		sandwichCost: sandwichCost,
+		selectedSandwich: selectedSandwich,
+		ingredients: ingredients
+	}; 
+	localStorage.setItem("saveData",JSON.stringify(saveData));
+	       };
+var savegame = JSON.parse(localStorage.getItem("save"));
+// loop
 window.setInterval(function(){ //looping thing
 			for(i=0;i<Math.floor(sandwichTastiness);i++){
 				if(sandwiches > 0){
