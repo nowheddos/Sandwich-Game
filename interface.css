@@ -52,3 +52,13 @@ div.rightSideFixed {
     50%{background-position:100% 25%}
     100%{background-position:0% 50%}
 }
+.invisible {
+    visibility: hidden;
+    position: absolute;
+    top: -9999px;
+}
+
+.visible {
+    visibility: visible;
+    position: static;
+}

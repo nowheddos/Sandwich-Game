@@ -14,21 +14,21 @@
 		Store traffic: <span id="peopleTick">0</span> people every <span id="secondTick">0</span> seconds.<br>
 		<button class="button" onClick="makeSandwich(1)">Make Sandwich</button></div><br>
 	<!-- currently selected + stats -->
-	<div class="column">Currently selected sandwich: <span id="currentSandwich">Breadwich</span><br>
+	<div id="currentlyStats" class="column">Currently selected sandwich: <span id="currentSandwich">Breadwich</span><br>
 		Cost: $<span id="sandwichCost">0</span><br>
 		Tastiness: <span id="sandwichTastiness">0</span><br>
 		Sell Value: $<span id="sandwichSV">0</span>
 		</div>
 		<!-- Alerts Log -->
-		<div class="column">Log
+		<div id="logDiv" class="column">Log
 			<p id="alertsBox">Click button. Make sandwich.</p>
 		</div>
 </div> <!-- End of Row -->
 
 
 
-<div class="row">
-	<div class="column" style="border:none">
+<div class="row"> 
+	<div id= "craftingStation" class="column" style="border:none">
 		<form id="sandwichForm"> <!-- Sandwich Creation -->
 				<fieldset style="size:10px 50px;">
 					<legend>Crafting Station</legend>
@@ -43,7 +43,7 @@
 		  <input type="submit" value="Craft" class="button"><br>
 		</fieldset>
 		</form>
-	</div><div class="column">
+	</div><div id="recipeBookSection" class="column">
  		<!-- recipe book section -->
 	<h3>Recipe Book</h3><select id="recipeBookSelection" oninput="swapRecipeBook(recipeBookSelection.value)"> 
 		<option value='0'>Breadwich</option>

@@ -22,3 +22,5 @@ sandwich game - simplest prototype
 3: ingredient searching
 
 	Explore the environment for ingredients, plus some bonus stuff like money or finding shops to buy ingredients directly
+
+	different environments with more ingrident
