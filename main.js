@@ -81,6 +81,7 @@ function save(){
 	       };
 function load(){
 	var savegame = JSON.parse(localStorage.getItem("saveData"));
+	money = savegame.money;
 };
 // loop
 window.setInterval(function(){ //looping thing
