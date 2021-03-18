@@ -31,19 +31,20 @@ function sanitizeHTML(text) { //sanitize text
 	element.innerText = text;
 	return element.innerHTML;
   }
-function setIngredientSelect(maxIngredients){ //makes ingredient selectors (the dropdown stuff)
+function setIngredientSelect(){ //makes ingredient selectors (the dropdown stuff)
 	var optionsTag = "";
+	document.getElementById("opt").innerHTML = '<span id="ingredientSelect"></span>'
 	for(i=0;i<ingredients.length;i++){ //gets the <options> for all ingredients, sets them into the variable optionsTag
 		optionsTag = optionsTag + "<option value= '" + i + "'>" + ingredients[i][0] + "</option>\n"
 	};
-
-	for(i = 0; i < maxIngredients; i++){ //sets up the <select>
+	for(i = 0; i < maxIngredientSelection; i++){ //sets up the <select>
 		document.getElementById("ingredientSelect").outerHTML = [
 			"<select id='ingrSelect" + i + "'>" + optionsTag + "</select><br>" + "<span id='ingredientSelect'></span>"
 		];
 	};
 };
-setIngredientSelect(maxIngredientSelection); //temporary
+setIngredientSelect(); //temporary
+//1 week later: it was not temporary.
 let form = document.getElementById('sandwichForm'); // form
 function handleForm(event) { event.preventDefault(); }  // prevent submit from reloading
 form.addEventListener('submit', handleForm); // copied and pasted code lmao
@@ -108,7 +109,8 @@ function save(){
 		ingredients: ingredients,
 		recipeBook: recipeBook,
 		autosaveEnabled: autosaveEnabled,
-		gameStage:gameStage
+		gameStage:gameStage,
+		ingredientBank:ingredientBank
 	}; 
 	localStorage.setItem("saveData",JSON.stringify(saveData));
 	console.log("Game saved");
@@ -126,6 +128,7 @@ function load(){
 	recipeBook = savegame.recipeBook; 
 	autosaveEnabled = savegame.autosaveEnabled; 
 	gameStage = savegame.gameStage;
+	ingredientBank = savegame.ingredientBank;
 	gameStageRender()
 	if(!autosaveEnabled){document.getElementById("autosaveBox").outerHTML = '<input id="autosaveBox" type="checkbox" oninput="autosaveEnabled = !autosaveEnabled;">'}; //check if autosave is disabled, replace if it is
 	console.log(recipeBook);
