@@ -35,3 +35,7 @@ div.rightSideFixed {
     bottom: 1px;
     position: fixed;
 }
+#sname {
+    font-size:30px;
+    padding: 14px 10px;
+}

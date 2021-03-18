@@ -70,6 +70,7 @@ form.onsubmit = function() { //when submit buton is pressed
 		//everything calculated, now it's setting time
 		var bns = calculateBonus(ingrListForBook);
 		recipeTastiness *= bns[1] //add bonus
+		document.getElementById("bonusOutput").innerHTML = bns[0].join("<br>");
 	recipeBook.unshift([form.sname.value, Number(recipeCost.toFixed(2)),Number(recipeTastiness.toFixed(2)), ingrListForBook]) //adds array to recipeBook
 	updateRecipe(form.sname.value, recipeCost.toFixed(2),recipeTastiness.toFixed(2)); //updates values for html
 		refreshBook();
@@ -133,13 +134,13 @@ function swapRecipeBook(e){
 swapRecipeBook(0);
 
 // loop
-function calculateBonus(ingrArray){ 
+function calculateBonus(ingrArray){  //get bonus values et names
 	console.log(ingrArray);
 	var bonuses = new Array;
 	var bonusTastiness = 1;
 		if(ingrArray.indexOf("Bread") === 0 && ingrArray.indexOf("Bread",-1) === ingrArray.length - 1){
 				//if bread is first and bread is last
-				bonuses += "Bread bonus! (x1.5 Tastiness)";
+				bonuses += "Traditional bonus! (x1.5 Tastiness)";
 				bonusTastiness *= 1.5;
 		}
 	return [bonuses,bonusTastiness]
