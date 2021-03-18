@@ -9,12 +9,16 @@ function calculateBonus(ingrArray){  //get bonus values et names
 		};
         if(ingrArray.includes("Bacon") && ingrArray.includes("Fried Egg") && ingrArray.includes("Cheese")){ //contains BEC
             console.log(ingrArray.includes("Bacon" && "Fried Egg" && "Cheese"))
-            bonuses += "Bacon, egg, and cheese bonus! (x1.5 Tastiness)<br>";
-            bonusTastiness *= 1.5;  
+            bonuses += "Bacon, egg, and cheese bonus! (x1.4 Tastiness)<br>";
+            bonusTastiness *= 1.4;  
         };
 		if(ingrArray.includes("Water")){ //contains BEC
             bonuses += "water (*0 tastiness)<br>";
             bonusTastiness *= 0;  
+        };
+		if(ingrArray.includes("Bacon") && ingrArray.includes("Lettuce") && ingrArray.includes("Tomato")){ //contains BEC
+            bonuses += "BLT BONUS! (x1.4 Tastiness)<br>";
+            bonusTastiness *= 1.4;  
         };
 	return [bonuses,bonusTastiness]
 }
