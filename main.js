@@ -5,7 +5,7 @@ var money = 5;
 var sandwichTastiness = 1;
 var sandwichCost = 1;
 var selectedSandwich = "Breadwich";
-var maxIngredientSelection = 4;
+var maxIngredientSelection = 3;
 var recipeBook = new Array(["Breadwich", 1.05, 1.95,["Bread", "Bread", "Bread"]]);
 var timeSpeed = 1.20;
 //Ingrediets: name, tastiness, cost
