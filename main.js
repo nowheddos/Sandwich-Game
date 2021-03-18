@@ -9,16 +9,6 @@ var maxIngredientSelection = 4;
 var recipeBook = new Array(["Breadwich", 1.05, 1.95,["Bread", "Bread", "Bread"]]);
 var timeSpeed = 1.20;
 //Ingrediets: name, tastiness, cost
-var ingredients = [
-["Bread", 1.25, 0.35],
-["Cheese", 2, 0.50],
-["Turkey", 1.5, 1],
-["Tomato", 2, 0.50],
-["Bacon",1,1.5],
-["Fried Egg",3,0.2],
-["Lettuce",2.83,1.4],
-["Water",-10,0]
-]
 function makeSandwich(amnt){
 	if(money >= sandwichCost){ //check if can afford sandwich
 		money = money-sandwichCost;// take money
