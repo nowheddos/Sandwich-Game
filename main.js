@@ -33,11 +33,14 @@ function sanitizeHTML(text) { //sanitize text
   }
 function setIngredientSelect(){ //makes ingredient selectors (the dropdown stuff)
 	var optionsTag = "";
+	console.log(optionsTag)
 	document.getElementById("opt").innerHTML = '<span id="ingredientSelect"></span>'
 	for(i=0;i<ingredients.length;i++){ //gets the <options> for all ingredients, sets them into the variable optionsTag
+		console.log(optionsTag)
 		optionsTag = optionsTag + "<option value= '" + i + "'>" + ingredients[i][0] + "</option>\n"
 	};
 	for(i = 0; i < maxIngredientSelection; i++){ //sets up the <select>
+		console.log(i)
 		document.getElementById("ingredientSelect").outerHTML = [
 			"<select id='ingrSelect" + i + "'>" + optionsTag + "</select><br>" + "<span id='ingredientSelect'></span>"
 		];
@@ -154,10 +157,16 @@ function gameStageRender() { //game unlocks
 	document.getElementById("currentlyStats").className = "column";
 	console.log("running")
 	switch(gameStage){
+		case 3:
+			milestone("$100.00")
+			document.getElementById("alertsBox").innerHTML = "Need $100.";
+			console.log("3")
+			break;
 		case 2:
 			milestone("$15.00")
 			document.getElementById("recipeBookSection").className = "invisible";
 			document.getElementById("alertsBox").innerHTML = "Would be nice to have $15 for a recipe book..";
+			console.log("2")
 			break;
 		case 1:
 			milestone("Create a sandwich")
@@ -175,6 +184,11 @@ function gameStageRender() { //game unlocks
 	}
 }
 function milestone(txt){document.getElementById("unlock").innerHTML = txt;}
+
+function darkMode(){
+	var element = document.body
+	element.classList.toggle("dark-mode");
+}
 // loop
 window.setInterval(function(){ //looping thing
 			for(i=0;i<Math.floor(Math.cbrt(sandwichTastiness));i++){

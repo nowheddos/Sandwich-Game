@@ -1,6 +1,9 @@
 *  {
     font-size: 115%;
    }
+body {
+    padding:1%;
+   }
 div.rightSideFixed {
     float: right;
     right: 40%;
@@ -37,7 +40,7 @@ div.rightSideFixed {
 }
 #sname {
     font-size:30px;
-    padding: 14px 10px;
+    padding: 14px 28px;
 }
 .rainbow-text {
     background-image: repeating-linear-gradient(45deg, violet, indigo, blue, green, yellow, orange, red, violet);
@@ -45,7 +48,6 @@ div.rightSideFixed {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: rainbow 8s ease infinite;
-    font-size:70%
   }
   @keyframes rainbow { 
     0%{background-position:0% 50%}

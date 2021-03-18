@@ -33,7 +33,7 @@
 			<input type="text" id="sname" autocomplete="off" required maxlength=25><br>
 			<div class="row">
 				<div id="opt" class="column" style="border:none;font-size:70%"><span id="ingredientSelect"></span></div>
-				<span class="rainbow-text"><div class="column"  id="bonusOutput" style="border:none"></div></span>
+				<span class="rainbow-text"><div class="column"  id="bonusOutput" style="border:none;font-size:80%"></div></span>
 			</div>		
 <!--				<span>Tastiness: </span><span id="tastinessReplace">?</span><br><br> do this later-->
 		  <input type="submit" value="Craft" class="button"><br>
@@ -41,7 +41,7 @@
 		</form>
 	</div><div id="recipeBookSection" class="column">
  		<!-- recipe book section -->
-	<h3>Recipe Book</h3><select id="recipeBookSelection" oninput="swapRecipeBook(recipeBookSelection.value)"> 
+	<h3>Recipe Book</h3><button style="border-radius: 20px;outline: none" onclick="if(recipeBook.length>1){recipeBook.splice(recipeBookSelection.value, 1);refreshBook()}">x</button> <select id="recipeBookSelection" oninput="swapRecipeBook(recipeBookSelection.value)">
 		<option value='0'>Breadwich</option>
 	</select><br>
 	<span id="recipeOutput">0</span>
@@ -56,9 +56,9 @@ Next unlock at:
 <br><span id="unlock">$5.00</span>
 </div>
 	<div class="column"> <!-- Dev tools -->
-		<h1>Dev Tools</h1>
-		<button onClick="gameStage++;gameStageRender();">skip gamestage</button>
-		<button onClick="maxIngredientSelection++;setIngredientSelect();">+1 Max Ingredient</button>
+		<h1 class="rainbow-text">Dev Tools</h1>
+		<button onClick="gameStage++;gameStageRender()">skip gamestage</button>
+		<button onClick="maxIngredientSelection++;setIngredientSelect()">+1 Max Ingredient</button>
 	</div>
 </div>
 
