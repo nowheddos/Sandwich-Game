@@ -30,7 +30,11 @@ var fullOptions = new Array;
 swapRecipeBook(0);
 }
 // form shit
-
+function sanitizeHTML(text) { //sanitize text
+	var element = document.createElement('div');
+	element.innerText = text;
+	return element.innerHTML;
+  }
 function setIngredientSelect(maxIngredients){ //makes ingredient selectors (the dropdown stuff)
 	var optionsTag = "";
 	for(i=0;i<ingredients.length;i++){ //gets the <options> for all ingredients, sets them into the variable optionsTag
@@ -77,7 +81,7 @@ function updateRecipe(name,tastiness,cost){ //update stats
 	selectedSandwich = name;
 	document.getElementById("sandwichTastiness").innerHTML = tastiness;
 	document.getElementById("sandwichCost").innerHTML = cost;
-	document.getElementById("currentSandwich").innerHTML = name;
+	document.getElementById("currentSandwich").innerHTML = sanitizeHTML(name);
 	document.getElementById("sandwichSV").innerHTML = (sandwichCost * 8/7).toFixed(2);
 	document.getElementById("peopleTick").innerHTML = Math.floor(sandwichTastiness);
 	document.getElementById("secondTick").innerHTML = +((2500/(sandwichTastiness/3))/1000).toFixed(2);
@@ -124,9 +128,10 @@ function load(){
 //recipe book shit
 function swapRecipeBook(e){
 	updateRecipe(recipeBook[e][0],recipeBook[e][1],recipeBook[e][2])
-	document.getElementById("recipeOutput").innerHTML = recipeBook[e].slice(0,3).join('<br>') + "<br>Raw ingredients: " + recipeBook[e][3].join(', ');
+	document.getElementById("recipeOutput").innerHTML = sanitizeHTML(recipeBook[e][0]) + "<hr>" + recipeBook[e].slice(1,3).join('<br>') + "<br>Raw ingredients: " + recipeBook[e][3].join(', ');
 };
 swapRecipeBook(0);
+
 // loop
 function calculateBonus(ingrArray){ 
 	console.log(ingrArray);
@@ -138,7 +143,6 @@ function calculateBonus(ingrArray){
 				bonusTastiness *= 1.5;
 		}
 	return [bonuses,bonusTastiness]
-
 }
 window.setInterval(function(){ //looping thing
 			for(i=0;i<Math.floor(sandwichTastiness);i++){
