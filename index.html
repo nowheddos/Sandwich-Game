@@ -3,13 +3,13 @@
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="interface.css" />
-		<title>Sandwiches</title>
+		<title>Sandwich-Game by Nowhed</title>
 	</head>
 	<body>
-		<small>Money: $<span id="moneyCount">5.00</span><br>
+		<div class="box">Money: $<span id="moneyCount">5.00</span><br>
 		Sandwiches in stock: <span id="sandwichCount">0</span><br>
-		Store traffic: <span id="peopleTick">0</span> people every <span id="secondTick">0</span> seconds.<br></small>
-		<button onClick="makeSandwich(1)">Make Sandwich</button><br> 
+		Store traffic: <span id="peopleTick">0</span> people every <span id="secondTick">0</span> seconds.<br>
+		<button onClick="makeSandwich(1)">Make Sandwich</button><br></div>
 		Currently selected sandwich: <span id="currentSandwich">Breadwich</span><br>
 		Cost: $<span id="sandwichCost">0</span><br>
 		Tastiness: <span id="sandwichTastiness">0</span><br>
@@ -24,9 +24,12 @@
 		<span id="newRecipe"> </span>
 		</form>
 	<hr> <!-- recipe book section -->
-	
-	<hr>
-		<button onClick="save()">Save</button><button onClick="load()">Load</button>
+	Recipe Book <select id="recipeBookSelection" oninput="swapRecipeBook(recipeBookSelection.value)">
+		<option value='0'>Breadwich</option>
+	</select><br>
+	<span id="recipeOutput">0</span>
+	<hr><!-- end recipe book section -->
+		<button onClick="save()">Save</button><button onClick="load()">Load</button><button onClick="if(confirm('Are you sure you want to Hard Reset? This cannot be undone.')){localStorage.removeItem(`saveData`)}">Hard Reset</button>
 	<script type="text/javascript" src="main.js"></script>
 	</body>
 </html>
