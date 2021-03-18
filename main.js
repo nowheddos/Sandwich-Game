@@ -15,7 +15,9 @@ var ingredients = [
 ["Turkey", 1.5, 1],
 ["Tomato", 2, 0.50],
 ["Bacon",1,1.5],
-["Fried Egg",3,0.2]
+["Fried Egg",3,0.2],
+["Lettuce",2.83,1.4],
+["Water",-10,0]
 ]
 function makeSandwich(amnt){
 	if(money >= sandwichCost){ //check if can afford sandwich
@@ -51,7 +53,7 @@ function setIngredientSelect(maxIngredients){ //makes ingredient selectors (the 
 		];
 	};
 };
-	setIngredientSelect(maxIngredientSelection); //temporary
+setIngredientSelect(maxIngredientSelection); //temporary
 let form = document.getElementById('sandwichForm'); // form
 function handleForm(event) { event.preventDefault(); }  // prevent submit from reloading
 form.addEventListener('submit', handleForm); // copied and pasted code lmao
@@ -94,8 +96,8 @@ function updateRecipe(name,tastiness,cost){ //update stats
 	sandwichTastiness = tastiness;
 	sandwichCost = cost;
 	selectedSandwich = name;
-	document.getElementById("sandwichTastiness").innerHTML = tastiness;
-	document.getElementById("sandwichCost").innerHTML = cost;
+	document.getElementById("sandwichTastiness").innerHTML = Number(tastiness).toFixed(2);
+	document.getElementById("sandwichCost").innerHTML = Number(cost).toFixed(2);
 	document.getElementById("currentSandwich").innerHTML = sanitizeHTML(name);
 	document.getElementById("sandwichSV").innerHTML = (sandwichCost * 8/7).toFixed(2);
 	document.getElementById("peopleTick").innerHTML = Math.floor(Math.cbrt(sandwichTastiness));
@@ -149,7 +151,7 @@ function swapRecipeBook(e){
 	document.getElementById("recipeOutput").innerHTML = sanitizeHTML(recipeBook[e][0]) + "<hr>" + recipeBook[e].slice(1,3).join('<br>') + "<br>Raw ingredients: " + recipeBook[e][3].join(', ' ) + "<br>Bonuses:<br><div class='rainbow-text'>" + calculateBonus(recipeBook[e][3])[0] + "</div>";
 };
 swapRecipeBook(0);
-function gameStageRender() {
+function gameStageRender() { //game unlocks
 	document.getElementById("recipeBookSection").className = "column";
 	document.getElementById("craftingStation").className = "column";
 	document.getElementById("logDiv").className = "column";
@@ -157,16 +159,18 @@ function gameStageRender() {
 	console.log("running")
 	switch(gameStage){
 		case 2:
-			console.log("3")
+			milestone("$15.00")
 			document.getElementById("recipeBookSection").className = "invisible";
 			document.getElementById("alertsBox").innerHTML = "Would be nice to have $15 for a recipe book..";
 			break;
 		case 1:
+			milestone("Create a sandwich")
 			console.log("1")
 			document.getElementById("recipeBookSection").className = "invisible";
 			document.getElementById("logDiv").className = "invisible";
 			break;
 		case 0:
+			milestone("$5.50")
 			document.getElementById("recipeBookSection").className = "invisible";
 			document.getElementById("craftingStation").className = "invisible";
 			document.getElementById("logDiv").className = "invisible";
@@ -174,6 +178,7 @@ function gameStageRender() {
 			console.log("0")
 	}
 }
+function milestone(txt){document.getElementById("unlock").innerHTML = txt;}
 // loop
 window.setInterval(function(){ //looping thing
 			for(i=0;i<Math.floor(Math.cbrt(sandwichTastiness));i++){
@@ -182,7 +187,7 @@ window.setInterval(function(){ //looping thing
 					money += +(sandwichCost * 8/7).toFixed(2); //money += a little higher than cost, multiplied by floortastiness because more people want it
 				};
 			};
-			if(money>=6 && gameStage === 0 || money >= 15 && gameStage === 2){
+			if(money>=5.5 && gameStage === 0 || money >= 15 && gameStage === 2){
 				gameStage++;
 				gameStageRender();
 			}
