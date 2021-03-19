@@ -26,3 +26,5 @@ Gameplay loop, as planned:
 	different environments with more ingrident
 
 Trello - https://trello.com/b/LupuPoaM/sandwiches-2
+
+Softlocked/ran outa money? Make a water sandwich (all ingredients water). It's free and nets you 10 cents each.
