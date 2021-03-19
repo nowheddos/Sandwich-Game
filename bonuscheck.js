@@ -16,5 +16,9 @@ function calculateBonus(ingrArray){  //get bonus values et names
             bonuses += "BLT BONUS! (x1.4 Tastiness)<br>";
             bonusTastiness *= 1.4;  
         };
+		if(ingrArray.includes("Peanut Butter") && ingrArray.includes("Jelly")){ //contains PB&J
+            bonuses += "Classic Combo (x1.25 Tastiness)<br>";
+            bonusTastiness *= 1.25;  
+        };
 	return [bonuses,bonusTastiness]
 }

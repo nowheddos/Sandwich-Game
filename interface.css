@@ -1,5 +1,7 @@
 *  {
     font-size: 115%;
+    scrollbar-color: rebeccapurple green;
+    scrollbar-width: thin;
    }
 html,body {
     overflow-x: hidden;
@@ -85,3 +87,4 @@ table {
   select {
       font-size: 30px;
   }
+  
