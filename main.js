@@ -168,14 +168,15 @@ function swapRecipeBook(e){
 };
 swapRecipeBook(0);
 function gameStageRender() { //game unlocks
-	document.getElementById("recipeBookSection").className = "column";
-	document.getElementById("craftingStation").className = "column";
-	document.getElementById("logDiv").className = "column";
-	document.getElementById("currentlyStats").className = "column";
+	fade("recipeBookSection",0)
+	fade("craftingStation",0)
+	fade("logDiv",0)
+	fade("currentlyStats",0)
 	switch(gameStage){ 
 		case 3:
-			milestone("$100.00")
-			document.getElementById("alertsBox").innerHTML = "Need $100.";
+			fade("recipeBookSection",1)
+			milestone("$25.00")
+			document.getElementById("alertsBox").innerHTML = "Reaching $25 would get you a shop. Or so they say.";
 			console.log("3")
 			break;
 		case 2:
@@ -200,7 +201,9 @@ function gameStageRender() { //game unlocks
 	}
 }
 function milestone(txt){document.getElementById("unlock").innerHTML = txt;}
+//function updateCraftPreview(){
 
+//} do later :)
 
 // loop
 window.setInterval(function(){ //looping thing
