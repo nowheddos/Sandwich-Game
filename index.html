@@ -60,20 +60,25 @@
 Next unlock after:
 <br><span id="unlock">$5.00</span><br>
 </div>
-<div class="column"> <!-- shop -->
+<div id="shopSection"class="column"> <!-- shop -->
 	<h1>Shop</h1>
-
+	<button class = "button" onclick="getIngredient(Math.round(Math.sqrt(Math.random(ingredientBank.length^2))))">Buy random ingredient</button>
 </div>
 	<div class="column"> <!-- Dev tools -->
-		<h1 class="rainbow-text">Dev Tools</h1>
-		<button class = "button" onClick="gameStage++;gameStageRender()">skip gamestage</button>
-		<button class = "button" onClick="maxIngredientSelection++;setIngredientSelect()">+1 Max Ingredient</button>
-		<button class = "button" onclick="getIngredient(Math.random(ingredientBank.length))">Get random ingredient</button>
 	</div>
 </div>
 
-		<div class="bottomScreen"><button class="button" onClick="save()">Save</button> <button class="button" onClick="load()">Load</button> <button style="background-color: darkred;color:white" class="button" onClick="if(confirm('Are you sure you want to Hard Reset? This cannot be undone.')){localStorage.removeItem(`saveData`);window.location.reload()}">Hard Reset</button>
-		<input id="autosaveBox" type="checkbox" oninput="autosaveEnabled = !autosaveEnabled;" checked>Autosave</div>
+		<div class="bottomScreen">
+				<button class="button" onClick="save()">Save</button>
+				<button class="button" onClick="load()">Load</button>
+				<button style="background-color: darkred;color:white" class="button" onClick="if(confirm('Are you sure you want to Hard Reset? This cannot be undone.')){localStorage.removeItem(`saveData`);window.location.reload()}">Hard Reset</button>
+				<input id="autosaveBox" type="checkbox" oninput="autosaveEnabled = !autosaveEnabled;" checked>Autosave
+			<span class="rainbow-text">Dev Tools</span>
+				<button class = "button" onClick="gameStage++;gameStageRender()">skip gamestage</button>
+				<button class = "button" onClick="maxIngredientSelection++;setIngredientSelect()">+1 Max Ingredient</button>
+				<button class = "button" onclick="getIngredient(Math.random(ingredientBank.length))">Get random ingredient</button>
+			</div>
+			<script type="text/javascript" src="milestones.js" ></script>
 			<script type="text/javascript" src="ingredients.js" ></script>
 			<script type="text/javascript" src="bonuscheck.js" ></script>
 			<script type="text/javascript" src="main.js" ></script>
