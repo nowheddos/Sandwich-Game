@@ -1,7 +1,8 @@
 *  {
     font-size: 115%;
    }
-body {
+html,body {
+    overflow-x: hidden;
     padding:1%;
    }
 div.rightSideFixed {
@@ -14,24 +15,25 @@ div.rightSideFixed {
 }
 .column {
     border-style: double;
-    padding: 4px;
+    padding: 7px;
     flex: 50%;
+    transition: opacity ease 3s;
 }
 .button {
     outline: none;
     padding: 10px 15px;
-    font-size: 80%;
-    border:none;
+    font-size: 70%;
+    border: solid rgb(189, 189, 189);
     background-color: rgb(189, 189, 189);
     transition-duration: 0.2s;
     cursor: pointer;
 }
 .button:hover {
     background-color: rgb(255, 255, 255);
-    border:none;
+    border: solid rgb(189, 189, 189);
 }
 .button:active {
-    border:none;
+    border: solid rgb(189, 189, 189);
     background-color:darkgray;
 }
 .bottomScreen {
@@ -43,12 +45,12 @@ div.rightSideFixed {
     padding: 14px 28px;
 }
 .rainbow-text {
-    background-image: repeating-linear-gradient(45deg, violet, indigo, blue, green, yellow, orange, red, violet);
+    background-image: repeating-linear-gradient(45deg, violet, indigo, blue, green, rgb(133, 133, 0), orange, red, violet);
     background-size: 800% 800%;
     background-clip:unset;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: rainbow 8s ease infinite;
+    animation: rainbow 4s ease infinite;
   }
   @keyframes rainbow { 
     0%{background-position:0% 50%}
@@ -56,12 +58,26 @@ div.rightSideFixed {
     100%{background-position:0% 50%}
 }
 .invisible {
-    visibility: hidden;
-    position: absolute;
-    top: -9999px;
+    opacity:0;  
+    height: 0;
+    width: 0;
 }
-
 .visible {
-    visibility: visible;
-    position: static;
+    opacity:1;
+    height: auto;
+    width: auto;
 }
+table {
+    font-size: 20px;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  td, th {
+    border: 1px double black;
+    text-align: left;
+    padding: 8px;
+  }
+
+  /*tr:nth-child(even) {
+    background-color: #9c9c9c;
+  }*/

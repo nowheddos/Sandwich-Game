@@ -5,7 +5,7 @@ var money = 5;
 var sandwichTastiness = 1;
 var sandwichCost = 1;
 var selectedSandwich = "Breadwich";
-var maxIngredientSelection = 3;
+var maxIngredientSelection = 4;
 var recipeBook = new Array(["Breadwich", 1.05, 1.95,["Bread", "Bread", "Bread"]]);
 var timeSpeed = 1.20;
 //Ingrediets: name, tastiness, cost
@@ -17,6 +17,18 @@ function makeSandwich(amnt){
 		document.getElementById("moneyCount").innerHTML = money.toFixed(2);
 	};
 };
+
+function fade(id,show) {
+	var para = document.getElementById(id);
+	if (show) {
+	  para.classList.remove("invisible");
+	  para.classList.add("visible");
+	} else {
+	  para.classList.remove("visible");
+	  para.classList.add("invisible");
+	}
+  }
+
 function refreshBook(){
 var fullOptions = new Array;
 	for(i=0;i<recipeBook.length;i++){ //re
@@ -147,7 +159,12 @@ function load(){
 //recipe book shit
 function swapRecipeBook(e){
 	updateRecipe(recipeBook[e][0],recipeBook[e][1],recipeBook[e][2])
-	document.getElementById("recipeOutput").innerHTML = sanitizeHTML(recipeBook[e][0]) + "<hr>" + recipeBook[e].slice(1,3).join('<br>') + "<br>Raw ingredients: " + recipeBook[e][3].join(', ' ) + "<br>Bonuses:<br><div class='rainbow-text'>" + calculateBonus(recipeBook[e][3])[0] + "</div>";
+	//outputs recipe into a table
+	if(calculateBonus(recipeBook[e][3])[0].length === 0){
+		document.getElementById("recipeOutput").innerHTML = "<i>\"" + sanitizeHTML(recipeBook[e][0]) + "\"</i> recipe breakdown:<hr><table><tr><td width='20px'>Tastiness:</td>\n<td>" + recipeBook[e][1] + "</td></tr>\n<tr><td>Cost:</td>\n<td>$" + Number(recipeBook[e][2]).toFixed(2) + "</td></tr>\n<tr><td rowspan='" + Number(recipeBook[e][3].length+1) + "'>Raw ingredients:</td>\n<tr><td>" + recipeBook[e][3].join('</td></tr>\n<tr><td>') + "</td></tr></table>";
+	} else {
+	document.getElementById("recipeOutput").innerHTML = "<i>\"" + sanitizeHTML(recipeBook[e][0]) + "\"</i> recipe breakdown:<br><table><tr><td width='20px'>Tastiness:</td>\n<td>" + recipeBook[e][1] + "</td></tr>\n<tr><td>Cost:</td>\n<td>$" + Number(recipeBook[e][2]).toFixed(2) + "</td></tr>\n<tr><td rowspan='" + Number(recipeBook[e][3].length+1) + "'>Raw ingredients:</td>\n<tr><td>" + recipeBook[e][3].join('</td></tr>\n<tr><td>') + "</td></tr><tr><td class='rainbow-text'>Bonuses:</td><td class='rainbow-text'>" + calculateBonus(recipeBook[e][3])[0] + "</td></tr></table>";
+	}
 };
 swapRecipeBook(0);
 function gameStageRender() { //game unlocks
@@ -155,8 +172,7 @@ function gameStageRender() { //game unlocks
 	document.getElementById("craftingStation").className = "column";
 	document.getElementById("logDiv").className = "column";
 	document.getElementById("currentlyStats").className = "column";
-	console.log("running")
-	switch(gameStage){
+	switch(gameStage){ 
 		case 3:
 			milestone("$100.00")
 			document.getElementById("alertsBox").innerHTML = "Need $100.";
@@ -185,10 +201,7 @@ function gameStageRender() { //game unlocks
 }
 function milestone(txt){document.getElementById("unlock").innerHTML = txt;}
 
-function darkMode(){
-	var element = document.body
-	element.classList.toggle("dark-mode");
-}
+
 // loop
 window.setInterval(function(){ //looping thing
 			for(i=0;i<Math.floor(Math.cbrt(sandwichTastiness));i++){

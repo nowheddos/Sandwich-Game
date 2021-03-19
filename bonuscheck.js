@@ -12,11 +12,7 @@ function calculateBonus(ingrArray){  //get bonus values et names
             bonuses += "Bacon, egg, and cheese bonus! (x1.4 Tastiness)<br>";
             bonusTastiness *= 1.4;  
         };
-		if(ingrArray.includes("Water")){ //contains BEC
-            bonuses += "water (*0 tastiness)<br>";
-            bonusTastiness *= 0;  
-        };
-		if(ingrArray.includes("Bacon") && ingrArray.includes("Lettuce") && ingrArray.includes("Tomato")){ //contains BEC
+		if(ingrArray.includes("Bacon") && ingrArray.includes("Lettuce") && ingrArray.includes("Tomato")){ //contains BLT
             bonuses += "BLT BONUS! (x1.4 Tastiness)<br>";
             bonusTastiness *= 1.4;  
         };

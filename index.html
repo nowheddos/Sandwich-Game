@@ -9,7 +9,7 @@
 <body>
 <div class="row">
 	<div class="column"> <!-- money/sandwich section -->
-		Money: $<span id="moneyCount">5.00</span><br>
+		Money: $<span class="numberJump" id="moneyCount">5.00</span><br>
 		Sandwiches in stock: <span id="sandwichCount">0</span><br>
 		Store traffic: <span id="peopleTick">0</span> people every <span id="secondTick">0</span> seconds.<br>
 		<button class="button" onClick="makeSandwich(1)">Make Sandwich</button></div><br>
@@ -25,43 +25,46 @@
 		</div>
 </div> <!-- End of Row -->
 <div class="row"> <!-- crafting statin -->
-	<div id= "craftingStation" class="column">
+	<div id="craftingStation" class="column">
 		<form id="sandwichForm"> <!-- Sandwich Creation -->
-				<fieldset style="size:10px 50px;">
+				<fieldset style="display:flexbox">
 					<legend>Crafting Station</legend>
 			<label style="font-size:100%">Sandwich Name:</label>
 			<input type="text" id="sname" autocomplete="off" required maxlength=25><br>
-			<div class="row">
-				<div id="opt" class="column" style="border:none;font-size:70%"><span id="ingredientSelect"></span></div>
-				<span class="rainbow-text"><div class="column"  id="bonusOutput" style="border:none;font-size:80%"></div></span>
+			<div class="row" style="max-height:350px;height:350px;overflow-y:scroll;">
+				<div id="opt" class="column" style="border:none;font-size:70%;flex:13%"><span id="ingredientSelect"></span></div>
+				<div class="column rainbow-text" id="bonusOutput" style="border:none;font-size:70%;">bonus goes here</div>
 			</div>		
 <!--				<span>Tastiness: </span><span id="tastinessReplace">?</span><br><br> do this later-->
 		  <input type="submit" value="Craft" class="button"><br>
 		</fieldset>
 		</form>
-	</div><div id="recipeBookSection" class="column">
- 		<!-- recipe book section -->
-	<h3>Recipe Book</h3>
-	<!-- delete recipe button -->
-	<button style="border-radius: 20px;outline: none" onclick="if(recipeBook.length>1){recipeBook.splice(recipeBookSelection.value, 1);refreshBook()}">x</button>
-	<select id="recipeBookSelection" oninput="swapRecipeBook(recipeBookSelection.value)">
-		<option value='0'>Breadwich</option>
-	</select><br>
+	</div> <!-- end crafting -->
+	<div id="recipeBookSection" class="column">
+		<h3>Recipe Book</h3>
+		<button style="border-radius: 20px;outline: none" onclick="if(recipeBook.length>1){recipeBook.splice(recipeBookSelection.value, 1);refreshBook()}">x</button>
+		<select id="recipeBookSelection" oninput="swapRecipeBook(recipeBookSelection.value)">
+			<!-- recipe book section -->
+		   <option value='0'>Breadwich</option>
+	   </select><br><br>
+		<div style="max-height:370px;height:370px;overflow-y:scroll;border:solid;border-radius: 9px;">
 	<span id="recipeOutput">0</span>
-	<br><b>!Swapping recipe refunds current stock!</b>
 	</div>
 </div>
+</div>
+
 	<!-- end recipe book section -->
 <div class="row">
 <div class="column">
 <h1>Milestones</h1>
-Next unlock at:
-<br><span id="unlock">$5.00</span>
+Next unlock after:
+<br><span id="unlock">$5.00</span><br>
+<span id="percent">0</span>%
 </div>
 	<div class="column"> <!-- Dev tools -->
 		<h1 class="rainbow-text">Dev Tools</h1>
-		<button onClick="gameStage++;gameStageRender()">skip gamestage</button>
-		<button onClick="maxIngredientSelection++;setIngredientSelect()">+1 Max Ingredient</button>
+		<button class = "button" onClick="gameStage++;gameStageRender()">skip gamestage</button>
+		<button class = "button" onClick="maxIngredientSelection++;setIngredientSelect()">+1 Max Ingredient</button>
 	</div>
 </div>
 
