@@ -59,7 +59,7 @@ function setIngredientSelect(){ //makes ingredient selectors (the dropdown stuff
 		];
 	};
 };
-setIngredientSelect(); //temporary
+//temporary
 //1 week later: it was not temporary.
 let form = document.getElementById('sandwichForm'); // form
 function handleForm(event) { event.preventDefault(); }  // prevent submit from reloading
@@ -156,6 +156,7 @@ function load(){
 	var d = new Date();
 	document.getElementById("alertsBox").innerHTML = "Loaded at " + d.getMinutes() + ":" + d.getSeconds() + ":" + d.getMilliseconds();
 }; if(localStorage.getItem("saveData") !== null){window.onload = load()} else {gameStageRender();}
+setIngredientSelect(); 
 //recipe book shit
 function swapRecipeBook(e){
 	updateRecipe(recipeBook[e][0],recipeBook[e][1],recipeBook[e][2])
