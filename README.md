@@ -1,9 +1,9 @@
 # Sandwich Game
 # https://nowhed.github.io/Sandwich-Game/
  
-sorry if this is bad, it's a prototype and i cant make a github pages site w/ a private repository without paying :/
+Protoype, expect bugs.
 
-sandwich game - simplest prototype
+Gameplay loop, as planned:
 
 1: sandwich selling
 
@@ -24,3 +24,5 @@ sandwich game - simplest prototype
 	Explore the environment for ingredients, plus some bonus stuff like money or finding shops to buy ingredients directly
 
 	different environments with more ingrident
+
+Trello - https://trello.com/b/LupuPoaM/sandwiches-2
