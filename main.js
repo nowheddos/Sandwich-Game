@@ -6,7 +6,7 @@ var sandwichTastiness = 1;
 var sandwichCost = 1;
 var selectedSandwich = "Breadwich";
 var maxIngredientSelection = 4;
-var recipeBook = new Array(["Breadwich", 1.05, 1.95,["Bread", "Bread", "Bread"]]);
+var recipeBook = new Array(["Breadwich", 1.05, 1.95,["White Bread", "White Bread", "White Bread"],["bread","bread","bread"]]);
 var timeSpeed = 1.20;
 var sellRatio = 8/7;
 //Ingrediets: name, tastiness, cost
@@ -69,27 +69,29 @@ form.onsubmit = function() { //when submit buton is pressed
 		var recipeStats = new Array;
 		var recipeTastiness = 1;
 		var recipeCost = 0;
-		var ingrListForBook = [];
+		var ingrListForBook = new Array;
 		var bns  = new Array;
+		var rawTypes = new Array;
 	for(i=0;i<maxIngredientSelection;i++){ //generate array of stats ex: [[Bread,1,1],[Turkey,1.5,1.5],[Cheese,2,3],[Bread,1,1]]
 								//  array            selection          number  value
 		recipeStats.push(ingredients[eval("form.ingrSelect" + i + ".value")]) //put stuff on end
 	};
 		for(i=0;i<recipeStats.length;i++){ //find tastiness & cost
-			console.log(recipeStats + " I:" + i + "tastiness: " + recipeTastiness + "stats: " + recipeStats[i][1]);
 			recipeTastiness*=recipeStats[i][1]
 			recipeCost+=recipeStats[i][2]
 			ingrListForBook.unshift(recipeStats[i][0])
+			rawTypes.unshift(recipeStats[i][3])
 		}
+		console.table(recipeStats);
 		//everything calculated, now it's setting time
-		bns = calculateBonus(ingrListForBook);
+		bns = calculateBonus(ingrListForBook,rawTypes);
 		console.log(recipeTastiness)
 		recipeTastiness = recipeTastiness * Number(bns[1]) //add bonus
 		console.log(recipeTastiness)
 		console.log(bns)
 		console.log(bns[0])
 		document.getElementById("bonusOutput").innerHTML = bns[0];
-	recipeBook.unshift([form.sname.value, Number(recipeTastiness.toFixed(2)),Number(recipeCost.toFixed(2)), ingrListForBook]) //adds array to recipeBook
+	recipeBook.unshift([form.sname.value, Number(recipeTastiness.toFixed(2)),Number(recipeCost.toFixed(2)), ingrListForBook, rawTypes]) //adds array to recipeBook
 	console.log(recipeBook)
 	updateRecipe(form.sname.value, recipeCost.toFixed(2),recipeTastiness.toFixed(2)); //updates values for html
 	if(gameStage === 1){
@@ -161,10 +163,29 @@ setIngredientSelect();
 function swapRecipeBook(e){
 	updateRecipe(recipeBook[e][0],recipeBook[e][1],recipeBook[e][2])
 	//outputs recipe into a table
-	if(calculateBonus(recipeBook[e][3])[0].length === 0){
-		document.getElementById("recipeOutput").innerHTML = "<i>\"" + sanitizeHTML(recipeBook[e][0]) + "\"</i> recipe breakdown:<hr><table><tr><td width='20px'>Tastiness:</td>\n<td>" + recipeBook[e][1] + "</td></tr>\n<tr><td>Cost:</td>\n<td>$" + Number(recipeBook[e][2]).toFixed(2) + "</td></tr>\n<tr><td>Sell value: </td><td>$" + Number(recipeBook[e][2] * sellRatio).toFixed(2) + "</td></tr><tr><td rowspan='" + Number(recipeBook[e][3].length+1) + "'>Raw ingredients:</td>\n<tr><td>" + recipeBook[e][3].join('</td></tr>\n<tr><td>') + "</td></tr></table>";
+	if(calculateBonus(recipeBook[e][3],recipeBook[e][4])[0].length === 0){
+		document.getElementById("recipeOutput").innerHTML = "<i>\"" + sanitizeHTML(recipeBook[e][0]) + `
+		\"</i> recipe breakdown:<hr>
+		<table
+			<tr>
+				<td width='20px'>Tastiness:</td>
+				<td>` + recipeBook[e][1] + `</td>
+			</tr>
+			<tr>
+				<td>Cost:</td>
+				<td>$` + Number(recipeBook[e][2]).toFixed(2) + `</td>
+			</tr>
+			<tr>
+				<td>Sell value: </td>
+				<td>$` + Number(recipeBook[e][2] * sellRatio).toFixed(2) + `</td>
+			</tr>
+			<tr>
+				<td rowspan='` + Number(recipeBook[e][3].length+1) + `'>Raw ingredients:</td>
+				<tr><td>` + recipeBook[e][3].join('</td></tr>\n<tr><td>') + `</td>
+			</tr>
+		</table>`;
 	} else {
-	document.getElementById("recipeOutput").innerHTML = "<i>\"" + sanitizeHTML(recipeBook[e][0]) + "\"</i> recipe breakdown:<br><table><tr><td width='20px'>Tastiness:</td>\n<td>" + recipeBook[e][1] + "</td></tr>\n<tr><td>Cost:</td>\n<td>$" + Number(recipeBook[e][2]).toFixed(2) + "</td></tr>\n<tr><td>Sell value: </td><td>$" + Number(recipeBook[e][2] * sellRatio).toFixed(2) + "</td>\n</tr>\n<tr><td rowspan='" + Number(recipeBook[e][3].length+1) + "'>Raw ingredients:</td>\n<tr><td>" + recipeBook[e][3].join('</td></tr>\n<tr><td>') + "</td></tr><tr><td class='rainbow-text'>Bonuses:</td><td class='rainbow-text'>" + calculateBonus(recipeBook[e][3])[0] + "</td></tr></table>";
+	document.getElementById("recipeOutput").innerHTML = "<i>\"" + sanitizeHTML(recipeBook[e][0]) + "\"</i> recipe breakdown:<br><table><tr><td width='20px'>Tastiness:</td>\n<td>" + recipeBook[e][1] + "</td></tr>\n<tr><td>Cost:</td>\n<td>$" + Number(recipeBook[e][2]).toFixed(2) + "</td></tr>\n<tr><td>Sell value: </td><td>$" + Number(recipeBook[e][2] * sellRatio).toFixed(2) + "</td>\n</tr>\n<tr><td rowspan='" + Number(recipeBook[e][3].length+1) + "'>Raw ingredients:</td>\n<tr><td>" + recipeBook[e][3].join('</td></tr>\n<tr><td>') + "</td></tr><tr><td class='rainbow-text'>Bonuses:</td><td class='rainbow-text'>" + calculateBonus(recipeBook[e][3],recipeBook[e][4])[0] + "</td></tr></table>";
 	}
 };
 swapRecipeBook(0);
