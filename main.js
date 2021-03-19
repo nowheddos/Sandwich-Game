@@ -168,13 +168,12 @@ function swapRecipeBook(e){
 };
 swapRecipeBook(0);
 function gameStageRender() { //game unlocks
-	fade("recipeBookSection",0)
-	fade("craftingStation",0)
-	fade("logDiv",0)
-	fade("currentlyStats",0)
+	document.getElementById("recipeBookSection").className = "column";
+	document.getElementById("craftingStation").className = "column";
+	document.getElementById("logDiv").className = "column";
+	document.getElementById("currentlyStats").className = "column";
 	switch(gameStage){ 
 		case 3:
-			fade("recipeBookSection",1)
 			milestone("$25.00")
 			document.getElementById("alertsBox").innerHTML = "Reaching $25 would get you a shop. Or so they say.";
 			console.log("3")
