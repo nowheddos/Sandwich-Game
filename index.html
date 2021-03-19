@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="interface.css" />
+		<link rel="icon" href="icon.png">
 		<title>Sandwich-Game by Nowhed</title>
 		<h1 class="column" style="position:50%;font-size:185%">Sandwich-Game</h1>
 	</head>
@@ -67,6 +68,7 @@ Next unlock after:
 		<h1 class="rainbow-text">Dev Tools</h1>
 		<button class = "button" onClick="gameStage++;gameStageRender()">skip gamestage</button>
 		<button class = "button" onClick="maxIngredientSelection++;setIngredientSelect()">+1 Max Ingredient</button>
+		<button class = "button" onclick="getIngredient(Math.random(ingredientBank.length))">Get random ingredient</button>
 	</div>
 </div>
 

@@ -12,9 +12,11 @@ var ingredientBank = [
     ["Tomato", 2, 0.50]
 ]
 function getIngredient(ingrNumber){
+    console.log(ingrNumber)
     var tempIngr = new Array;
-    tempIngr = ingredientBank[ingrNumber]
-    ingredientBank.splice(ingrNumber)
-    ingredients += tempIngr
+    tempIngr.unshift(ingredientBank[ingrNumber]);
+    console.table(tempIngr);
+    ingredientBank.splice(ingrNumber, 1);
+    ingredients.unshift(tempIngr);
     setIngredientSelect();
 }
