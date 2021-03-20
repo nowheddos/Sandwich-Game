@@ -117,7 +117,7 @@ function updateRecipe(name,tastiness,cost){ //update stats
 	document.getElementById("currentSandwich").innerHTML = sanitizeHTML(name);
 	document.getElementById("sandwichSV").innerHTML = (sandwichCost * sellRatio + 0.1).toFixed(2);
 	document.getElementById("peopleTick").innerHTML = Math.floor(Math.cbrt(sandwichTastiness));
-	document.getElementById("secondTick").innerHTML = Number(5000/timeSpeed^sandwichTastiness).toFixed(2)/1000;
+	document.getElementById("secondTick").innerHTML = (Number(5000/Math.pow(timeSpeed,sandwichTastiness/5))/1000).toFixed(1);
 	document.getElementById("sandwichCount").innerHTML = sandwiches;
 	document.getElementById("moneyCount").innerHTML = money.toFixed(2);
 }; //updateRecipe("Breadwich", 1.05, 1.95);
@@ -134,7 +134,10 @@ function save(){
 		autosaveEnabled: autosaveEnabled,
 		gameStage:gameStage,
 		ingredientBank:ingredientBank,
-		maxIngredientSelection:maxIngredientSelection
+		maxIngredientSelection:maxIngredientSelection,
+		sellRatio:sellRatio,
+		profitsCost:profitsCost,
+		profitsAmount:profitsAmount
 	}; 
 	localStorage.setItem("saveData",JSON.stringify(saveData));
 	console.log("Game saved");
@@ -154,6 +157,9 @@ function load(){
 	gameStage = savegame.gameStage;
 	ingredientBank = savegame.ingredientBank;
 	maxIngredientSelection = savegame.maxIngredientSelection;
+	sellRatio = savegame.sellRatio;
+	profitsCost = savegame.profitsCost;
+	profitsAmount = savegame.profitsAmount;
 	gameStageRender()
 	if(!autosaveEnabled){document.getElementById("autosaveBox").outerHTML = '<input id="autosaveBox" type="checkbox" oninput="autosaveEnabled = !autosaveEnabled;">'}; //check if autosave is disabled, replace if it is
 	console.log(recipeBook);
@@ -204,9 +210,9 @@ function buyProfits(){   //cost of this profits
     	money -= profitsCost;                     		     //removes cash spent
 		profitsCost = Math.floor(Math.pow(profitsCost,1.1));
         updateRecipe(String(selectedSandwich),sandwichTastiness,sandwichCost);
-		document.getElementById('sellValue').innerHTML = "$" + profitsCost.toFixed(2);
+		document.getElementById('sellValue').innerHTML = "$" + (sandwichCost * sellRatio + 0.1).toFixed(2); //sell area in table array
         document.getElementById('moneyCount').innerHTML = money.toFixed(2); 
-		document.getElementById('profitsCost').innerHTML = "$" + sellRatio.toFixed(2);
+		document.getElementById('profitsCost').innerHTML = "$" + profitsCost.toFixed(2); //how much to increase  profits
     } else {document.getElementById("alertsBox").innerHTML = "Not enough! Need $" + profitsCost.toFixed(2) + ", you only have $" + money.toFixed(2) + ".";}
 };
 
@@ -236,7 +242,7 @@ window.setInterval(function(){ //looping thing
 			}
 	document.getElementById("sandwichCount").innerHTML = sandwiches;
 	document.getElementById("moneyCount").innerHTML = money.toFixed(2);
-}, 5000/timeSpeed^sandwichTastiness); //1000 = 1000ms = 1s
+}, Number(5000/(Math.pow(timeSpeed,sandwichTastiness/5)))); //1000 = 1000ms = 1s
 
 window.setInterval(function(){
 	save();
