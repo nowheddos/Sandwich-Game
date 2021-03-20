@@ -15,32 +15,36 @@ function calculateBonus(ingrSpecific,ingrArray){  //get bonus values et names
 	var bonusTastiness = 1;
 		if(checkIfIncludes(["bread","meat","cheese","vegetable","sauce"],ingrArray)){
 				//contains all ingredient types
-				bonuses += "Each and every type! (x1.65 Tastiness)<br>";
+				bonuses += "Each and every type!<br>(x1.65 Tastiness)<br>";
 				bonusTastiness *= 1.65;
 		}
 		if(ingrArray.indexOf("bread") === 0 && ingrArray.indexOf("bread",-1) === ingrArray.length - 1){ //bread bonus
 				//if bread is first and bread is last
-				bonuses += "Traditional bonus! (x1.25 Tastiness)<br>";
+				bonuses += "Traditional bonus!<br>(x1.25 Tastiness)<br>";
 				bonusTastiness *= 1.25;
 		};
         if(ingrSpecific.includes("Bacon") && ingrSpecific.includes("Fried Egg") && ingrSpecific.includes("Cheese")){ //contains BEC
             	//BEC
-            bonuses += "Bacon, egg, and cheese! (x1.4 Tastiness)<br>";
+            bonuses += "Bacon, egg,and cheese!<br>(x1.4 Tastiness)<br>";
             bonusTastiness *= 1.4;  
         };
 		if(ingrSpecific.includes("Bacon") && ingrSpecific.includes("Lettuce") && ingrSpecific.includes("Tomato")){ //contains BLT
 				//BLT
-			bonuses += "BLT BONUS! (x1.4 Tastiness)<br>";
+			bonuses += "BLT BONUS!<br>(x1.4 Tastiness)<br>";
             bonusTastiness *= 1.4;  
         };
 		if(ingrSpecific.includes("Peanut Butter") && ingrSpecific.includes("Jelly")){ //contains PB&J
 				//PB&J
-			bonuses += "Classic Combo! (x1.25 Tastiness)<br>";
+			bonuses += "Classic Combo!<br>(x1.25 Tastiness)<br>";
             bonusTastiness *= 1.25;  
         };
 		if(ingrSpecific[0] === ingrSpecific[ingrSpecific.length-1]){
-			bonuses += "Structure Purist! (x1.08 Tastiness)<br>";
+			bonuses += "Structure Purist!<br>(x1.08 Tastiness)<br>";
             bonusTastiness *= 1.08;  
+		}
+		if(ingrSpecific.includes("Mustard") && ingrArray.includes("meat")) { //mustard + meat
+			bonuses += "Mustard Synergy Bonus!<br>(x1.12 Tastiness)<br>";
+            bonusTastiness *= 1.12; 
 		}
 	return [bonuses,bonusTastiness]
 }

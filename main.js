@@ -20,14 +20,6 @@ function makeSandwich(amnt){
 		document.getElementById("moneyCount").innerHTML = money.toFixed(2);
 	};
 };
-function makeInvis(){ // makes all unlockables invisible
-	document.getElementById("recipeBookSection").className = "invisible";
-	document.getElementById("craftingStation").className = "invisible";
-	document.getElementById("logDiv").className = "invisible";
-	document.getElementById("currentlyStats").className = "invisible";
-	document.getElementById("shopSection").className = "invisible";
-	document.getElementById("Research").className = "invisible";
-}
 function getRandomInt(max,rareness) {
 	return Math.floor(Math.pow(Math.random(), rareness) * Math.floor(max));
   } //random number
@@ -206,7 +198,7 @@ function buyProfits(){   //cost of this profits
         sellRatio *= 1.07				                  //increases profits
     	money -= profitsCost;                     		     //removes cash spent
 		profitsCost = Math.floor(Math.pow(profitsCost,1.1));
-        updateRecipe(String(selectedSandwich),sandwichTastiness,sandwichCost);
+		document.getElementById('sandwichSV').innerHTML = (sandwichCost * sellRatio + 0.1).toFixed(2);
 		document.getElementById('sellValue').innerHTML = "$" + (sandwichCost * sellRatio + 0.1).toFixed(2); //sell area in table array
         document.getElementById('moneyCount').innerHTML = money.toFixed(2); 
 		document.getElementById('profitsCost').innerHTML = "$" + profitsCost.toFixed(2); //how much to increase  profits

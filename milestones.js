@@ -1,5 +1,12 @@
 // suprisingly not as horrible looking as it used to be
-
+function makeInvis(){ // makes all unlockables invisible
+	document.getElementById("recipeBookSection").className = "invisible";
+	document.getElementById("craftingStation").className = "invisible";
+	document.getElementById("logDiv").className = "invisible";
+	document.getElementById("currentlyStats").className = "invisible";
+	document.getElementById("shopSection").className = "invisible";
+	document.getElementById("Research").className = "invisible";
+}
 function gameStageRender() { //game unlocks
 	var alreadyOutput = true;
 	switch(gameStage){
