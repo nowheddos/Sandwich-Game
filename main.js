@@ -160,6 +160,12 @@ function load(){
 	sellRatio = savegame.sellRatio;
 	profitsCost = savegame.profitsCost;
 	profitsAmount = savegame.profitsAmount;
+		document.getElementById("recipeBookSection").className = "column";
+		document.getElementById("craftingStation").className = "column";
+		document.getElementById("logDiv").className = "column";
+		document.getElementById("currentlyStats").className = "column";
+   		document.getElementById("shopSection").className = "column";
+		document.getElementById("Research").className = "column";
 	gameStageRender()
 	if(!autosaveEnabled){document.getElementById("autosaveBox").outerHTML = '<input id="autosaveBox" type="checkbox" oninput="autosaveEnabled = !autosaveEnabled;">'}; //check if autosave is disabled, replace if it is
 	console.log(recipeBook);

@@ -1,10 +1,6 @@
+// just saying, I know this is awful shit garbage etc, but I have NO idea how to fix it.
+
 function gameStageRender() { //game unlocks
-	document.getElementById("recipeBookSection").className = "column";
-	document.getElementById("craftingStation").className = "column";
-	document.getElementById("logDiv").className = "column";
-	document.getElementById("currentlyStats").className = "column";
-    document.getElementById("shopSection").className = "column";
-	document.getElementById("Research").className = "column";
 	switch(gameStage){ //i am so terribly sorry for this piece of trash
         case 4:
             milestone("Game finished! Expect more later :)");
