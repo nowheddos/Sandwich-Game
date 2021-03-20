@@ -20,9 +20,15 @@ function calculateBonus(ingrSpecific,ingrArray){  //get bonus values et names
 		}
 		if(ingrArray.indexOf("bread") === 0 && ingrArray.indexOf("bread",-1) === ingrArray.length - 1){ //bread bonus
 				//if bread is first and bread is last
-				bonuses += "Traditional bonus!<br>(x1.25 Tastiness)<br>";
-				bonusTastiness *= 1.25;
-		};
+				bonuses += "Traditional bonus!<br>(x1.3 Tastiness)<br>";
+				bonusTastiness *= 1.3;
+		} else if(ingrArray.indexOf("bread") === 0){
+			bonuses += "Open faced bonus!<br>(x1.07 Tastiness)<br>";
+			bonusTastiness *= 1.07;
+		} else {
+			bonuses += "No bread wrap penalty.<br>(x0.6 Tastiness)<br>";
+			bonusTastiness *= 0.6;
+		}
         if(ingrSpecific.includes("Bacon") && ingrSpecific.includes("Fried Egg") && ingrSpecific.includes("Cheese")){ //contains BEC
             	//BEC
             bonuses += "Bacon, egg,and cheese!<br>(x1.4 Tastiness)<br>";
@@ -38,12 +44,8 @@ function calculateBonus(ingrSpecific,ingrArray){  //get bonus values et names
 			bonuses += "Classic Combo!<br>(x1.25 Tastiness)<br>";
             bonusTastiness *= 1.25;  
         };
-		if(ingrSpecific[0] === ingrSpecific[ingrSpecific.length-1]){
-			bonuses += "Structure Purist!<br>(x1.08 Tastiness)<br>";
-            bonusTastiness *= 1.08;  
-		}
 		if(ingrSpecific.includes("Mustard") && ingrArray.includes("meat")) { //mustard + meat
-			bonuses += "Mustard Synergy Bonus!<br>(x1.12 Tastiness)<br>";
+			bonuses += "Mustard synergy bonus!<br>(x1.12 Tastiness)<br>";
             bonusTastiness *= 1.12; 
 		}
 	return [bonuses,bonusTastiness]

@@ -43,9 +43,9 @@ function setIngredientSelect(){ //makes ingredient selectors (the dropdown stuff
 	console.log(optionsTag)
 	document.getElementById("opt").innerHTML = '<span id="ingredientSelect"></span>'
 	for(i=0;i<ingredients.length;i++){ //gets the <options> for all ingredients, sets them into the variable optionsTag
-		console.log(optionsTag)
 		optionsTag = optionsTag + "<option value= '" + i + "'>" + ingredients[i][0] + "</option>\n"
 	};
+	console.log(optionsTag)
 	for(i = 0; i < maxIngredientSelection; i++){ //sets up the <select>
 		console.log(i)
 		document.getElementById("ingredientSelect").outerHTML = [
@@ -60,6 +60,7 @@ function handleForm(event) { event.preventDefault(); }  // prevent submit from r
 form.addEventListener('submit', handleForm); // copied and pasted code lmao
 
 form.onsubmit = function() { //when submit buton is pressed
+	if(form.sname.value)
 		var recipeStats = new Array;
 		var recipeTastiness = 1;
 		var recipeCost = 0;
