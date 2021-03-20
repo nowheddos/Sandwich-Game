@@ -87,4 +87,4 @@ table {
   select {
       font-size: 30px;
   }
-  
+  .noborder, .noborder tr, .noborder th, .noborder td { border: none; }

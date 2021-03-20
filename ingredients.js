@@ -17,7 +17,7 @@ var ingredientBank = [
     ["Fried Egg",3,2.8,"meat"] //common ingredients
 ]
 function getIngredient(ingrNumber){
-    if(!ingredientBank === []){
+    if(!(ingredientBank === [])){
         console.log(ingrNumber)
         ingredients.unshift(ingredientBank[Math.round(ingrNumber)]); //gets ingr from bank, puts into ingredients
         ingredientBank.splice(Math.round(ingrNumber), 1); //removes ingr from bank
@@ -25,11 +25,4 @@ function getIngredient(ingrNumber){
     } else {
         document.getElementById("alertsBox").innerHTML = "No more ingredients to get."
     }
-}
-function buyIngredient(rns,price){
-    if(money>=price && !ingredientBank === []){
-        money -= price;
-        document.getElementById("moneyCount").innerHTML =  money.toFixed(2);
-        getIngredient(getRandomInt(ingredientBank.length,rns))
-    } else {document.getElementById("alertsBox").innerHTML = "Not enough! Need $" + price.toFixed(2) + ", you only have $" + money.toFixed(2) + ".";}
 }

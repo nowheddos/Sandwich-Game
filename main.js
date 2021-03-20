@@ -9,6 +9,8 @@ var maxIngredientSelection = 4;
 var recipeBook = new Array(["Breadwich", 1.05, 1.95,["White Bread", "White Bread", "White Bread"],["bread","bread","bread"]]);
 var timeSpeed = 1.20;
 var sellRatio = 8/7;
+var profitsCost = 10;
+var profitsAmount = 1;
 //Ingrediets: name, tastiness, cost
 function makeSandwich(amnt){
 	if(money >= sandwichCost){ //check if can afford sandwich
@@ -183,7 +185,7 @@ function swapRecipeBook(e){
 			</tr>
 			<tr>
 				<td>Sell value: </td>
-				<td>$` + Number(recipeBook[e][2] * sellRatio + 0.1).toFixed(2) + `</td>
+				<td id='sellValue'>$` + Number(recipeBook[e][2] * sellRatio + 0.1).toFixed(2) + `</td>
 			</tr>
 			<tr>
 				<td rowspan='` + Number(recipeBook[e][3].length+1) + `'>Raw ingredients:</td>
@@ -191,10 +193,30 @@ function swapRecipeBook(e){
 			</tr>
 		</table>`;
 	} else {
-	document.getElementById("recipeOutput").innerHTML = "<i>\"" + sanitizeHTML(recipeBook[e][0]) + "\"</i> recipe breakdown:<br><table><tr><td width='20px'>Tastiness:</td>\n<td>" + recipeBook[e][1] + "</td></tr>\n<tr><td>Cost:</td>\n<td>$" + Number(recipeBook[e][2]).toFixed(2) + "</td></tr>\n<tr><td>Sell value: </td><td>$" + Number(recipeBook[e][2] * sellRatio + 0.1).toFixed(2) + "</td>\n</tr>\n<tr><td rowspan='" + Number(recipeBook[e][3].length+1) + "'>Raw ingredients:</td>\n<tr><td>" + recipeBook[e][3].join('</td></tr>\n<tr><td>') + "</td></tr><tr><td class='rainbow-text'>Bonuses:</td><td class='rainbow-text'>" + calculateBonus(recipeBook[e][3],recipeBook[e][4])[0] + "</td></tr></table>";
+	document.getElementById("recipeOutput").innerHTML = "<i>\"" + sanitizeHTML(recipeBook[e][0]) + "\"</i> recipe breakdown:<br><table><tr><td width='20px'>Tastiness:</td>\n<td>" + recipeBook[e][1] + "</td></tr>\n<tr><td>Cost:</td>\n<td>$" + Number(recipeBook[e][2]).toFixed(2) + "</td></tr>\n<tr><td>Sell value: </td><td id='sellValue'>$" + Number(recipeBook[e][2] * sellRatio + 0.1).toFixed(2) + "</td>\n</tr>\n<tr><td rowspan='" + Number(recipeBook[e][3].length+1) + "'>Raw ingredients:</td>\n<tr><td>" + recipeBook[e][3].join('</td></tr>\n<tr><td>') + "</td></tr><tr><td class='rainbow-text'>Bonuses:</td><td class='rainbow-text'>" + calculateBonus(recipeBook[e][3],recipeBook[e][4])[0] + "</td></tr></table>";
 	}
 };
 swapRecipeBook(0);
+					//shop shit		
+function buyProfits(){   //cost of this profits
+    if(money >= profitsCost){  
+        sellRatio *= 1.07				                  //increases profits
+    	money -= profitsCost;                     		     //removes cash spent
+		profitsCost = Math.floor(Math.pow(profitsCost,1.1));
+        updateRecipe(String(selectedSandwich),sandwichTastiness,sandwichCost);
+		document.getElementById('sellValue').innerHTML = "$" + profitsCost.toFixed(2);
+        document.getElementById('moneyCount').innerHTML = money.toFixed(2); 
+		document.getElementById('profitsCost').innerHTML = "$" + sellRatio.toFixed(2);
+    } else {document.getElementById("alertsBox").innerHTML = "Not enough! Need $" + profitsCost.toFixed(2) + ", you only have $" + money.toFixed(2) + ".";}
+};
+
+function buyIngredient(rns,price){
+    if(money>=price && !(ingredientBank === [])){
+        money -= price;
+        document.getElementById("moneyCount").innerHTML =  money.toFixed(2);
+        getIngredient(getRandomInt(ingredientBank.length,rns))
+    } else {document.getElementById("alertsBox").innerHTML = "Not enough! Need $" + price.toFixed(2) + ", you only have $" + money.toFixed(2) + ".";}
+}
 
 //function updateCraftPreview(){
 

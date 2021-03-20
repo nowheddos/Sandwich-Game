@@ -47,7 +47,7 @@
 			<!-- recipe book section -->
 		   <option value='0'>Breadwich</option>
 	   </select><br><br>
-		<div style="max-height:370px;height:370px;overflow-y:scroll;border:solid;border-radius: 9px;">
+		<div style="max-height:440px;height:440px;overflow-y:scroll;border:solid">
 	<span id="recipeOutput">0</span>
 	</div>
 </div>
@@ -62,7 +62,16 @@ Next unlock after:
 </div>
 <div id="shopSection"class="column"> <!-- shop -->
 	<h1>Shop</h1>
-	<label>$5.00</label> <button class = "button" onclick="buyIngredient(2,5)">Buy random ingredient</button>
+	<table class="noborder">
+		<tr>
+			<td style="text-align:right">$5.00</td>
+			<td><button class = "button" onclick="buyIngredient(2,5)">Buy random ingredient</button></td>
+		</tr>
+		<tr>
+			<td id="profitsCost" style="text-align:right">$10.00</td>
+			<td><button class = "button" onclick="buyProfits()">Increase Cost:Profits raito</button></td>
+		</tr>
+	</table>
 </div>
 	<div class="column"> <!-- Dev tools -->
 	</div>
@@ -73,10 +82,14 @@ Next unlock after:
 				<button class="button" onClick="load()">Load</button>
 				<button style="background-color: darkred;color:white" class="button" onClick="if(confirm('Are you sure you want to Hard Reset? This cannot be undone.')){localStorage.removeItem(`saveData`);window.location.reload()}">Hard Reset</button>
 				<input id="autosaveBox" type="checkbox" oninput="autosaveEnabled = !autosaveEnabled;" checked>Autosave
-			<span class="rainbow-text">Dev Tools</span>
-				<button class = "button" onClick="gameStage++;gameStageRender()">skip gamestage</button>
-				<button class = "button" onClick="maxIngredientSelection++;setIngredientSelect()">+1 Max Ingredient</button>
-				<button class = "button" onclick="getIngredient(getRandomInt(ingredientBank.length,2))">Get random ingredient</button>
+				<br><span style="font-size:20px;" class="rainbow-text">Dev Tools</span>
+				<div style="font-size:15px;">
+					<button class = "button" onClick="gameStage++;gameStageRender()">skip game stage</button>
+					<button class = "button" onClick="gameStage=4;gameStageRender()">max game stage</button>
+					<button class = "button" onClick="maxIngredientSelection++;setIngredientSelect()">+1 Max Ingredient</button>
+					<button class = "button" onclick="getIngredient(getRandomInt(ingredientBank.length,2))">Get random ingredient</button>
+					<button class = "button" onclick="money+=20;document.getElementById('moneyCount').innerHTML = money.toFixed(2);">+20 money</button>
+				</div>
 			</div>
 			<script type="text/javascript" src="milestones.js" ></script>
 			<script type="text/javascript" src="ingredients.js" ></script>
