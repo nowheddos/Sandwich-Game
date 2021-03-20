@@ -1,7 +1,8 @@
-// just saying, I know this is awful shit garbage etc, but I have NO idea how to fix it.
+// suprisingly not as horrible looking as it used to be
 
 function gameStageRender() { //game unlocks
-	switch(gameStage){ //i am so terribly sorry for this piece of trash
+	var alreadyOutput = false;
+	switch(gameStage){
 		case 0:
 			milestone("$5.50")
 			console.log("0")
@@ -19,12 +20,12 @@ function gameStageRender() { //game unlocks
 			milestone("$15.00")
 			document.getElementById("logDiv").className = "column";
 			document.getElementById("alertsBox").innerHTML = "Would be nice to have $15 for a recipe book..";
-			document.getElementById("craftingStation").className = "column";
 			console.log("2")
 		case 1:
 			milestone("Create a sandwich")
 			console.log("1")
 			document.getElementById("currentlyStats").className = "column";
+			document.getElementById("craftingStation").className = "column";
 
 	}
 }
