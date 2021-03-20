@@ -18,6 +18,10 @@ function makeSandwich(amnt){
 		document.getElementById("moneyCount").innerHTML = money.toFixed(2);
 	};
 };
+ 
+function getRandomInt(max,rareness) {
+	return Math.floor(Math.pow(Math.random(), rareness) * Math.floor(max));
+  } //random number
 
 function fade(id,show) {
 	var para = document.getElementById(id);
@@ -109,7 +113,7 @@ function updateRecipe(name,tastiness,cost){ //update stats
 	selectedSandwich = name;
 	document.getElementById("sandwichCost").innerHTML = Number(cost).toFixed(2);
 	document.getElementById("currentSandwich").innerHTML = sanitizeHTML(name);
-	document.getElementById("sandwichSV").innerHTML = (sandwichCost * sellRatio).toFixed(2);
+	document.getElementById("sandwichSV").innerHTML = (sandwichCost * sellRatio + 0.1).toFixed(2);
 	document.getElementById("peopleTick").innerHTML = Math.floor(Math.cbrt(sandwichTastiness));
 	document.getElementById("secondTick").innerHTML = Number(5000/timeSpeed^sandwichTastiness).toFixed(2)/1000;
 	document.getElementById("sandwichCount").innerHTML = sandwiches;
@@ -127,7 +131,8 @@ function save(){
 		recipeBook: recipeBook,
 		autosaveEnabled: autosaveEnabled,
 		gameStage:gameStage,
-		ingredientBank:ingredientBank
+		ingredientBank:ingredientBank,
+		maxIngredientSelection:maxIngredientSelection
 	}; 
 	localStorage.setItem("saveData",JSON.stringify(saveData));
 	console.log("Game saved");
@@ -146,6 +151,7 @@ function load(){
 	autosaveEnabled = savegame.autosaveEnabled; 
 	gameStage = savegame.gameStage;
 	ingredientBank = savegame.ingredientBank;
+	maxIngredientSelection = savegame.maxIngredientSelection;
 	gameStageRender()
 	if(!autosaveEnabled){document.getElementById("autosaveBox").outerHTML = '<input id="autosaveBox" type="checkbox" oninput="autosaveEnabled = !autosaveEnabled;">'}; //check if autosave is disabled, replace if it is
 	console.log(recipeBook);
@@ -177,7 +183,7 @@ function swapRecipeBook(e){
 			</tr>
 			<tr>
 				<td>Sell value: </td>
-				<td>$` + Number(recipeBook[e][2] * sellRatio).toFixed(2) + `</td>
+				<td>$` + Number(recipeBook[e][2] * sellRatio + 0.1).toFixed(2) + `</td>
 			</tr>
 			<tr>
 				<td rowspan='` + Number(recipeBook[e][3].length+1) + `'>Raw ingredients:</td>
@@ -185,7 +191,7 @@ function swapRecipeBook(e){
 			</tr>
 		</table>`;
 	} else {
-	document.getElementById("recipeOutput").innerHTML = "<i>\"" + sanitizeHTML(recipeBook[e][0]) + "\"</i> recipe breakdown:<br><table><tr><td width='20px'>Tastiness:</td>\n<td>" + recipeBook[e][1] + "</td></tr>\n<tr><td>Cost:</td>\n<td>$" + Number(recipeBook[e][2]).toFixed(2) + "</td></tr>\n<tr><td>Sell value: </td><td>$" + Number(recipeBook[e][2] * sellRatio).toFixed(2) + "</td>\n</tr>\n<tr><td rowspan='" + Number(recipeBook[e][3].length+1) + "'>Raw ingredients:</td>\n<tr><td>" + recipeBook[e][3].join('</td></tr>\n<tr><td>') + "</td></tr><tr><td class='rainbow-text'>Bonuses:</td><td class='rainbow-text'>" + calculateBonus(recipeBook[e][3],recipeBook[e][4])[0] + "</td></tr></table>";
+	document.getElementById("recipeOutput").innerHTML = "<i>\"" + sanitizeHTML(recipeBook[e][0]) + "\"</i> recipe breakdown:<br><table><tr><td width='20px'>Tastiness:</td>\n<td>" + recipeBook[e][1] + "</td></tr>\n<tr><td>Cost:</td>\n<td>$" + Number(recipeBook[e][2]).toFixed(2) + "</td></tr>\n<tr><td>Sell value: </td><td>$" + Number(recipeBook[e][2] * sellRatio + 0.1).toFixed(2) + "</td>\n</tr>\n<tr><td rowspan='" + Number(recipeBook[e][3].length+1) + "'>Raw ingredients:</td>\n<tr><td>" + recipeBook[e][3].join('</td></tr>\n<tr><td>') + "</td></tr><tr><td class='rainbow-text'>Bonuses:</td><td class='rainbow-text'>" + calculateBonus(recipeBook[e][3],recipeBook[e][4])[0] + "</td></tr></table>";
 	}
 };
 swapRecipeBook(0);
@@ -199,7 +205,7 @@ window.setInterval(function(){ //looping thing
 			for(i=0;i<Math.floor(Math.cbrt(sandwichTastiness));i++){
 				if(sandwiches > 0){
 		    		sandwiches--
-					money += +(sandwichCost * 8/7).toFixed(2); //money += a little higher than cost, multiplied by floortastiness because more people want it
+					money += +(sandwichCost * sellRatio + 0.1).toFixed(2); //money += a little higher than cost, multiplied by floortastiness because more people want it
 				};
 			};
 			if(money>=5.5 && gameStage === 0 || money >= 15 && gameStage === 2 || money >= 20 && gameStage === 3){

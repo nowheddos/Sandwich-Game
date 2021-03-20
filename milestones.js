@@ -6,7 +6,7 @@ function gameStageRender() { //game unlocks
     document.getElementById("shopSection").className = "column";
 	switch(gameStage){ //i am so terribly sorry for this piece of trash
         case 4:
-            milestone("$80.00");
+            milestone("Game finished! Expect more later :)");
             document.getElementById("alertsBox").innerHTML = "Shop unlocked! I wonder what's next...";
             break;
 		case 3:

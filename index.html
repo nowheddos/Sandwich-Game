@@ -62,7 +62,7 @@ Next unlock after:
 </div>
 <div id="shopSection"class="column"> <!-- shop -->
 	<h1>Shop</h1>
-	<button class = "button" onclick="getIngredient(Math.round(Math.sqrt(Math.random(ingredientBank.length^2))))">Buy random ingredient</button>
+	<label>$5.00</label> <button class = "button" onclick="buyIngredient(2,5)">Buy random ingredient</button>
 </div>
 	<div class="column"> <!-- Dev tools -->
 	</div>
@@ -76,7 +76,7 @@ Next unlock after:
 			<span class="rainbow-text">Dev Tools</span>
 				<button class = "button" onClick="gameStage++;gameStageRender()">skip gamestage</button>
 				<button class = "button" onClick="maxIngredientSelection++;setIngredientSelect()">+1 Max Ingredient</button>
-				<button class = "button" onclick="getIngredient(Math.random(ingredientBank.length))">Get random ingredient</button>
+				<button class = "button" onclick="getIngredient(getRandomInt(ingredientBank.length,2))">Get random ingredient</button>
 			</div>
 			<script type="text/javascript" src="milestones.js" ></script>
 			<script type="text/javascript" src="ingredients.js" ></script>
