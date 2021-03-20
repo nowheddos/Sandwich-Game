@@ -4,6 +4,7 @@ var ingredients = [
     ["Rye", 1.1, 1.7,"bread"],
     ["American Cheese", 2, 0.50,"cheese"],
     ["Turkey", 1.5, 1,"meat"],
+    ["Mustard", 1.5, 1,"sauce"],
     ["Lettuce",2.83,1.4,"vegetable"],
     ["Water", 1, 0,"sauce"]
 ]

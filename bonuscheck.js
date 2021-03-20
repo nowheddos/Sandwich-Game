@@ -38,5 +38,9 @@ function calculateBonus(ingrSpecific,ingrArray){  //get bonus values et names
 			bonuses += "Classic Combo! (x1.25 Tastiness)<br>";
             bonusTastiness *= 1.25;  
         };
+		if(ingrSpecific[0] === ingrSpecific[ingrSpecific.length]){
+			bonuses += "Structure Purist (x1.08 Tastiness)<br>";
+            bonusTastiness *= 1.08;  
+		}
 	return [bonuses,bonusTastiness]
 }
