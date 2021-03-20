@@ -20,21 +20,17 @@ function makeSandwich(amnt){
 		document.getElementById("moneyCount").innerHTML = money.toFixed(2);
 	};
 };
- 
+function makeInvis(){ // makes all unlockables invisible
+	document.getElementById("recipeBookSection").className = "invisible";
+	document.getElementById("craftingStation").className = "invisible";
+	document.getElementById("logDiv").className = "invisible";
+	document.getElementById("currentlyStats").className = "invisible";
+	document.getElementById("shopSection").className = "invisible";
+	document.getElementById("Research").className = "invisible";
+}
 function getRandomInt(max,rareness) {
 	return Math.floor(Math.pow(Math.random(), rareness) * Math.floor(max));
   } //random number
-
-function fade(id,show) {
-	var para = document.getElementById(id);
-	if (show) {
-	  para.classList.remove("invisible");
-	  para.classList.add("visible");
-	} else {
-	  para.classList.remove("visible");
-	  para.classList.add("invisible");
-	}
-  }
 
 function refreshBook(){
 var fullOptions = new Array;
@@ -160,12 +156,7 @@ function load(){
 	sellRatio = savegame.sellRatio;
 	profitsCost = savegame.profitsCost;
 	profitsAmount = savegame.profitsAmount;
-		document.getElementById("recipeBookSection").className = "column";
-		document.getElementById("craftingStation").className = "column";
-		document.getElementById("logDiv").className = "column";
-		document.getElementById("currentlyStats").className = "column";
-   		document.getElementById("shopSection").className = "column";
-		document.getElementById("Research").className = "column";
+	makeInvis()
 	gameStageRender()
 	if(!autosaveEnabled){document.getElementById("autosaveBox").outerHTML = '<input id="autosaveBox" type="checkbox" oninput="autosaveEnabled = !autosaveEnabled;">'}; //check if autosave is disabled, replace if it is
 	console.log(recipeBook);
@@ -177,7 +168,7 @@ function load(){
 		console.log("game loaded successfully, money: " + money);
 	var d = new Date();
 	document.getElementById("alertsBox").innerHTML = "Loaded at " + d.getMinutes() + ":" + d.getSeconds() + ":" + d.getMilliseconds();
-}; if(localStorage.getItem("saveData") !== null){window.onload = load()} else {gameStageRender();}
+}; if(localStorage.getItem("saveData") !== null){window.onload = load()} else {makeInvis();gameStageRender();}
 setIngredientSelect(); 
 //recipe book shit
 function swapRecipeBook(e){
