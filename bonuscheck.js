@@ -10,7 +10,7 @@ function checkIfIncludes(ingrArray,spec){
 	return true;
 }
 function calculateBonus(ingrSpecific,ingrArray){  //get bonus values et names
-	console.log("Bonus function recieved: " + ingrArray);
+	console.log("Bonus function recieved: " + ingrArray + " & ");
 	var bonuses = new Array;
 	var bonusTastiness = 1;
 		if(checkIfIncludes(["bread","meat","cheese","vegetable","sauce"],ingrArray)){
@@ -38,8 +38,8 @@ function calculateBonus(ingrSpecific,ingrArray){  //get bonus values et names
 			bonuses += "Classic Combo! (x1.25 Tastiness)<br>";
             bonusTastiness *= 1.25;  
         };
-		if(ingrSpecific[0] === ingrSpecific[ingrSpecific.length]){
-			bonuses += "Structure Purist (x1.08 Tastiness)<br>";
+		if(ingrSpecific[0] === ingrSpecific[ingrSpecific.length-1]){
+			bonuses += "Structure Purist! (x1.08 Tastiness)<br>";
             bonusTastiness *= 1.08;  
 		}
 	return [bonuses,bonusTastiness]
