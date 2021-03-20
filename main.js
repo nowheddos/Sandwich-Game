@@ -207,11 +207,15 @@ function buyProfits(){   //cost of this profits
 };
 
 function buyIngredient(rns,price){
-    if(money>=price && !(ingredientBank === [])){
+    if(money>=price && ingredientBank.length > 0){
         money -= price;
         document.getElementById("moneyCount").innerHTML =  money.toFixed(2);
         getIngredient(getRandomInt(ingredientBank.length,rns))
-    } else {document.getElementById("alertsBox").innerHTML = "Not enough! Need $" + price.toFixed(2) + ", you only have $" + money.toFixed(2) + ".";}
+    } else if(ingredientBank.length === 0){
+		document.getElementById("alertsBox").innerHTML = "No more ingredients to get.";
+	} else {
+		document.getElementById("alertsBox").innerHTML = "Not enough! Need $" + price.toFixed(2) + ", you only have $" + money.toFixed(2) + ".";
+	}
 }
 
 //function updateCraftPreview(){

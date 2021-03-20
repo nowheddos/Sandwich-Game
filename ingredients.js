@@ -16,11 +16,13 @@ var ingredientBank = [
     ["Bagel",1,2.5,"bread"],
     ["Jelly",2,1,"sauce"],
     ["Peanut Butter",1,2.5,"sauce"],
-    ["Fried Egg",3,2.8,"meat"], 
-    ["Swiss Cheese",1.4,0.9,"cheese"]
+    ["Fried Egg",2,2.8,"meat"], 
+    ["Swiss Cheese",1.4,0.9,"cheese"],
+    ["Mayo",1.6,2,"sauce"],
+    ["Roast Beef",1.8,1.5,"meat"]
 ]
 function getIngredient(ingrNumber){
-    if(!(ingredientBank === [])){
+    if(ingredientBank.length > 0){
         console.log(ingrNumber)
         ingredients.unshift(ingredientBank[Math.round(ingrNumber)]); //gets ingr from bank, puts into ingredients
         ingredientBank.splice(Math.round(ingrNumber), 1); //removes ingr from bank

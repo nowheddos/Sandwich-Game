@@ -17,7 +17,7 @@ function gameStageRender() { //game unlocks
 		case 5:
 			
 		case 4:
-            if(alreadyOutput){milestone("Game finished! Expect more later :)");
+            if(alreadyOutput){milestone("$60.00");
             document.getElementById("alertsBox").innerHTML = "Shop unlocked! I wonder what's next...";
 			alreadyOutput = !alreadyOutput}
 			document.getElementById("shopSection").className = "column";
