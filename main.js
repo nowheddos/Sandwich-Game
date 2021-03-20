@@ -105,7 +105,7 @@ function updateRecipe(name,tastiness,cost){ //update stats
 	document.getElementById("sandwichCost").innerHTML = Number(cost).toFixed(2);
 	document.getElementById("currentSandwich").innerHTML = sanitizeHTML(name);
 	document.getElementById("sandwichSV").innerHTML = (sandwichCost * sellRatio + 0.1).toFixed(2);
-	document.getElementById("peopleTick").innerHTML = Math.floor(Math.cbrt(sandwichTastiness));
+	document.getElementById("peopleTick").innerHTML = Math.floor(Math.cbrt(sandwichTastiness*1.5));
 	document.getElementById("secondTick").innerHTML = (Number(5000/Math.pow(timeSpeed,sandwichTastiness/5))/1000).toFixed(1);
 	document.getElementById("sandwichCount").innerHTML = sandwiches;
 	document.getElementById("moneyCount").innerHTML = money.toFixed(2);
@@ -185,11 +185,11 @@ function swapRecipeBook(e){
 			</tr>
 			<tr>
 				<td rowspan='` + Number(recipeBook[e][3].length+1) + `'>Raw ingredients:</td>
-				<tr><td>` + recipeBook[e][3].join('</td></tr>\n<tr><td>') + `</td>
+				<tr><td>` + recipeBook[e][3].reverse().join('</td></tr>\n<tr><td>') + `</td>
 			</tr>
 		</table>`;
 	} else {
-	document.getElementById("recipeOutput").innerHTML = "<i>\"" + sanitizeHTML(recipeBook[e][0]) + "\"</i> recipe breakdown:<br><table><tr><td width='20px'>Tastiness:</td>\n<td>" + recipeBook[e][1] + "</td></tr>\n<tr><td>Cost:</td>\n<td>$" + Number(recipeBook[e][2]).toFixed(2) + "</td></tr>\n<tr><td>Sell value: </td><td id='sellValue'>$" + Number(recipeBook[e][2] * sellRatio + 0.1).toFixed(2) + "</td>\n</tr>\n<tr><td rowspan='" + Number(recipeBook[e][3].length+1) + "'>Raw ingredients:</td>\n<tr><td>" + recipeBook[e][3].join('</td></tr>\n<tr><td>') + "</td></tr><tr><td class='rainbow-text'>Bonuses:</td><td class='rainbow-text'>" + calculateBonus(recipeBook[e][3],recipeBook[e][4])[0] + "</td></tr></table>";
+	document.getElementById("recipeOutput").innerHTML = "<i>\"" + sanitizeHTML(recipeBook[e][0]) + "\"</i> recipe breakdown:<br><table><tr><td width='20px'>Tastiness:</td>\n<td>" + recipeBook[e][1] + "</td></tr>\n<tr><td>Cost:</td>\n<td>$" + Number(recipeBook[e][2]).toFixed(2) + "</td></tr>\n<tr><td>Sell value: </td><td id='sellValue'>$" + Number(recipeBook[e][2] * sellRatio + 0.1).toFixed(2) + "</td>\n</tr>\n<tr><td rowspan='" + Number(recipeBook[e][3].length+1) + "'>Raw ingredients:</td>\n<tr><td>" + recipeBook[e][3].reverse().join('</td></tr>\n<tr><td>') + "</td></tr><tr><td class='rainbow-text'>Bonuses:</td><td class='rainbow-text'>" + calculateBonus(recipeBook[e][3],recipeBook[e][4])[0] + "</td></tr></table>";
 	}
 };
 swapRecipeBook(0);
@@ -198,7 +198,7 @@ function buyProfits(){   //cost of this profits
     if(money >= profitsCost){  
         sellRatio *= 1.07				                  //increases profits
     	money -= profitsCost;                     		     //removes cash spent
-		profitsCost = Math.floor(Math.pow(profitsCost,1.1));
+		profitsCost = +(Math.pow(profitsCost,1.17)).toFixed(2);
 		document.getElementById('sandwichSV').innerHTML = (sandwichCost * sellRatio + 0.1).toFixed(2);
 		document.getElementById('sellValue').innerHTML = "$" + (sandwichCost * sellRatio + 0.1).toFixed(2); //sell area in table array
         document.getElementById('moneyCount').innerHTML = money.toFixed(2); 
@@ -224,7 +224,7 @@ function buyIngredient(rns,price){
 
 // loop
 window.setInterval(function(){ //looping thing
-			for(i=0;i<Math.floor(Math.cbrt(sandwichTastiness));i++){
+			for(i=0;i<Math.floor(Math.cbrt(sandwichTastiness*1.5));i++){
 				if(sandwiches > 0){
 		    		sandwiches--
 					money += +(sandwichCost * sellRatio + 0.1).toFixed(2); //money += a little higher than cost, multiplied by floortastiness because more people want it
