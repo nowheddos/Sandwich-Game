@@ -11,6 +11,8 @@ var timeSpeed = 1.20;
 var sellRatio = 8/7;
 var profitsCost = 10;
 var profitsAmount = 1;
+var sandwichPoints = 0;
+var SPS = 0;
 //Ingrediets: name, tastiness, cost
 function makeSandwich(amnt){
 	if(money >= sandwichCost){ //check if can afford sandwich
@@ -39,20 +41,22 @@ function sanitizeHTML(text) { //sanitize text
 	return element.innerHTML;
   }
 function setIngredientSelect(){ //makes ingredient selectors (the dropdown stuff)
-	var optionsTag = "";
-	console.log(optionsTag)
+	var optionsTag = new Array;
 	document.getElementById("opt").innerHTML = '<span id="ingredientSelect"></span>'
 	for(i=0;i<ingredients.length;i++){ //gets the <options> for all ingredients, sets them into the variable optionsTag
-		optionsTag = optionsTag + "<option value= '" + i + "'>" + ingredients[i][0] + "</option>\n"
+		optionsTag.push("<option value='" + i + "'>" + ingredients[i][0] + "</option>\n")
+		console.table(optionsTag)
 	};
 	console.log(optionsTag)
 	for(i = 0; i < maxIngredientSelection; i++){ //sets up the <select>
-		console.log(i)
 		document.getElementById("ingredientSelect").outerHTML = [
 			"<select id='ingrSelect" + i + "'>" + optionsTag + "</select><br>" + "<span id='ingredientSelect'></span>"
 		];
 	};
-};
+	const altar = optionsTag.reverse();
+	altar.shift()
+	document.getElementById("altarSelect").innerHTML = altar;
+}
 //temporary
 //1 week later: it was not temporary.
 let form = document.getElementById('sandwichForm'); // form
@@ -105,7 +109,7 @@ function updateRecipe(name,tastiness,cost){ //update stats
 	document.getElementById("sandwichCost").innerHTML = Number(cost).toFixed(2);
 	document.getElementById("currentSandwich").innerHTML = sanitizeHTML(name);
 	document.getElementById("sandwichSV").innerHTML = (sandwichCost * sellRatio + 0.1).toFixed(2);
-	document.getElementById("peopleTick").innerHTML = Math.floor(Math.cbrt(sandwichTastiness*1.5));
+	document.getElementById("peopleTick").innerHTML = Math.ceil(Math.cbrt(sandwichTastiness*1.5));
 	document.getElementById("secondTick").innerHTML = (Number(5000/Math.pow(timeSpeed,sandwichTastiness/5))/1000).toFixed(1);
 	document.getElementById("sandwichCount").innerHTML = sandwiches;
 	document.getElementById("moneyCount").innerHTML = money.toFixed(2);
@@ -126,7 +130,9 @@ function save(){
 		maxIngredientSelection:maxIngredientSelection,
 		sellRatio:sellRatio,
 		profitsCost:profitsCost,
-		profitsAmount:profitsAmount
+		profitsAmount:profitsAmount,
+		sandwichPoints:sandwichPoints,
+		SPS:SPS
 	}; 
 	localStorage.setItem("saveData",JSON.stringify(saveData));
 	console.log("Game saved");
@@ -149,6 +155,11 @@ function load(){
 	sellRatio = savegame.sellRatio;
 	profitsCost = savegame.profitsCost;
 	profitsAmount = savegame.profitsAmount;
+	sandwichPoints = savegame.sandwichPoints;
+	SPS = savegame.SPS;
+	document.getElementById('maxCost').innerHTML = "SP:" + Math.floor(Math.pow(maxIngredientSelection,6.6439));
+	document.getElementById('SandwichPerSecond').innerHTML = SPS;
+	document.getElementById('ingrCost').innerHTML = "$" + Math.abs(Math.pow(ingredients.length-2,1.3)-1.365).toFixed(2)
 	makeInvis()
 	gameStageRender()
 	if(!autosaveEnabled){document.getElementById("autosaveBox").outerHTML = '<input id="autosaveBox" type="checkbox" oninput="autosaveEnabled = !autosaveEnabled;">'}; //check if autosave is disabled, replace if it is
@@ -209,35 +220,64 @@ function buyProfits(){   //cost of this profits
 function buyIngredient(rns,price){
     if(money>=price && ingredientBank.length > 0){
         money -= price;
+		getIngredient(getRandomInt(ingredientBank.length,rns))
+		document.getElementById('ingrCost').innerHTML = "$" + Math.abs(Math.pow(ingredients.length-2,1.3)-1.365).toFixed(2)
         document.getElementById("moneyCount").innerHTML =  money.toFixed(2);
-        getIngredient(getRandomInt(ingredientBank.length,rns))
     } else if(ingredientBank.length === 0){
 		document.getElementById("alertsBox").innerHTML = "No more ingredients to get.";
 	} else {
 		document.getElementById("alertsBox").innerHTML = "Not enough! Need $" + price.toFixed(2) + ", you only have $" + money.toFixed(2) + ".";
 	}
 }
-
 //function updateCraftPreview(){
 
 //} do later :)
 
 // loop
+function calculateSandwichPoints(bam){ //calculates amnt of Sandwich points/second for ingredient sacrificed
+	return Math.floor(ingredients[bam][1]*ingredients[bam][2]*50)
+};
+function sacrifice(val) {
+	if(ingredients.length>4){
+		SPS += calculateSandwichPoints(val);
+		ingredients.splice(val,1);
+		setIngredientSelect()
+		document.getElementById('SandwichPerSecond').innerHTML = SPS;
+		document.getElementById('ingrCost').innerHTML = "$" + Math.abs(Math.pow(ingredients.length-2,1.3)-1.365).toFixed(2)
+	} else {
+		document.getElementById("alertsBox").innerHTML = "I don't think you should Sacrifice with an ingredient count that low...";
+	}
+}
+function buyMax(){
+	if(sandwichPoints>=Math.floor(Math.pow(maxIngredientSelection,6.6439))){
+        sandwichPoints -= Math.floor(Math.pow(maxIngredientSelection,6.6439));
+		maxIngredientSelection++;
+		document.getElementById('maxCost').innerHTML = "SP:" + Math.floor(Math.pow(maxIngredientSelection,6.6439));
+        document.getElementById("SandwichPointCount").innerHTML =  sandwichPoints;
+		setIngredientSelect()
+    } else {
+		document.getElementById("alertsBox").innerHTML = "Not enough! Need SP:" + Math.floor(Math.pow(maxIngredientSelection,6.6439)) + ", you only have SP:" + sandwichPoints + ".";
+	}
+}
+document.getElementById('hypotheticalSandwichPerSecond').innerHTML = calculateSandwichPoints(altarSelect.value)
 window.setInterval(function(){ //looping thing
-			for(i=0;i<Math.floor(Math.cbrt(sandwichTastiness*1.5));i++){
+			for(i=0;i<Math.ceil(Math.cbrt(sandwichTastiness*1.5));i++){
 				if(sandwiches > 0){
 		    		sandwiches--
 					money += +(sandwichCost * sellRatio + 0.1).toFixed(2); //money += a little higher than cost, multiplied by floortastiness because more people want it
 				};
 			};
-			if(money>=5.5 && gameStage === 0 || money >= 15 && gameStage === 2 || money >= 20 && gameStage === 3){
+			if(money>=5.5 && gameStage === 0 || money >= 15 && gameStage === 2 || money >= 25 && gameStage === 3 || money >= 35 && gameStage === 4){
 				gameStage++;
 				gameStageRender();
 			}
 	document.getElementById("sandwichCount").innerHTML = sandwiches;
 	document.getElementById("moneyCount").innerHTML = money.toFixed(2);
 }, Number(5000/(Math.pow(timeSpeed,sandwichTastiness/5)))); //1000 = 1000ms = 1s
-
+window.setInterval(function(){
+	sandwichPoints += SPS;
+	document.getElementById('SandwichPointCount').innerHTML = sandwichPoints
+}, 1000);
 window.setInterval(function(){
 	save();
 }, 30000);

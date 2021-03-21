@@ -13,6 +13,9 @@ div.rightSideFixed {
     right: 40%;
     position: fixed;
 }
+p{
+    font-size: 80%; 
+}
 .row {
     display: flex;
 }
@@ -38,6 +41,9 @@ div.rightSideFixed {
 .button:active {
     border: solid rgb(189, 189, 189);
     background-color:darkgray;
+}
+.button:disabled {
+    cursor: not-allowed;
 }
 .bottomScreen {
     bottom: 1px;
@@ -88,3 +94,39 @@ table {
       font-size: 30px;
   }
   .noborder, .noborder tr, .noborder th, .noborder td { border: none; }
+  .altar {
+    background: radial-gradient(circle, rgba(98,0,0,1) 17%, rgba(138,0,0,1) 50%, rgba(98,0,0,1) 83%);
+    background-size: 400% 400%;
+    border:inset rgb(42, 42, 42);
+    border-width: 6px;
+    border-radius:100px;
+    width:150px;
+    height:70px;
+    padding:70px;
+    margin:auto;
+    box-shadow: -2px -2px 20px 15px rgb(0 0 0 / 40%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+    position: relative;
+    animation: altarBg 6s ease infinite;
+    --wekbit-animation: altarBg 6s ease infinite;
+  }
+@keyframes altarBg {
+    0%{background-position:20% 15%}
+    50%{background-position:85% 85%}
+    100%{background-position:15% 20%}
+}
+  #altarSelect {
+    text-align-last:center;
+    left:7%;
+    color:white;
+    border:none;
+    background:rgba(0, 0, 0, 0);
+    position:absolute;
+    top: 50%;
+    margin-top:-10%;
+    outline:0px;
+  }
+  option {
+      color: black;
+      background-color: white;
+      border-radius:100px;
+  }

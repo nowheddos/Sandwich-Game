@@ -10,12 +10,15 @@
 <body>
 <div class="row">
 	<div class="column"> <!-- money/sandwich section -->
+			<h1>Shop Statistics</h1>
 		Money: $<span class="numberJump" id="moneyCount">5.00</span><br>
 		Sandwiches in stock: <span id="sandwichCount">0</span><br>
 		Store traffic: <span id="peopleTick">0</span> people every <span id="secondTick">0</span> seconds.<br>
 		<button class="button" onClick="makeSandwich(1)">Make Sandwich</button></div><br>
 	<!-- currently selected + stats -->
-	<div id="currentlyStats" class="column">Currently selected sandwich: <span id="currentSandwich">Breadwich</span><br>
+	<div id="currentlyStats" class="column">
+			<h1>Sandwich Statistics</h1>
+		Currently selected sandwich: <span id="currentSandwich">Breadwich</span><br>
 		Cost: $<span id="sandwichCost">0</span><br>
 		Sell Value: $<span id="sandwichSV">0</span>
 		</div>
@@ -30,7 +33,7 @@
 	<div id="craftingStation" class="column">
 		<form id="sandwichForm"> <!-- Sandwich Creation -->
 				<fieldset style="display:flexbox">
-					<legend>Crafting Station</legend>
+					<legend><h1 style="font-size:85%">Crafting Station</h1></legend>
 			<label style="font-size:100%">Sandwich Name:</label>
 			<input type="text" id="sname" autocomplete="off" required maxlength=25><br><label style="font-size:85%">Sandwich ingredients</label>
 			<div class="row">
@@ -56,24 +59,39 @@
 
 	<!-- end recipe book section -->
 <div class="row">
-		<div id="logDiv" class="column">Log
+		<div id="logDiv" class="column"><h1>Log</h1>
 			<p id="alertsBox">hi</p>
 		</div>
 <div id="shopSection"class="column"> <!-- shop -->
-	<h1>Shop</h1>
+	<h1>Shop</h1> 
 	<table class="noborder">
 		<tr>
-			<td style="text-align:right">$5.00</td>
-			<td><button class = "button" onclick="buyIngredient(2,5)">Buy random ingredient</button></td>
+			<td id="ingrCost" style="text-align:right">$4.70</td>
+			<td><button class = "button" onclick="buyIngredient(2,Math.pow(ingredients.length-2,1.3)-1.365)">Buy random ingredient</button></td>
 		</tr>
 		<tr>
 			<td id="profitsCost" style="text-align:right">$10.00</td>
 			<td><button class = "button" onclick="buyProfits()">Increase Cost:Profits raito</button></td>
 		</tr>
+		<td>SP Shop</td>
+		<tr>
+			<td id="maxCost" style="text-align:right">SP:10000</td>
+			<td><button class = "button" onclick="buyMax()">+1 Max Ingredient</button></td>
+		</tr>
 	</table>
 </div>
-	<div id="Research" class="column"> <!-- Research -->
+	<div id="darkArts" class="column"> <!-- Sandwich -->
 		<h1>Dark Sandwich Arts</h1>
+		SP/S: <span id="SandwichPerSecond">0</span><br>
+		Sandwich Points: <span id="SandwichPointCount">0</span>
+		<div style="text-align: center;">Altar</div><br>
+		<div class="altar">
+			<select  id="altarSelect" oninput="document.getElementById('hypotheticalSandwichPerSecond').innerHTML = calculateSandwichPoints(altarSelect.value)">
+			</select>
+		</div><br>
+		<div style="text-align: center;"><button onclick="sacrifice(altarSelect.value)" class="button">Sacrifice Ingredient for SP Income</button><br>
+		From Sacrifice: <span id="hypotheticalSandwichPerSecond">0</span> SP/S</div>
+		<p>Get rid of ingredients for Sandwich points. You cannot use the Sacrificed ingridient in any future recipies. Current recipies are not altered (for now).</p>
 	</div>
 </div>
 
@@ -85,7 +103,7 @@
 				<br><span style="font-size:20px;" class="rainbow-text">Dev Tools</span>
 				<div style="font-size:15px;">
 					<button class = "button" onClick="gameStage++;gameStageRender()">skip game stage</button>
-					<button class = "button" onClick="gameStage=4;gameStageRender()">max game stage</button>
+					<button class = "button" onClick="gameStage=5;gameStageRender()">max game stage</button>
 					<button class = "button" onClick="maxIngredientSelection++;setIngredientSelect()">+1 Max Ingredient</button>
 					<button class = "button" onclick="getIngredient(getRandomInt(ingredientBank.length,2))">Get random ingredient</button>
 					<button class = "button" onclick="money+=20;document.getElementById('moneyCount').innerHTML = money.toFixed(2);">+20 money</button>

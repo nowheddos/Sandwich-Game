@@ -1,6 +1,4 @@
 function checkIfIncludes(ingrArray,spec){
-	console.table(ingrArray)
-	console.table(spec)
 	for(i=0;i<ingrArray.length;i++){ //for length of check given
 		console.log(ingrArray[i])
 		if(!spec.includes(ingrArray[i])){ //if array includes [i] of given array
@@ -21,7 +19,7 @@ function calculateBonus(ingrSpecific,ingrArray){  //get bonus values et names
 		if(ingrArray.indexOf("bread") === 0 && ingrArray.indexOf("bread",-1) === ingrArray.length - 1){ //bread bonus
 				//if bread is first and bread is last
 				bonuses += "Traditional bonus!<br>(x1.3 Tastiness)<br>";
-				bonusTastiness *= 1.3;
+				bonusTastiness *= 1.4;
 		} else if(ingrArray.indexOf("bread") === 0){
 			bonuses += "Open faced bonus!<br>(x1.07 Tastiness)<br>";
 			bonusTastiness *= 1.07;

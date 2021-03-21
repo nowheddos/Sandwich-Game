@@ -5,7 +5,7 @@ function makeInvis(){ // makes all unlockables invisible
 	document.getElementById("logDiv").className = "invisible";
 	document.getElementById("currentlyStats").className = "invisible";
 	document.getElementById("shopSection").className = "invisible";
-	document.getElementById("Research").className = "invisible";
+	document.getElementById("darkArts").className = "invisible";
 }
 function gameStageRender() { //game unlocks
 	var alreadyOutput = true;
@@ -15,10 +15,13 @@ function gameStageRender() { //game unlocks
 			console.log("0")
 			break;
 		case 5:
-			
+			if(alreadyOutput){milestone("That's everything right now! More coming soon.");
+            document.getElementById("alertsBox").innerHTML = "Hmmm... I wonder what you can use excess ingredients for....";
+			alreadyOutput = !alreadyOutput}
+			document.getElementById("darkArts").className = "column";	
 		case 4:
-            if(alreadyOutput){milestone("$60.00");
-            document.getElementById("alertsBox").innerHTML = "Shop unlocked! I wonder what's next...";
+            if(alreadyOutput){milestone("$35.00");
+            document.getElementById("alertsBox").innerHTML = "Shop unlocked! I wonder what's next?";
 			alreadyOutput = !alreadyOutput}
 			document.getElementById("shopSection").className = "column";
 		case 3:
