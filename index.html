@@ -75,7 +75,7 @@
 		</tr>
 		<td>SP Shop</td>
 		<tr>
-			<td id="maxCost" style="text-align:right">SP:10000</td>
+			<td id="maxCost" style="text-align:right">SP:</td>
 			<td><button class = "button" onclick="buyMax()">+1 Max Ingredient</button></td>
 		</tr>
 	</table>
@@ -107,6 +107,7 @@
 					<button class = "button" onClick="maxIngredientSelection++;setIngredientSelect()">+1 Max Ingredient</button>
 					<button class = "button" onclick="getIngredient(getRandomInt(ingredientBank.length,2))">Get random ingredient</button>
 					<button class = "button" onclick="money+=20;document.getElementById('moneyCount').innerHTML = money.toFixed(2);">+20 money</button>
+					<button class = "button" onclick="sandwichPoints+=5000;document.getElementById('SandwichPointCount').innerHTML = sandwichPoints;">+5000 SP</button>
 				</div>
 			</div>
 			<script type="text/javascript" src="milestones.js" ></script>

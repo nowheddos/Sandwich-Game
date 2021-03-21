@@ -20,6 +20,7 @@ var ingredientBank = [
     ["Fried Egg",1.8,2,"meat"], 
     ["Swiss Cheese",1.4,0.9,"cheese"],
     ["Mayo",1.6,2,"sauce"],
+    ["Baguette",1.7,1.7,"bread"],
     ["Roast Beef",1.8,1.5,"meat"]
 ]
 function getIngredient(ingrNumber){

@@ -27,7 +27,7 @@ function calculateBonus(ingrSpecific,ingrArray){  //get bonus values et names
 			bonuses += "No bread wrap penalty.<br>(x0.6 Tastiness)<br>";
 			bonusTastiness *= 0.6;
 		}
-        if(checkIfIncludes(["Bacon","Fried Egg","Cheese"],ingrSpecific)){ //contains BEC
+        if(checkIfIncludes(["Bacon","Fried Egg"],ingrSpecific) && ingrArray.includes("cheese")){ //contains BEC
             	//BEC
             bonuses += "Bacon, egg,and cheese!<br>(x1.4 Tastiness)<br>";
             bonusTastiness *= 1.4;  
@@ -47,10 +47,17 @@ function calculateBonus(ingrSpecific,ingrArray){  //get bonus values et names
             bonusTastiness *= 1.12; 
 		}
 		if(checkIfIncludes(["Roast Beef","Tomato","Lettuce"],ingrSpecific)){
-			bonuses += "Roast beef bonus!<br>(x1.7 Tastiness)<br>";
+			bonuses += "Roast beef Sandwich bonus!<br>(x1.7 Tastiness)<br>";
             bonusTastiness *= 1.7; 
 		}
-		if(checkIfIncludes(["Ham","Swiss Cheese"],ingrSpecific)){
+		if(checkIfIncludes(["Ham","Tomato","Lettuce"],ingrSpecific)){
+			bonuses += "Ham Sandwich bonus!<br>(x1.4 Tastiness)<br>";
+            bonusTastiness *= 1.4; 
+		}
+		if(checkIfIncludes(["Ham","Swiss Cheese","Mayo"],ingrSpecific)){
+			bonuses += "Ham & swiss (+Mayo) bonus!<br>(x1.4 Tastiness)<br>";
+            bonusTastiness *= 1.4; 
+		} else if(checkIfIncludes(["Ham","Swiss Cheese"],ingrSpecific)){
 			bonuses += "Ham & swiss bonus!<br>(x1.2 Tastiness)<br>";
             bonusTastiness *= 1.2; 
 		}

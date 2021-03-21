@@ -157,7 +157,7 @@ function load(){
 	profitsAmount = savegame.profitsAmount;
 	sandwichPoints = savegame.sandwichPoints;
 	SPS = savegame.SPS;
-	document.getElementById('maxCost').innerHTML = "SP:" + Math.floor(Math.pow(maxIngredientSelection,6.6439));
+	document.getElementById('maxCost').innerHTML = "SP:" + Math.floor(Math.pow(maxIngredientSelection,7));
 	document.getElementById('SandwichPerSecond').innerHTML = SPS;
 	document.getElementById('ingrCost').innerHTML = "$" + Math.abs(Math.pow(ingredients.length-2,1.3)-1.365).toFixed(2)
 	makeInvis()
@@ -249,14 +249,14 @@ function sacrifice(val) {
 	}
 }
 function buyMax(){
-	if(sandwichPoints>=Math.floor(Math.pow(maxIngredientSelection,6.6439))){
-        sandwichPoints -= Math.floor(Math.pow(maxIngredientSelection,6.6439));
+	if(sandwichPoints>=Math.floor(Math.pow(maxIngredientSelection,7))){
+        sandwichPoints -= Math.floor(Math.pow(maxIngredientSelection,7));
 		maxIngredientSelection++;
-		document.getElementById('maxCost').innerHTML = "SP:" + Math.floor(Math.pow(maxIngredientSelection,6.6439));
+		document.getElementById('maxCost').innerHTML = "SP:" + Math.floor(Math.pow(maxIngredientSelection,7));
         document.getElementById("SandwichPointCount").innerHTML =  sandwichPoints;
 		setIngredientSelect()
     } else {
-		document.getElementById("alertsBox").innerHTML = "Not enough! Need SP:" + Math.floor(Math.pow(maxIngredientSelection,6.6439)) + ", you only have SP:" + sandwichPoints + ".";
+		document.getElementById("alertsBox").innerHTML = "Not enough! Need SP:" + Math.floor(Math.pow(maxIngredientSelection,7)) + ", you only have SP:" + sandwichPoints + ".";
 	}
 }
 document.getElementById('hypotheticalSandwichPerSecond').innerHTML = calculateSandwichPoints(altarSelect.value)
