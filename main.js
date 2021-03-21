@@ -157,9 +157,10 @@ function load(){
 	profitsAmount = savegame.profitsAmount;
 	sandwichPoints = savegame.sandwichPoints;
 	SPS = savegame.SPS;
+	document.getElementById('profitsCost').innerHTML = "$" + profitsCost.toFixed(2);
 	document.getElementById('maxCost').innerHTML = "SP:" + Math.floor(Math.pow(maxIngredientSelection,7));
 	document.getElementById('SandwichPerSecond').innerHTML = SPS;
-	document.getElementById('ingrCost').innerHTML = "$" + Math.abs(Math.pow(ingredients.length-2,1.3)-1.365).toFixed(2)
+	document.getElementById('ingrCost').innerHTML = "$" + Math.abs(Math.pow(ingredients.length-2,1.6)-1.365).toFixed(2)
 	makeInvis()
 	gameStageRender()
 	if(!autosaveEnabled){document.getElementById("autosaveBox").outerHTML = '<input id="autosaveBox" type="checkbox" oninput="autosaveEnabled = !autosaveEnabled;">'}; //check if autosave is disabled, replace if it is
@@ -221,7 +222,7 @@ function buyIngredient(rns,price){
     if(money>=price && ingredientBank.length > 0){
         money -= price;
 		getIngredient(getRandomInt(ingredientBank.length,rns))
-		document.getElementById('ingrCost').innerHTML = "$" + Math.abs(Math.pow(ingredients.length-2,1.3)-1.365).toFixed(2)
+		document.getElementById('ingrCost').innerHTML = "$" + Math.abs(Math.pow(ingredients.length-2,1.6)-1.365).toFixed(2)
         document.getElementById("moneyCount").innerHTML =  money.toFixed(2);
     } else if(ingredientBank.length === 0){
 		document.getElementById("alertsBox").innerHTML = "No more ingredients to get.";
@@ -243,7 +244,7 @@ function sacrifice(val) {
 		ingredients.splice(val,1);
 		setIngredientSelect()
 		document.getElementById('SandwichPerSecond').innerHTML = SPS;
-		document.getElementById('ingrCost').innerHTML = "$" + Math.abs(Math.pow(ingredients.length-2,1.3)-1.365).toFixed(2)
+		document.getElementById('ingrCost').innerHTML = "$" + Math.abs(Math.pow(ingredients.length-2,1.6)-1.365).toFixed(2)
 	} else {
 		document.getElementById("alertsBox").innerHTML = "I don't think you should Sacrifice with an ingredient count that low...";
 	}
@@ -259,6 +260,7 @@ function buyMax(){
 		document.getElementById("alertsBox").innerHTML = "Not enough! Need SP:" + Math.floor(Math.pow(maxIngredientSelection,7)) + ", you only have SP:" + sandwichPoints + ".";
 	}
 }
+document.getElementById('maxCost').innerHTML = "SP:" + Math.floor(Math.pow(maxIngredientSelection,7));
 document.getElementById('hypotheticalSandwichPerSecond').innerHTML = calculateSandwichPoints(altarSelect.value)
 window.setInterval(function(){ //looping thing
 			for(i=0;i<Math.ceil(Math.cbrt(sandwichTastiness*1.5));i++){
