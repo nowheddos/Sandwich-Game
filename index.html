@@ -59,9 +59,16 @@
 
 	<!-- end recipe book section -->
 <div class="row">
-		<div id="logDiv" class="column"><h1>Log</h1>
-			<p id="alertsBox">hi</p>
+		<div style="flex-direction: column;border:none;padding:0" id="logDiv" class="row column">
+			<div class="column">
+				<h1>Log</h1>
+				<p id="alertsBox">hi</p>
+			</div>
+			<div id="Automation" class="column">
+				<h1>Automation</h1>
+			</div>
 		</div>
+
 <div id="shopSection"class="column"> <!-- shop -->
 	<h1>Shop</h1> 
 	<table class="noborder">
@@ -103,7 +110,7 @@
 				<br><span style="font-size:20px;" class="rainbow-text">Dev Tools</span>
 				<div style="font-size:15px;">
 					<button class = "button" onClick="gameStage++;gameStageRender()">skip game stage</button>
-					<button class = "button" onClick="gameStage=5;gameStageRender()">max game stage</button>
+					<button class = "button" onClick="gameStage=6;gameStageRender()">max game stage</button>
 					<button class = "button" onClick="maxIngredientSelection++;setIngredientSelect()">+1 Max Ingredient</button>
 					<button class = "button" onclick="getIngredient(getRandomInt(ingredientBank.length,2))">Get random ingredient</button>
 					<button class = "button" onclick="money+=20;document.getElementById('moneyCount').innerHTML = money.toFixed(2);">+20 money</button>

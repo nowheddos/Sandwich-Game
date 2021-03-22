@@ -1,6 +1,5 @@
 function checkIfIncludes(ingrArray,spec){
 	for(i=0;i<ingrArray.length;i++){ //for length of check given
-		console.log(ingrArray[i])
 			if(!spec.includes(ingrArray[i])){ //if array includes [i] of given array
 				return false;
 			}
@@ -8,7 +7,7 @@ function checkIfIncludes(ingrArray,spec){
 	return true;
 }
 function calculateBonus(ingrSpecific,ingrArray){  //get bonus values et names
-	console.log("Bonus function recieved: " + ingrArray + " & ");
+	console.log("Bonus function recieved: " + ingrArray + " specific: " + ingrSpecific);
 	var bonuses = new Array;
 	var bonusTastiness = 1;
 		if(checkIfIncludes(["bread","meat","cheese","vegetable","sauce"],ingrArray)){
@@ -29,7 +28,7 @@ function calculateBonus(ingrSpecific,ingrArray){  //get bonus values et names
 		}
         if(checkIfIncludes(["Bacon","Fried Egg"],ingrSpecific) && ingrArray.includes("cheese")){ //contains BEC
             	//BEC
-            bonuses += "Bacon, egg,and cheese!<br>(x1.4 Tastiness)<br>";
+            bonuses += "Bacon, egg, and cheese!<br>(x1.4 Tastiness)<br>";
             bonusTastiness *= 1.4;  
         };
 		if(checkIfIncludes(["Bacon","Lettuce"],ingrSpecific) && ingrArray.includes("tomato")){ //contains BLT
@@ -50,7 +49,7 @@ function calculateBonus(ingrSpecific,ingrArray){  //get bonus values et names
 			bonuses += "Roast beef Sandwich bonus!<br>(x1.7 Tastiness)<br>";
             bonusTastiness *= 1.7; 
 		}
-		if(checkIfIncludes(["Ham","Tomato","Lettuce"],ingrSpecific)){
+		if(checkIfIncludes(["Ham","Lettuce"],ingrSpecific) && ingrArray.includes("tomato")){
 			bonuses += "Ham Sandwich bonus!<br>(x1.4 Tastiness)<br>";
             bonusTastiness *= 1.4; 
 		}

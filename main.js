@@ -45,7 +45,6 @@ function setIngredientSelect(){ //makes ingredient selectors (the dropdown stuff
 	document.getElementById("opt").innerHTML = '<span id="ingredientSelect"></span>'
 	for(i=0;i<ingredients.length;i++){ //gets the <options> for all ingredients, sets them into the variable optionsTag
 		optionsTag.push("<option value='" + i + "'>" + ingredients[i][0] + "</option>\n")
-		console.table(optionsTag)
 	};
 	console.log(optionsTag)
 	for(i = 0; i < maxIngredientSelection; i++){ //sets up the <select>
@@ -109,7 +108,7 @@ function updateRecipe(name,tastiness,cost){ //update stats
 	document.getElementById("sandwichCost").innerHTML = Number(cost).toFixed(2);
 	document.getElementById("currentSandwich").innerHTML = sanitizeHTML(name);
 	document.getElementById("sandwichSV").innerHTML = (sandwichCost * sellRatio + 0.1).toFixed(2);
-	document.getElementById("peopleTick").innerHTML = Math.ceil(Math.cbrt(sandwichTastiness*1.5));
+	document.getElementById("peopleTick").innerHTML = Math.round(Math.cbrt(sandwichTastiness*1.5));
 	document.getElementById("secondTick").innerHTML = (Number(5000/Math.pow(timeSpeed,sandwichTastiness/5))/1000).toFixed(1);
 	document.getElementById("sandwichCount").innerHTML = sandwiches;
 	document.getElementById("moneyCount").innerHTML = money.toFixed(2);
@@ -132,7 +131,8 @@ function save(){
 		profitsCost:profitsCost,
 		profitsAmount:profitsAmount,
 		sandwichPoints:sandwichPoints,
-		SPS:SPS
+		SPS:SPS,
+		ingredientsSacrificed:ingredientsSacrificed
 	}; 
 	localStorage.setItem("saveData",JSON.stringify(saveData));
 	console.log("Game saved");
@@ -156,11 +156,12 @@ function load(){
 	profitsCost = savegame.profitsCost;
 	profitsAmount = savegame.profitsAmount;
 	sandwichPoints = savegame.sandwichPoints;
+	ingredientsSacrificed = savegame.ingredientsSacrificed;
 	SPS = savegame.SPS;
 	document.getElementById('profitsCost').innerHTML = "$" + profitsCost.toFixed(2);
-	document.getElementById('maxCost').innerHTML = "SP:" + Math.floor(Math.pow(maxIngredientSelection,7));
+	document.getElementById('maxCost').innerHTML = "SP:" + Math.floor(Math.pow(maxIngredientSelection,8));
 	document.getElementById('SandwichPerSecond').innerHTML = SPS;
-	document.getElementById('ingrCost').innerHTML = "$" + Math.abs(Math.pow(ingredients.length-2,1.6)-1.365).toFixed(2)
+	document.getElementById('ingrCost').innerHTML = "$" + Math.abs(Math.pow(ingredients.length-2,2.5)-1.365).toFixed(2)
 	makeInvis()
 	gameStageRender()
 	if(!autosaveEnabled){document.getElementById("autosaveBox").outerHTML = '<input id="autosaveBox" type="checkbox" oninput="autosaveEnabled = !autosaveEnabled;">'}; //check if autosave is disabled, replace if it is
@@ -208,7 +209,7 @@ swapRecipeBook(0);
 					//shop shit		
 function buyProfits(){   //cost of this profits
     if(money >= profitsCost){  
-        sellRatio *= 1.07				                  //increases profits
+        sellRatio *= 1.05				                  //increases profits
     	money -= profitsCost;                     		     //removes cash spent
 		profitsCost = +(Math.pow(profitsCost,1.17)).toFixed(2);
 		document.getElementById('sandwichSV').innerHTML = (sandwichCost * sellRatio + 0.1).toFixed(2);
@@ -222,7 +223,7 @@ function buyIngredient(rns,price){
     if(money>=price && ingredientBank.length > 0){
         money -= price;
 		getIngredient(getRandomInt(ingredientBank.length,rns))
-		document.getElementById('ingrCost').innerHTML = "$" + Math.abs(Math.pow(ingredients.length-2,1.6)-1.365).toFixed(2)
+		document.getElementById('ingrCost').innerHTML = "$" + Math.abs(Math.pow(ingredients.length-2,2.5)-1.365).toFixed(2)
         document.getElementById("moneyCount").innerHTML =  money.toFixed(2);
     } else if(ingredientBank.length === 0){
 		document.getElementById("alertsBox").innerHTML = "No more ingredients to get.";
@@ -242,41 +243,44 @@ function sacrifice(val) {
 	document.getElementById('hypotheticalSandwichPerSecond').innerHTML = calculateSandwichPoints(altarSelect.value)
 	if(ingredients.length>4){
 		SPS += calculateSandwichPoints(val);
-		ingredients.splice(val,1);
+		ingredientsSacrificed = ingredientsSacrificed.concat(ingredients.splice(val,1));
 		setIngredientSelect()
 		document.getElementById('SandwichPerSecond').innerHTML = SPS;
-		document.getElementById('ingrCost').innerHTML = "$" + Math.abs(Math.pow(ingredients.length-2,1.6)-1.365).toFixed(2)
+		document.getElementById('ingrCost').innerHTML = "$" + Math.abs(Math.pow(ingredients.length-2,2.5)-1.365).toFixed(2)
 	} else {
 		document.getElementById("alertsBox").innerHTML = "I don't think you should Sacrifice with an ingredient count that low...";
 	}
 }
 function buyMax(){
-	if(sandwichPoints>=Math.floor(Math.pow(maxIngredientSelection,7))){
-        sandwichPoints -= Math.floor(Math.pow(maxIngredientSelection,7));
+	if(sandwichPoints>=Math.floor(Math.pow(maxIngredientSelection,8))){
+        sandwichPoints -= Math.floor(Math.pow(maxIngredientSelection,8));
 		maxIngredientSelection++;
-		document.getElementById('maxCost').innerHTML = "SP:" + Math.floor(Math.pow(maxIngredientSelection,7));
+		document.getElementById('maxCost').innerHTML = "SP:" + Math.floor(Math.pow(maxIngredientSelection,8));
         document.getElementById("SandwichPointCount").innerHTML =  sandwichPoints;
 		setIngredientSelect()
     } else {
-		document.getElementById("alertsBox").innerHTML = "Not enough! Need SP:" + Math.floor(Math.pow(maxIngredientSelection,7)) + ", you only have SP:" + sandwichPoints + ".";
+		document.getElementById("alertsBox").innerHTML = "Not enough! Need SP:" + Math.floor(Math.pow(maxIngredientSelection,8)) + ", you only have SP:" + sandwichPoints + ".";
 	}
 }
-document.getElementById('maxCost').innerHTML = "SP:" + Math.floor(Math.pow(maxIngredientSelection,7));
+document.getElementById('maxCost').innerHTML = "SP:" + Math.floor(Math.pow(maxIngredientSelection,8));
 document.getElementById('hypotheticalSandwichPerSecond').innerHTML = calculateSandwichPoints(altarSelect.value)
-window.setInterval(function(){ //looping thing
-			for(i=0;i<Math.ceil(Math.cbrt(sandwichTastiness*1.5));i++){
+setTimeout(function() {loop();}, Number(5000/Math.pow(timeSpeed,sandwichTastiness/5)))
+function loop(){ //looping thing
+			for(i=0;i<Math.round(Math.cbrt(sandwichTastiness*1.5));i++){
 				if(sandwiches > 0){
 		    		sandwiches--
 					money += +(sandwichCost * sellRatio + 0.1).toFixed(2); //money += a little higher than cost, multiplied by floortastiness because more people want it
 				};
 			};
-			if(money>=5.5 && gameStage === 0 || money >= 15 && gameStage === 2 || money >= 25 && gameStage === 3 || money >= 35 && gameStage === 4){
+			if(money>=5.5 && gameStage === 0 || money >= 15 && gameStage === 2 || money >= 25 && gameStage === 3 || money >= 35 && gameStage === 4 || money >= 150 && gameStage === 5){
 				gameStage++;
 				gameStageRender();
 			}
 	document.getElementById("sandwichCount").innerHTML = sandwiches;
 	document.getElementById("moneyCount").innerHTML = money.toFixed(2);
-}, 5000/(Math.pow(timeSpeed,sandwichTastiness/5))); //1000 = 1000ms = 1s
+	setTimeout(function() {loop();}, Number(5000/Math.pow(timeSpeed,sandwichTastiness/5)))
+}; //1000 = 1000ms = 1s
+
 window.setInterval(function(){
 	sandwichPoints += SPS;
 	document.getElementById('SandwichPointCount').innerHTML = sandwichPoints

@@ -11,30 +11,31 @@ var ingredients = [
 //ingredients get better & rarer the farther on the list they are.
 // name tastiness cost type
 var ingredientBank = [
-    ["Cherry Tomato", 2, 0.50,"tomato"],
-    ["Rye", 1.4, 1.7,"bread"],
-    ["Bacon",1,1.5,"meat"],
-    ["Ham",1.35,1.6,"meat"],
-    ["Swiss Cheese",1.4,0.9,"cheese"],
-    ["Bagel",1,2.3,"bread"],
-    ["Jelly",2,1,"sauce"],
-    ["Peanut Butter",1,1.7,"sauce"],
-    ["Sauerkraut",1.2,1.4,"vegetable"],
-    ["Yellow Mustard",1.4,1.2,"mustard"],
-    ["Fried Egg",1.8,1.7,"meat"], 
-    ["Tomatoes on the Vine",1.85,1.75,"tomato"],
-    ["Mayo",1.6,2,"sauce"],
-    ["Baguette",1.7,1.7,"bread"],
-    ["Roast Beef",1.8,1.5,"meat"],
-        ["Sourdough Bread",2,1.8,"bread"],
-    ["Chicken Salad",1.6,2,"meat"], 
-    ["Provolone",1.5,2.1,"cheese"],
-    ["Beefsteak Tomato",1.85,1.75,"tomato"],
-    ["Dijon Mustard",1.7,1.7,"mustard"],
-    ["Sourdough Baguette",2.35,1.9,"bread"],
-    ["Deli Chicken",2.4,1.9,"meat"],
-    ["Dill Pickle",2.35,2.1,"vegetable"]
+    ["Cherry Tomato", 1, 0.50,"tomato"],
+    ["Rye", 1.2, 1.3,"bread"],
+    ["Bacon",1.3,1.5,"meat"],
+    ["Ham",1.35,1.65,"meat"],
+    ["Swiss Cheese",1.4,1.6,"cheese"],
+    ["Bagel",1.3,1.85,"bread"],
+    ["Jelly",1.45,1.7,"sauce"],
+    ["Peanut Butter",1.5,1.7,"sauce"],
+    ["Sauerkraut",1.45,1.85,"vegetable"],
+    ["Yellow Mustard",1.5,1.85,"mustard"],
+    ["Fried Egg",1.6,1.7,"meat"], 
+    ["Tomatoes on the Vine",1.55,1.75,"tomato"],
+    ["Mayo",1.6,1.75,"sauce"],
+    ["Baguette",1.75,1.7,"bread"],
+    ["Roast Beef",1.8,1.6,"meat"],
+        ["Sourdough Bread",1.85,1.75,"bread"],
+    ["Chicken Salad",1.8,1.8,"meat"], 
+    ["Provolone",1.85,2,"cheese"],
+    ["Beefsteak Tomato",1.9,1.85,"tomato"],
+    ["Dijon Mustard",2,1.95,"mustard"],
+    ["Sourdough Baguette",2.1,1.9,"bread"],
+    ["Deli Chicken",2.2,1.65,"meat"],
+    ["Dill Pickle",2.1,2.15,"vegetable"]
 ]
+var ingredientsSacrificed = new Array;
 function getIngredient(ingrNumber){
     if(ingredientBank.length > 0){
         console.log(ingrNumber)

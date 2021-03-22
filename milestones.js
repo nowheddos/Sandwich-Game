@@ -6,6 +6,7 @@ function makeInvis(){ // makes all unlockables invisible
 	document.getElementById("currentlyStats").className = "invisible";
 	document.getElementById("shopSection").className = "invisible";
 	document.getElementById("darkArts").className = "invisible";
+	document.getElementById("Automation").className = "invisible";
 }
 function gameStageRender() { //game unlocks
 	var alreadyOutput = true;
@@ -14,8 +15,13 @@ function gameStageRender() { //game unlocks
 			milestone("$5.50")
 			console.log("0")
 			break;
-		case 5:
+		case 6:
 			if(alreadyOutput){milestone("That's everything right now! More coming soon.");
+			document.getElementById("alertsBox").innerHTML = "Ah, the age of sandwich automation!";
+			alreadyOutput = !alreadyOutput}
+			document.getElementById("Automation").className = "column";	
+		case 5:
+			if(alreadyOutput){milestone("$150.00");
             document.getElementById("alertsBox").innerHTML = "Hmmm... I wonder what you can use excess ingredients for....";
 			alreadyOutput = !alreadyOutput}
 			document.getElementById("darkArts").className = "column";	
