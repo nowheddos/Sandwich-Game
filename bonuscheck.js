@@ -1,9 +1,9 @@
 function checkIfIncludes(ingrArray,spec){
 	for(i=0;i<ingrArray.length;i++){ //for length of check given
 		console.log(ingrArray[i])
-		if(!spec.includes(ingrArray[i])){ //if array includes [i] of given array
-			return false;
-		}
+			if(!spec.includes(ingrArray[i])){ //if array includes [i] of given array
+				return false;
+			}
 	}
 	return true;
 }
@@ -32,7 +32,7 @@ function calculateBonus(ingrSpecific,ingrArray){  //get bonus values et names
             bonuses += "Bacon, egg,and cheese!<br>(x1.4 Tastiness)<br>";
             bonusTastiness *= 1.4;  
         };
-		if(checkIfIncludes(["Bacon","Lettuce","Tomato"],ingrSpecific)){ //contains BLT
+		if(checkIfIncludes(["Bacon","Lettuce"],ingrSpecific) && ingrArray.includes("tomato")){ //contains BLT
 				//BLT
 			bonuses += "BLT BONUS!<br>(x1.4 Tastiness)<br>";
             bonusTastiness *= 1.4;  
@@ -42,11 +42,11 @@ function calculateBonus(ingrSpecific,ingrArray){  //get bonus values et names
 			bonuses += "Classic Combo!<br>(x1.25 Tastiness)<br>";
             bonusTastiness *= 1.25;  
         };
-		if(ingrSpecific.includes("Mustard") && ingrArray.includes("meat")) { //mustard + meat
+		if(checkIfIncludes(["meat", "mustard"],ingrArray)) { //mustard + meat
 			bonuses += "Mustard synergy bonus!<br>(x1.12 Tastiness)<br>";
             bonusTastiness *= 1.12; 
 		}
-		if(checkIfIncludes(["Roast Beef","Tomato","Lettuce"],ingrSpecific)){
+		if(checkIfIncludes(["Roast Beef","Lettuce"],ingrSpecific) && ingrArray.includes("tomato")){
 			bonuses += "Roast beef Sandwich bonus!<br>(x1.7 Tastiness)<br>";
             bonusTastiness *= 1.7; 
 		}
@@ -60,6 +60,13 @@ function calculateBonus(ingrSpecific,ingrArray){  //get bonus values et names
 		} else if(checkIfIncludes(["Ham","Swiss Cheese"],ingrSpecific)){
 			bonuses += "Ham & swiss bonus!<br>(x1.2 Tastiness)<br>";
             bonusTastiness *= 1.2; 
+		}
+		if(checkIfIncludes(["Roast Beef","Sauerkraut","Swiss Cheese","Rye"],ingrSpecific)){
+			bonuses += "True reuben bonus!<br>(x1.95 Tastiness)<br>";
+            bonusTastiness *= 1.95; 
+		} else if(checkIfIncludes(["Roast Beef","Sauerkraut","Swiss Cheese"],ingrSpecific)){
+			bonuses += "Reuben bonus!<br>(x1.8 Tastiness)<br>";
+            bonusTastiness *= 1.7; 
 		}
 	return [bonuses,bonusTastiness]
 }

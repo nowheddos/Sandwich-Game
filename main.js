@@ -239,6 +239,7 @@ function calculateSandwichPoints(bam){ //calculates amnt of Sandwich points/seco
 	return Math.floor(ingredients[bam][1]*ingredients[bam][2]*50)
 };
 function sacrifice(val) {
+	document.getElementById('hypotheticalSandwichPerSecond').innerHTML = calculateSandwichPoints(altarSelect.value)
 	if(ingredients.length>4){
 		SPS += calculateSandwichPoints(val);
 		ingredients.splice(val,1);
@@ -275,7 +276,7 @@ window.setInterval(function(){ //looping thing
 			}
 	document.getElementById("sandwichCount").innerHTML = sandwiches;
 	document.getElementById("moneyCount").innerHTML = money.toFixed(2);
-}, Number(5000/(Math.pow(timeSpeed,sandwichTastiness/5)))); //1000 = 1000ms = 1s
+}, 5000/(Math.pow(timeSpeed,sandwichTastiness/5))); //1000 = 1000ms = 1s
 window.setInterval(function(){
 	sandwichPoints += SPS;
 	document.getElementById('SandwichPointCount').innerHTML = sandwichPoints

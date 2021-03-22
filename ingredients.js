@@ -3,25 +3,37 @@
 var ingredients = [
     ["White Bread", 1.15, 0.35,"bread"],
     ["American Cheese", 1.2, 0.50,"cheese"],
-    ["Turkey", 1.6, 0.8,"meat"],
-    ["Mustard", 1.6, 1,"sauce"],
-    ["Lettuce",1.8,1,"vegetable"],
+    ["Turkey", 1.4, 0.8,"meat"],
+    ["Homemade Mustard", 1.2, 1,"mustard"],
+    ["Lettuce",1.35,1,"vegetable"],
     ["Water", 1, 0,"sauce"]
 ]
 //ingredients get better & rarer the farther on the list they are.
+// name tastiness cost type
 var ingredientBank = [
-    ["Tomato", 2, 0.50,"vegetable"],
+    ["Cherry Tomato", 2, 0.50,"tomato"],
     ["Rye", 1.4, 1.7,"bread"],
     ["Bacon",1,1.5,"meat"],
     ["Ham",1.35,1.6,"meat"],
+    ["Swiss Cheese",1.4,0.9,"cheese"],
     ["Bagel",1,2.3,"bread"],
     ["Jelly",2,1,"sauce"],
-    ["Peanut Butter",1,2.1,"sauce"],
-    ["Fried Egg",1.8,2,"meat"], 
-    ["Swiss Cheese",1.4,0.9,"cheese"],
+    ["Peanut Butter",1,1.7,"sauce"],
+    ["Sauerkraut",1.2,1.4,"vegetable"],
+    ["Yellow Mustard",1.4,1.2,"mustard"],
+    ["Fried Egg",1.8,1.7,"meat"], 
+    ["Tomatoes on the Vine",1.85,1.75,"tomato"],
     ["Mayo",1.6,2,"sauce"],
     ["Baguette",1.7,1.7,"bread"],
-    ["Roast Beef",1.8,1.5,"meat"]
+    ["Roast Beef",1.8,1.5,"meat"],
+        ["Sourdough Bread",2,1.8,"bread"],
+    ["Chicken Salad",1.6,2,"meat"], 
+    ["Provolone",1.5,2.1,"cheese"],
+    ["Beefsteak Tomato",1.85,1.75,"tomato"],
+    ["Dijon Mustard",1.7,1.7,"mustard"],
+    ["Sourdough Baguette",2.35,1.9,"bread"],
+    ["Deli Chicken",2.4,1.9,"meat"],
+    ["Dill Pickle",2.35,2.1,"vegetable"]
 ]
 function getIngredient(ingrNumber){
     if(ingredientBank.length > 0){
