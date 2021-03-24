@@ -76,5 +76,9 @@ function calculateBonus(ingrSpecific,ingrArray){  //get bonus values et names
 			bonuses += "Reuben bonus!<br>(x1.8 Tastiness)<br>";
             bonusTastiness *= 1.7; 
 		}
+		if(checkIfIncludes(["Lamb","Pita Bread"],ingrSpecific) || checkIfIncludes(["Lamb","Sourdough Pita"],ingrSpecific)){
+			bonuses += "Gyro Bonus!<br>(x1.4 Tastiness)<br>";
+            bonusTastiness *= 1.4; 
+		}
 	return [bonuses,bonusTastiness]
 }

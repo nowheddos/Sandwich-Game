@@ -23,6 +23,7 @@ var ingredientBank = [
     ["Sauerkraut",1.45,1.85,"vegetable"],
     ["Yellow Mustard",1.5,1.85,"mustard"],
     ["Romaine Lettuce",1.55,1.6,"lettuce"],
+    ["Pita Bread",1.575,1.65,"bread"],
     ["Fried Egg",1.6,1.7,"meat"], 
     ["Tomatoes on the Vine",1.55,1.75,"tomato"],
     ["Mayo",1.6,1.75,"sauce"],
@@ -35,9 +36,10 @@ var ingredientBank = [
     ["Provolone",1.85,2,"cheese"],
     ["Beefsteak Tomato",1.9,1.85,"tomato"],
     ["Dijon Mustard",2,1.95,"mustard"],
-    ["Sourdough Baguette",2.1,1.9,"bread"],
     ["Deli Chicken",2.2,1.65,"meat"],
-    ["Dill Pickle",2.1,2.15,"vegetable"]
+    ["Dill Pickle",2.1,2.15,"vegetable"],
+    ["Sourdough Pita",1.15,2.2,"bread"],
+    ["Lamb",2.15,2.2,"meat"],
 ]
 var ingredientsSacrificed = new Array;
 function getIngredient(ingrNumber){
