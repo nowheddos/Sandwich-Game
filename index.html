@@ -65,7 +65,30 @@
 				<p id="alertsBox">hi</p>
 			</div>
 			<div id="Automation" class="column">
-				<h1>Automation</h1>
+					<h1>Automation</h1>
+				<table class="noborder">
+					<tr>
+						<td id="sandwichMakerCost" style="text-align:right">$100.00</td>
+						<td><button class = "button" onclick="buyAutomation()">Buy Auto-Sandwich Maker</button></td>
+					</tr>
+				</table><hr>
+				<!-- machinery table -->
+					Machinery:
+				<table>
+					<tbody id="automakerList">
+					<tr>
+						<td>Name</td>
+						<td>Durability</td>
+						<td colspan="2">Charge</td>
+					</tr>
+					<tr>
+						<td style="font-size:70%">Automaker 1</td>
+						<td style="padding:0"><div style="font-size:80%;text-align: center;height:100%;width:70%;background: rgb(0, 212, 0);">70%</div></td>
+						<td style="padding:0;width:45%"><div style="font-size:80%;text-align: center;height:100%;width:35%;background: rgb(0, 212, 0);">35%</div></td>
+						<td style="padding:0"><button onclick="recharge(1)" class="button">Charge<br>SP:5000</button></td>
+					</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 

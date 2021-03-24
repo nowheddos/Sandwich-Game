@@ -13,6 +13,7 @@ var profitsCost = 10;
 var profitsAmount = 1;
 var sandwichPoints = 0;
 var SPS = 0;
+var machinery = [[100,100],[50,75]];
 //Ingrediets: name, tastiness, cost
 function makeSandwich(amnt){
 	if(money >= sandwichCost){ //check if can afford sandwich
@@ -132,7 +133,8 @@ function save(){
 		profitsAmount:profitsAmount,
 		sandwichPoints:sandwichPoints,
 		SPS:SPS,
-		ingredientsSacrificed:ingredientsSacrificed
+		ingredientsSacrificed:ingredientsSacrificed,
+		machinery:machinery
 	}; 
 	localStorage.setItem("saveData",JSON.stringify(saveData));
 	console.log("Game saved");
@@ -158,6 +160,7 @@ function load(){
 	sandwichPoints = savegame.sandwichPoints;
 	ingredientsSacrificed = savegame.ingredientsSacrificed;
 	SPS = savegame.SPS;
+	machinery = savegame.machinery;
 	document.getElementById('profitsCost').innerHTML = "$" + profitsCost.toFixed(2);
 	document.getElementById('maxCost').innerHTML = "SP:" + Math.floor(Math.pow(maxIngredientSelection,8));
 	document.getElementById('SandwichPerSecond').innerHTML = SPS;
@@ -232,9 +235,7 @@ function buyIngredient(rns,price){
 	}
 }
 //function updateCraftPreview(){
-
 //} do later :)
-
 // loop
 function calculateSandwichPoints(bam){ //calculates amnt of Sandwich points/second for ingredient sacrificed
 	return Math.floor(ingredients[bam][1]*ingredients[bam][2]*50)
@@ -260,6 +261,25 @@ function buyMax(){
 		setIngredientSelect()
     } else {
 		document.getElementById("alertsBox").innerHTML = "Not enough! Need SP:" + Math.floor(Math.pow(maxIngredientSelection,8)) + ", you only have SP:" + sandwichPoints + ".";
+	}
+}
+function refreshMachinery(){
+	document.getElementById("automakerList").innerHTML = `
+	<tr>
+		<td>Name</td>
+		<td>Durability</td>
+		<td colspan="2">Charge</td>
+	</tr>`
+	for(i=0;machinery.length;i++){
+
+	}
+}
+function buyAutomation(){
+	if(money>=Math.pow(100,machinery.length)){
+		machinery.unshift([100,100]);
+		document.getElementById("moneyCount").innerHTML =  money.toFixed(2);
+	} else {
+		document.getElementById("alertsBox").innerHTML = "Not enough! Need $" + Math.pow(100,machinery.length).toFixed(2) + ", you only have $" + money.toFixed(2) + ".";
 	}
 }
 document.getElementById('maxCost').innerHTML = "SP:" + Math.floor(Math.pow(maxIngredientSelection,8));

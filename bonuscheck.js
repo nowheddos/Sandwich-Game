@@ -10,10 +10,18 @@ function calculateBonus(ingrSpecific,ingrArray){  //get bonus values et names
 	console.log("Bonus function recieved: " + ingrArray + " specific: " + ingrSpecific);
 	var bonuses = new Array;
 	var bonusTastiness = 1;
-		if(checkIfIncludes(["bread","meat","cheese","vegetable","sauce"],ingrArray)){
-				//contains all ingredient types
-				bonuses += "Each and every type!<br>(x1.65 Tastiness)<br>";
-				bonusTastiness *= 1.65;
+	var reuseAmnt = 0;
+		for(i=0;ingrSpecific.length>i;i++){ //check for ingredient overlap
+			if(ingrSpecific[i]===ingrSpecific[i+1]){
+				reuseAmnt=i;
+				bonusTastiness *= 0.35;
+				console.log(bonusTastiness)
+				console.log(reuseAmnt)
+			}
+		}
+		if(!(reuseAmnt === 0)){ //found overlap, disable bonuses
+			bonuses += "Ingredient Reuse Penalty (" + reuseAmnt + ")<br>(x" + Math.pow(0.35,reuseAmnt).toFixed(3) + " Tastiness)<br>";
+			return [bonuses,bonusTastiness]
 		}
 		if(ingrArray.indexOf("bread") === 0 && ingrArray.indexOf("bread",-1) === ingrArray.length - 1){ //bread bonus
 				//if bread is first and bread is last
@@ -23,8 +31,9 @@ function calculateBonus(ingrSpecific,ingrArray){  //get bonus values et names
 			bonuses += "Open faced bonus!<br>(x1.07 Tastiness)<br>";
 			bonusTastiness *= 1.07;
 		} else {
-			bonuses += "No bread wrap penalty.<br>(x0.6 Tastiness)<br>";
-			bonusTastiness *= 0.6;
+			bonuses += "No bread wrap penalty.<br>(x0.35 Tastiness)<br>";
+			bonusTastiness *= 0.35;
+			return [bonuses,bonusTastiness]
 		}
         if(checkIfIncludes(["Bacon","Fried Egg"],ingrSpecific) && ingrArray.includes("cheese")){ //contains BEC
             	//BEC
