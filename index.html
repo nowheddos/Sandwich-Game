@@ -18,7 +18,7 @@
 	<!-- currently selected + stats -->
 	<div id="currentlyStats" class="column">
 			<h1>Sandwich Statistics</h1>
-		Currently selected sandwich: <span id="currentSandwich">Breadwich</span><br>
+		Currently selected sandwich: <span id="currentSandwich">Water Sandwich</span><br>
 		Cost: $<span id="sandwichCost">0</span><br>
 		Sell Value: $<span id="sandwichSV">0</span>
 		</div>
@@ -49,7 +49,7 @@
 		<button style="border-radius: 20px;outline: none" onclick="if(recipeBook.length>1){recipeBook.splice(recipeBookSelection.value, 1);refreshBook()}">x</button>
 		<select id="recipeBookSelection" oninput="swapRecipeBook(recipeBookSelection.value)">
 			<!-- recipe book section -->
-		   <option value='0'>Breadwich</option>
+		   <option value='0'>Water Sandwich</option>
 	   </select><br><br>
 		<div style="max-height:440px;height:440px;overflow-y:scroll;border:solid">
 	<span id="recipeOutput">0</span>
@@ -75,7 +75,10 @@
 						<td id="sandwichMakerCost" style="text-align:right">$100.00</td>
 						<td><button class = "button" onclick="buyAutomation()">Buy Auto-Sandwich Maker</button></td>
 					</tr>
-				</table><hr>
+				</table>
+				<!--set false to true, viceversa      clear loop start loop-->
+				<input type="checkbox" oninput="toggleMachinery=!toggleMachinery;clearTimeout(setTimeout(function() {autoMakerLoop();}, 4000/timeSpeed));setTimeout(function() {autoMakerLoop();}, 4000/timeSpeed)">Toggle Machinery</input>
+				<hr>
 				<!-- machinery table -->
 					Machinery:
 				<table>
