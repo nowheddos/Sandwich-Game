@@ -17,9 +17,10 @@ function gameStageRender() { //game unlocks
 			break;
 		case 6:
 			if(alreadyOutput){milestone("That's everything right now! More coming soon.");
-			document.getElementById("alertsBox").innerHTML = "Ah, the age of sandwich automation!";
+			document.getElementById("alertsBox").innerHTML = "Ah, the age of automation!";
 			alreadyOutput = !alreadyOutput}
 			document.getElementById("Automation").className = "column";	
+			setTimeout(function() {autoMakerLoop();}, timeSpeed*1000)
 		case 5:
 			if(alreadyOutput){milestone("$150.00");
             document.getElementById("alertsBox").innerHTML = "Hmmm... I wonder what you can use excess ingredients for....";

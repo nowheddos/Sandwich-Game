@@ -13,15 +13,16 @@ var profitsCost = 10;
 var profitsAmount = 1;
 var sandwichPoints = 0;
 var SPS = 0;
-var machinery = [[100,100],[50,75]];
+var machinery = [[100,100]];
 //Ingrediets: name, tastiness, cost
 function makeSandwich(amnt){
-	if(money >= sandwichCost){ //check if can afford sandwich
-		money = money-sandwichCost;// take money
+	console.log(amnt)
+	if(money >= sandwichCost*amnt){ //check if can afford sandwich
+		money = money-sandwichCost*amnt;// take money
 		sandwiches = sandwiches + amnt; //make sandwich
 		document.getElementById("sandwichCount").innerHTML = sandwiches; //set html
 		document.getElementById("moneyCount").innerHTML = money.toFixed(2);
-	};
+	} else {console.log("Can't afford!")}
 };
 function getRandomInt(max,rareness) {
 	return Math.floor(Math.pow(Math.random(), rareness) * Math.floor(max));
@@ -164,7 +165,7 @@ function load(){
 	document.getElementById('profitsCost').innerHTML = "$" + profitsCost.toFixed(2);
 	document.getElementById('maxCost').innerHTML = "SP:" + Math.floor(Math.pow(maxIngredientSelection,8));
 	document.getElementById('SandwichPerSecond').innerHTML = SPS;
-	document.getElementById('ingrCost').innerHTML = "$" + Math.abs(Math.pow(ingredients.length-2,2.5)-1.365).toFixed(2)
+	document.getElementById('ingrCost').innerHTML = "$" + Math.abs(Math.pow(ingredients.length-3,2.3)-1.365).toFixed(2)
 	makeInvis()
 	gameStageRender()
 	if(!autosaveEnabled){document.getElementById("autosaveBox").outerHTML = '<input id="autosaveBox" type="checkbox" oninput="autosaveEnabled = !autosaveEnabled;">'}; //check if autosave is disabled, replace if it is
@@ -226,7 +227,7 @@ function buyIngredient(rns,price){
     if(money>=price && ingredientBank.length > 0){
         money -= price;
 		getIngredient(getRandomInt(ingredientBank.length,rns))
-		document.getElementById('ingrCost').innerHTML = "$" + Math.abs(Math.pow(ingredients.length-2,2.5)-1.365).toFixed(2)
+		document.getElementById('ingrCost').innerHTML = "$" + Math.abs(Math.pow(ingredients.length-3,2.3 )-1.365).toFixed(2)
         document.getElementById("moneyCount").innerHTML =  money.toFixed(2);
     } else if(ingredientBank.length === 0){
 		document.getElementById("alertsBox").innerHTML = "No more ingredients to get.";
@@ -247,7 +248,7 @@ function sacrifice(val) {
 		ingredientsSacrificed = ingredientsSacrificed.concat(ingredients.splice(val,1));
 		setIngredientSelect()
 		document.getElementById('SandwichPerSecond').innerHTML = SPS;
-		document.getElementById('ingrCost').innerHTML = "$" + Math.abs(Math.pow(ingredients.length-2,2.5)-1.365).toFixed(2)
+		document.getElementById('ingrCost').innerHTML = "$" + Math.abs(Math.pow(ingredients.length-3,2.3)-1.365).toFixed(2)
 	} else {
 		document.getElementById("alertsBox").innerHTML = "I don't think you should Sacrifice with an ingredient count that low...";
 	}
@@ -264,27 +265,61 @@ function buyMax(){
 	}
 }
 function refreshMachinery(){
+	
 	document.getElementById("automakerList").innerHTML = `
 	<tr>
 		<td>Name</td>
 		<td>Durability</td>
 		<td colspan="2">Charge</td>
 	</tr>`
-	for(i=0;machinery.length;i++){
-
+	for(i=0;machinery.length>i;i++){
+			if(machinery[i][0]<=0){machinery.splice(i,1);continue;}
+		document.getElementById("automakerList").innerHTML+=`
+		<tr>
+			<td style="font-size:70%">Automaker `+ Number(i+1) +`</td>
+			<td style="padding:0"><div style="font-size:80%;text-align: center;height:100%;width:`+ machinery[i][0] +`%;background: rgb(0, 212, 0);">`+ machinery[i][0].toFixed(1) +`%</div></td>
+			<td style="padding:0;width:45%"><div style="font-size:80%;text-align: center;height:100%;width:`+ machinery[i][1] +`%;background: rgb(0, 212, 0);">`+ machinery[i][1].toFixed(1) +`%</div></td>
+			<td style="padding:0"><button onclick="recharge(`+ i +`)" class="button">Charge<br>SP:5000</button></td>
+		</tr>`
 	}
-}
+}refreshMachinery()
 function buyAutomation(){
-	if(money>=Math.pow(100,machinery.length)){
+	if(money>=Math.pow(5.25,machinery.length)+94.75){
 		machinery.unshift([100,100]);
+		document.getElementById("sandwichMakerCost").innerHTML = "$" + (Math.pow(5.25,machinery.length)+94.75).toFixed(2);
 		document.getElementById("moneyCount").innerHTML =  money.toFixed(2);
 	} else {
-		document.getElementById("alertsBox").innerHTML = "Not enough! Need $" + Math.pow(100,machinery.length).toFixed(2) + ", you only have $" + money.toFixed(2) + ".";
+		document.getElementById("alertsBox").innerHTML = "Not enough! Need $" + (Math.pow(5.25,machinery.length)+94.75).toFixed(2) + ", you only have $" + money.toFixed(2) + ".";
 	}
 }
 document.getElementById('maxCost').innerHTML = "SP:" + Math.floor(Math.pow(maxIngredientSelection,8));
 document.getElementById('hypotheticalSandwichPerSecond').innerHTML = calculateSandwichPoints(altarSelect.value)
 setTimeout(function() {loop();}, Number(5000/Math.pow(timeSpeed,sandwichTastiness/5)))
+function autoMakerLoop(){
+	if(money >= machinery.length*sandwichCost){
+	var unchargedAmount = 0;
+	for(i=0;machinery.length>i;i++){
+		if(machinery[i][0]<=0){
+			unchargedAmount++
+		} else {
+			machinery[i][0] -= 0.15;
+			machinery[i][1] -= 0.5;
+		}
+	}
+	refreshMachinery()
+	makeSandwich(Number(machinery.length-unchargedAmount))
+}
+	setTimeout(function() {autoMakerLoop();}, timeSpeed*1000)
+}
+function recharge(machineToCharge){
+	if(sandwichPoints>=5000){
+		sandwichPoints -= 5000;
+		machinery[machineToCharge][1] = 100;
+		refreshMachinery;
+	} else {
+		document.getElementById("alertsBox").innerHTML = "Can't afford recharge!"
+	}
+}
 function loop(){ //looping thing
 			for(i=0;i<Math.round(Math.cbrt(sandwichTastiness*1.5));i++){
 				if(sandwiches > 0){
@@ -304,7 +339,7 @@ function loop(){ //looping thing
 window.setInterval(function(){
 	sandwichPoints += SPS;
 	document.getElementById('SandwichPointCount').innerHTML = sandwichPoints
-}, 1000);
+}, 833*timeSpeed);
 window.setInterval(function(){
 	save();
 }, 30000);

@@ -40,7 +40,7 @@ function calculateBonus(ingrSpecific,ingrArray){  //get bonus values et names
             bonuses += "Bacon, egg, and cheese!<br>(x1.4 Tastiness)<br>";
             bonusTastiness *= 1.4;  
         };
-		if(checkIfIncludes(["Bacon","Lettuce"],ingrSpecific) && ingrArray.includes("tomato")){ //contains BLT
+		if(checkIfIncludes(["Bacon"],ingrSpecific) && ingrArray.includes("tomato","lettuce")){ //contains BLT
 				//BLT
 			bonuses += "BLT BONUS!<br>(x1.4 Tastiness)<br>";
             bonusTastiness *= 1.4;  
@@ -54,11 +54,11 @@ function calculateBonus(ingrSpecific,ingrArray){  //get bonus values et names
 			bonuses += "Mustard synergy bonus!<br>(x1.12 Tastiness)<br>";
             bonusTastiness *= 1.12; 
 		}
-		if(checkIfIncludes(["Roast Beef","Lettuce"],ingrSpecific) && ingrArray.includes("tomato")){
+		if(checkIfIncludes(["Roast Beef"],ingrSpecific) && ingrArray.includes("tomato","lettuce")){
 			bonuses += "Roast beef Sandwich bonus!<br>(x1.7 Tastiness)<br>";
             bonusTastiness *= 1.7; 
 		}
-		if(checkIfIncludes(["Ham","Lettuce"],ingrSpecific) && ingrArray.includes("tomato")){
+		if(checkIfIncludes(["Ham"],ingrSpecific) && ingrArray.includes("tomato","lettuce")){
 			bonuses += "Ham Sandwich bonus!<br>(x1.4 Tastiness)<br>";
             bonusTastiness *= 1.4; 
 		}
