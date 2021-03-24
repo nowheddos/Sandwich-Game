@@ -20,7 +20,7 @@ function gameStageRender() { //game unlocks
 			document.getElementById("alertsBox").innerHTML = "Ah, the age of automation!";
 			alreadyOutput = !alreadyOutput}
 			document.getElementById("Automation").className = "column";	
-			setTimeout(function() {autoMakerLoop();}, timeSpeed*1000)
+			autoMakerLoop()
 		case 5:
 			if(alreadyOutput){milestone("$150.00");
             document.getElementById("alertsBox").innerHTML = "Hmmm... I wonder what you can use excess ingredients for....";

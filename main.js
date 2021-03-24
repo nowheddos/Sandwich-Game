@@ -285,7 +285,7 @@ function refreshMachinery(){
 }refreshMachinery()
 function buyAutomation(){
 	if(money>=Math.pow(5.25,machinery.length)+94.75){
-		machinery.unshift([100,100]);
+		machinery.push([100,100]);
 		document.getElementById("sandwichMakerCost").innerHTML = "$" + (Math.pow(5.25,machinery.length)+94.75).toFixed(2);
 		document.getElementById("moneyCount").innerHTML =  money.toFixed(2);
 	} else {
@@ -309,7 +309,7 @@ function autoMakerLoop(){
 	refreshMachinery()
 	makeSandwich(Number(machinery.length-unchargedAmount))
 }
-	setTimeout(function() {autoMakerLoop();}, timeSpeed*1000)
+	setTimeout(function() {autoMakerLoop();}, 6000/timeSpeed)
 }
 function recharge(machineToCharge){
 	if(sandwichPoints>=5000){
