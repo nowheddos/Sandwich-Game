@@ -11,6 +11,8 @@ function calculateBonus(ingrSpecific,ingrArray){  //get bonus values et names
 	var bonuses = new Array;
 	var bonusTastiness = 1;
 	var reuseAmnt = 0;
+
+	// sorry for this awful mess
 		for(i=0;ingrSpecific.length>i;i++){ //check for ingredient overlap
 			if(ingrSpecific[i]===ingrSpecific[i+1]){
 				reuseAmnt=i;
@@ -95,6 +97,10 @@ function calculateBonus(ingrSpecific,ingrArray){  //get bonus values et names
 		if(checkIfIncludes(["cheese"],ingrArray) && checkIfIncludes(["Baked Beans","Small Onions"],ingrSpecific)){
 			bonuses += "Baked Bean Sandwich!<br>(x1.35 Tastiness)<br>";
             bonusTastiness *= 1.35; 
+		}
+		if(checkIfIncludes(["Horseradish Sauce","Roast Beef"],ingrSpecific) || checkIfIncludes(["Horseradish Sauce","Ham"],ingrSpecific)){
+			bonuses += "Horseradish Bonus!<br>(x1.6 Tastiness)<br>";
+            bonusTastiness *= 1.6; 
 		}
 	return [bonuses,bonusTastiness]
 }
