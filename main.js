@@ -15,6 +15,7 @@ var sandwichPoints = 0;
 var SPS = 0;
 var machinery = [[100,100]];
 var toggleMachinery = false;
+var startLoop = setTimeout(function() {autoMakerLoop();}, 4000/timeSpeed);
 //Ingrediets: name, tastiness, cost
 function makeSandwich(amnt){
 	console.log(amnt)
@@ -316,8 +317,9 @@ function autoMakerLoop(){
 	refreshMachinery()
 	makeSandwich(Number(machinery.length-unchargedAmount))
 }
-	setTimeout(function() {autoMakerLoop();}, 4000/timeSpeed)}
-}
+	clearTimeout(startLoop)
+	startLoop
+}}
 function recharge(machineToCharge){
 	if(sandwichPoints>=5000){
 		sandwichPoints -= 5000;
