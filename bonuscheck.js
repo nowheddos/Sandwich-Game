@@ -62,7 +62,7 @@ function calculateBonus(ingrSpecific,ingrArray){  //get bonus values et names
 			bonuses += "Ham Sandwich bonus!<br>(x1.4 Tastiness)<br>";
             bonusTastiness *= 1.4; 
 		}
-		if(checkIfIncludes(["Ham","Swiss Cheese","Mayo"],ingrSpecific)){
+		if(checkIfIncludes(["Ham","Swiss Cheese"],ingrSpecific) && ingrArray.includes("mayonnaise")){
 			bonuses += "Ham & swiss (+Mayo) bonus!<br>(x1.4 Tastiness)<br>";
             bonusTastiness *= 1.4; 
 		} else if(checkIfIncludes(["Ham","Swiss Cheese"],ingrSpecific)){
@@ -79,6 +79,18 @@ function calculateBonus(ingrSpecific,ingrArray){  //get bonus values et names
 		if(checkIfIncludes(["Lamb","Pita Bread"],ingrSpecific) || checkIfIncludes(["Lamb","Sourdough Pita"],ingrSpecific)){
 			bonuses += "Gyro Bonus!<br>(x1.4 Tastiness)<br>";
             bonusTastiness *= 1.4; 
+		}
+		if(checkIfIncludes(["meat","cheese","tomato","lettuce"],ingrArray)){
+			bonuses += "Sub Bonus!<br>(x1.6 Tastiness)<br>";
+            bonusTastiness *= 1.6; 
+		}
+		if(checkIfIncludes(["meat","cheese","tomato","lettuce"],ingrArray)){
+			bonuses += "Sub Bonus!<br>(x1.6 Tastiness)<br>";
+            bonusTastiness *= 1.6; 
+		}
+		if(checkIfIncludes(["cheese"],ingrArray) && checkIfIncludes(["Steak","Onions"],ingrSpecific)){
+			bonuses += "Cheese Steak Bonus!<br>(x1.8 Tastiness)<br>";
+            bonusTastiness *= 1.8; 
 		}
 	return [bonuses,bonusTastiness]
 }
