@@ -92,5 +92,9 @@ function calculateBonus(ingrSpecific,ingrArray){  //get bonus values et names
 			bonuses += "Cheese Steak Bonus!<br>(x1.8 Tastiness)<br>";
             bonusTastiness *= 1.8; 
 		}
+		if(checkIfIncludes(["cheese"],ingrArray) && checkIfIncludes(["Baked Beans","Small Onions"],ingrSpecific)){
+			bonuses += "Baked Bean Sandwich!<br>(x1.35 Tastiness)<br>";
+            bonusTastiness *= 1.35; 
+		}
 	return [bonuses,bonusTastiness]
 }

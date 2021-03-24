@@ -18,7 +18,9 @@ var ingredientBank = [
     ["Homemade Mayo",1.325,1.7,"mayonnaise"],
     ["Butter Lettuce",1.4,1.5,"lettuce"],
     ["Swiss Cheese",1.4,1.6,"cheese"],
-    ["Bagel",1.3,1.85,"bread"],
+    ["English Muffin",1.3,1.85,"bread"],
+    ["Baked Beans",1.35,1.9,"vegetable"],
+    ["Small Onions",1.4,1.65,"vegetable"],
     ["Jelly",1.45,1.7,"sauce"],
     ["Peanut Butter",1.5,1.7,"sauce"],
     ["Sauerkraut",1.45,1.85,"vegetable"],
@@ -53,7 +55,7 @@ var ingredientBank = [
     ["Homegrown Lettuce",2.45,2.55,"lettuce"],
     ["Genespliced Tomato",2.5,2.45,"tomato"],
     ["Deli Ham",2.45,2.6,"meat"],
-    ["Onions",2.55,2.5,"vegetable"],
+    ["Farmer's Market Onions",2.55,2.5,"vegetable"],
     ["Steak",2.3,2.2,"meat"],
     ["High Quality Roll",2.6,2.55,"bread"]
 ]
