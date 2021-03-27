@@ -34,6 +34,20 @@ p{
     transition-duration: 0.2s;
     cursor: pointer;
 }
+.scaryButton {
+    padding: 5px;
+    font-size: 25px;
+    color: white;
+    background: radial-gradient(circle, rgb(66, 0, 0) 17%, rgb(141, 0, 0) 50%, rgb(65, 0, 0) 83%);
+    background-size: 600% 600%;
+    border:inset rgb(42, 42, 42);
+    border-width: 6px;
+    margin:auto;
+    position: relative;
+    animation: altarBg 15s ease infinite;
+    --wekbit-animation: altarBg 15s ease infinite;
+    cursor: pointer;
+}
 .button:hover {
     background-color: rgb(255, 255, 255);
     border: solid rgb(189, 189, 189);
@@ -42,8 +56,9 @@ p{
     border: solid rgb(189, 189, 189);
     background-color:darkgray;
 }
-.button:disabled {
+button:disabled {
     cursor: not-allowed;
+    opacity: 60%;
 }
 .bottomScreen {
     bottom: 1px;
@@ -132,3 +147,11 @@ table {
       background-color: white;
       border-radius:100px;
   }
+  @keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+     }
+}

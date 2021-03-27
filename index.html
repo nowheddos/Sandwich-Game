@@ -4,7 +4,7 @@
 		<link rel="stylesheet" type="text/css" href="interface.css" />
 		<link rel="icon" href="icon.png">
 		<title>Sandwich-Game by Nowhed</title>
-		<h1 class="column" style="position:50%;font-size:185%">Sandwich-Game</h1>
+		<h1 class="column" style="position:50%;font-size:185%">Sandwich Game</h1>
 	</head>
 
 <body>
@@ -55,7 +55,7 @@
 	<span id="recipeOutput">0</span>
 	</div>
 </div>
-<div id="Automation" class="column"> <!--automation column-->
+<div style="flex:60%" id="Automation" class="column"> <!--automation column-->
 	<h1>Automation</h1>
 	<p style="font-size:67%">Automatically buys ingredients and
 		packages sandwiches for customers. Only buys when all bots can afford. When charge runs out, it sits idly.
@@ -89,17 +89,12 @@
 </table>
 </div>
 </div>
-
+<div id="logDiv" class="column">
+	<h1>Log</h1><label id="alertsBox">Ah, the age of automation!</label>
+</div>
 	<!-- end recipe book section -->
-<div class="row">
-		<div style="flex-direction: column;border:none;padding:0" id="logDiv" class="row column">
-			<div class="column">
-				<h1>Log</h1>
-				<p id="alertsBox">hi</p>
-			</div>
-		</div>
-
-<div id="shopSection"class="column"> <!-- shop -->
+<div class="row"><!--shop, dark sandwich arts-->
+	<div id="shopSection"class="column"> <!-- shop -->
 	<h1>Shop</h1> 
 	<table class="noborder">
 		<tr>
@@ -110,15 +105,25 @@
 			<td id="profitsCost" style="text-align:right">$10.00</td>
 			<td><button class = "button" onclick="buyProfits()">Increase Cost:Profits ratio</button></td>
 		</tr>
+		<tr>
+			<td id="speedCost" style="text-align:right">$25.00</td>
+			<td><button class = "button" onclick="upgradeBots(0)">Upgrade automaker speed</button></td>
+		</tr>
+		<tr>
+			<td id="durCost" style="text-align:right">$25.00</td>
+			<td><button class = "button" onclick="upgradeBots(1)">Upgrade automaker durability</button></td>
+		</tr>	
 		<td colspan="3">SP Shop</td>
 		<tr>
 			<td id="maxCost" style="text-align:right">SP:</td>
 			<td><button class = "button" onclick="buyMax()">+1 Max Ingredient</button></td>
 		</tr>
 	</table>
-</div>
-	<div id="darkArts" class="column"> <!-- Sandwich -->
+	</div>
+
+	<div id="darkArts" class="column"> <!-- Sandwich sacrifice -->
 		<h1>Dark Sandwich Arts</h1>
+		<i>Divine Sacrifice</i><br>
 		SP/S: <span id="SandwichPerSecond">0</span><br>
 		Sandwich Points: <span id="SandwichPointCount">0</span>
 		<div style="text-align: center;">Altar</div><br>
@@ -130,8 +135,17 @@
 		From Sacrifice: <span id="hypotheticalSandwichPerSecond">0</span> SP/S</div>
 		<p>Get rid of ingredients for Sandwich points. You cannot use the Sacrificed ingridient in any future recipies. Current recipies are not altered (for now).</p>
 	</div>
+	<div id="prestige" class="column">
+		<h1>Invocation</h1>
+		<i>Divine Resetting</i><br>
+		Prestige upon the calls of the Sandwich Lord Breadmortius, Master of Time and Sandwiches, 
+		Duke of the Universal Sandwich, Giver and Taker of Time and Lettuce.
+		<button onclick="prestige()" class="scaryButton" disabled>Leave this Mortal Plane and be Rewarded with Time</button><br>
+		Gaineth: x<span id="timeGain">1</span> Time Speed<br>
+		Taketh: Possesions, but not things discovered Nor your Stages.<br>
+	</div>
 </div>
-
+</div>
 		<div class="bottomScreen">
 				<button class="button" onClick="save()">Save</button>
 				<button class="button" onClick="load()">Load</button>
@@ -143,7 +157,7 @@
 					<button class = "button" onClick="gameStage=6;gameStageRender()">max game stage</button>
 					<button class = "button" onClick="maxIngredientSelection++;setIngredientSelect()">+1 Max Ingredient</button>
 					<button class = "button" onclick="getIngredient(getRandomInt(ingredientBank.length,2))">Get random ingredient</button>
-					<button class = "button" onclick="money+=20;document.getElementById('moneyCount').innerHTML = money.toFixed(2);">+20 money</button>
+					<button class = "button" onclick="money+=20;moneyTotal+=20;document.getElementById('moneyCount').innerHTML = money.toFixed(2);">+20 money</button>
 					<button class = "button" onclick="sandwichPoints+=5000;document.getElementById('SandwichPointCount').innerHTML = sandwichPoints;">+5000 SP</button>
 				</div>
 			</div>

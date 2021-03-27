@@ -11,7 +11,7 @@ var ingredients = [
 //ingredients get better & rarer the farther on the list they are.
 // name tastiness cost type
 var ingredientBank = [
-    ["Cherry Tomato", 1, 0.50,"tomato"],
+    ["Old Tomato", 1, 0.50,"tomato"],
     ["Rye", 1.2, 1.3,"bread"],
     ["Bacon",1.3,1.5,"meat"],
     ["Fried Egg",1.35,1.65,"meat"],
@@ -39,7 +39,7 @@ var ingredientBank = [
     ["Chicken Salad",1.8,1.8,"meat"], 
     ["Provolone",1.85,2,"cheese"],
     ["Deli Mayo",1.875,1.9,"mayonnaise"],
-    ["Beefsteak Tomato",1.9,1.85,"tomato"],
+    ["Tasty Beefsteak Tomato",1.9,1.85,"tomato"],
     ["Dijon Mustard",2,1.95,"mustard"],
     ["Deli Chicken",2.2,1.65,"meat"],
     ["Dill Pickle",2.1,2.15,"vegetable"],
@@ -58,7 +58,7 @@ var ingredientBank = [
     ["Deli Ham",2.45,2.6,"meat"],
     ["Farmer's Market Onions",2.55,2.5,"vegetable"],
     ["Steak",2.3,2.2,"meat"],
-    ["High Quality Roll",2.6,2.55,"bread"]
+    ["High Quality Roll",2.6,2.55,"bread"],
 ]
 var ingredientsSacrificed = new Array;
 function getIngredient(ingrNumber){
