@@ -19,6 +19,13 @@ var toggleMachinery = false;
 var startLoop;
 var botUpgrades = [1,1];
 //Ingrediets: name, tastiness, cost
+if (navigator.userAgent.match(/Mobile/)) {
+	document.getElementById('Automation').outerHTML = ''
+	document.getElementById('automationMobile').class = 'column';
+	document.getElementById('automationMobile').id = 'Automation';
+	} else {
+		document.getElementById('automationMobile').outerHTML = '';
+	}
 function makeSandwich(amnt){
 	console.log(amnt)
 	if(money >= sandwichCost*amnt){ //check if can afford sandwich

@@ -25,6 +25,9 @@ p{
     flex: 50%;
     transition: opacity ease 3s;
 }
+@media (max-width:1000px){
+    
+}
 .button {
     outline: none;
     padding: 10px 15px;
