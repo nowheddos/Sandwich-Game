@@ -20,9 +20,9 @@ var startLoop;
 var botUpgrades = [1,1,false];
 //Ingrediets: name, tastiness, cost
 if (navigator.userAgent.match(/Mobile/)) {
+	var tmp = document.getElementById('Automation').outerHTML;
 	document.getElementById('Automation').outerHTML = ''
-	document.getElementById('automationMobile').class = 'column';
-	document.getElementById('automationMobile').id = 'Automation';
+	document.getElementById('automationMobile').outerHTML = tmp;
 	} else {
 		document.getElementById('automationMobile').outerHTML = '';
 	} //fixes css on mobile devices
