@@ -25,7 +25,7 @@ if (navigator.userAgent.match(/Mobile/)) {
 	document.getElementById('automationMobile').id = 'Automation';
 	} else {
 		document.getElementById('automationMobile').outerHTML = '';
-	}
+	} //fixes css on mobile devices
 function makeSandwich(amnt){
 	console.log(amnt)
 	if(money >= sandwichCost*amnt){ //check if can afford sandwich
@@ -335,14 +335,14 @@ function upgradeBots(val){
 		case 0:
 			if(money>=Math.pow(botUpgrades[0],2.8)+25){
 				money-=Math.pow(botUpgrades[0],2.8)+25
-				botUpgrades[0]+=1.15
+				botUpgrades[0]+=1.08
 				document.getElementById("speedCost").innerHTML = "$" + (Math.pow(botUpgrades[0],2.8)+25).toFixed(2)
 			}
 		break;
 		case 1:
 			if(money>=Math.pow(botUpgrades[1],2.5)+25){
 				money-=Math.pow(botUpgrades[1],2.5)+25
-				botUpgrades[1]+=1.15
+				botUpgrades[1]+=1.08
 				document.getElementById("durCost").innerHTML = "$" + (Math.pow(botUpgrades[0],2.5)+25).toFixed(2)
 			}	
 	}
