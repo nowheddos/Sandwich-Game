@@ -180,7 +180,7 @@ function load(){
 	machinery = savegame.machinery;
 	botUpgrades = savegame.botUpgrades;
 		if(botUpgrades[2]){
-
+			
 		}
 	document.getElementById("speedCost").innerHTML = "$" + (Math.pow(botUpgrades[0],2.8)+25).toFixed(2)
 	document.getElementById("durCost").innerHTML = "$" + (Math.pow(botUpgrades[0],2.5)+25).toFixed(2)
