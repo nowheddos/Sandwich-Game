@@ -68,7 +68,11 @@
 	</tr>
 </table>
 <!--set false to true, viceversa      clear loop start loop-->
-<input type="checkbox" oninput="toggleMachinery=!toggleMachinery;clearTimeout(startLoop);startLoop = setTimeout(function() {autoMakerLoop();}, 4000/timeSpeed);">Toggle Machinery</input>
+<input type="checkbox" oninput="toggleMachinery=!toggleMachinery;clearTimeout(startLoop);startLoop = setTimeout(function() {autoMakerLoop();}, 4000/timeSpeed);">Toggle Machinery</input><br>
+<form>
+	<label>Stop buying at or above:</label><input id="sammichMax" type="number" style="width: 60px;" min="0" value="12"></input><br>
+	<label>Start buying again at or below:</label><input id="sammichMin" type="number" style="width: 60px;" min="0" value="0"></input><br>
+	<input type="submit"></form>
 <hr>
 <!-- machinery table -->
 	Machinery:
@@ -145,6 +149,10 @@
 			<td id="durCost" style="text-align:right">$25.00</td>
 			<td><button class = "button" onclick="upgradeBots(1)">Upgrade automaker durability</button></td>
 		</tr>	
+		<tr>
+			<td style="text-align:right">$60.00</td>
+			<td><button id="machineryButton" class = "button" onclick="upgradeBots(2)">Upgrade machinery toggle</button></td>
+		</tr>	
 		<td colspan="3">SP Shop</td>
 		<tr>
 			<td id="maxCost" style="text-align:right">SP:</td>
@@ -180,6 +188,7 @@ Prestige upon the calls of the Sandwich Lord Breadmortius, Master of Time and Sa
 </div>
 </div>
 		<div class="bottomScreen">
+				<button class="button" onclick="window.location.href='https://forms.gle/5PA3GGUAnqnsWfWP9'">Feedback form</button>
 				<button class="button" onClick="save()">Save</button>
 				<button class="button" onClick="load()">Load</button>
 				<button style="background-color: darkred;color:white" class="button" onClick="if(confirm('Are you sure you want to Hard Reset? This cannot be undone.')){localStorage.removeItem(`saveData`);window.location.reload()}">Hard Reset</button>

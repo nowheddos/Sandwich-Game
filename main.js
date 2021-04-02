@@ -17,7 +17,7 @@ var SPS = 0;
 var machinery = [[100,100]];
 var toggleMachinery = false;
 var startLoop;
-var botUpgrades = [1,1];
+var botUpgrades = [1,1,false];
 //Ingrediets: name, tastiness, cost
 if (navigator.userAgent.match(/Mobile/)) {
 	document.getElementById('Automation').outerHTML = ''
@@ -179,6 +179,9 @@ function load(){
 	SPS = savegame.SPS;
 	machinery = savegame.machinery;
 	botUpgrades = savegame.botUpgrades;
+		if(botUpgrades[2]){
+
+		}
 	document.getElementById("speedCost").innerHTML = "$" + (Math.pow(botUpgrades[0],2.8)+25).toFixed(2)
 	document.getElementById("durCost").innerHTML = "$" + (Math.pow(botUpgrades[0],2.5)+25).toFixed(2)
 	document.getElementById("sandwichMakerCost").innerHTML = "$" + (Math.pow(5.25,machinery.length)+94.75).toFixed(2);
@@ -344,7 +347,14 @@ function upgradeBots(val){
 				money-=Math.pow(botUpgrades[1],2.5)+25
 				botUpgrades[1]+=1.08
 				document.getElementById("durCost").innerHTML = "$" + (Math.pow(botUpgrades[0],2.5)+25).toFixed(2)
-			}	
+			}
+		case 2:
+			if(money>=60){
+				money-=60;
+				botUpgrades[2] = true;
+				document.getElementById("machineryButton").disabled = true;
+			}
+		break;
 	}
 }
 function autoMakerLoop(){
