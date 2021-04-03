@@ -1,162 +1,194 @@
 <!DOCTYPE HTML>
 <html>
-	<head>
-		<link rel="stylesheet" type="text/css" href="interface.css" />
-		<link rel="icon" href="icon.png">
-		<title>Sandwich-Game by Nowhed</title>
-		<h1 class="column" style="position:50%;font-size:185%">Sandwich Game</h1>
-	</head>
+
+<head>
+	<link rel="stylesheet" type="text/css" href="interface.css" />
+	<link rel="icon" href="icon.png">
+	<title>Sandwich-Game by Nowhed</title>
+	<h1 class="column" style="position:50%;font-size:185%">Sandwich Game</h1>
+</head>
 
 <body>
-<div class="row">
-	<div id="shopStats" class="column"> <!-- money/sandwich section -->
+	<div class="row"><!-- money/sandwich section, currently selected+ stats, milestyones -->
+		<div id="shopStats" class="column">
+			<!-- money/sandwich section -->
 			<h1>Shop Statistics</h1>
-		Money: $<span class="numberJump" id="moneyCount">5.00</span><br>
-		Sandwiches in stock: <span id="sandwichCount">0</span><br>
-		Store traffic: <span id="peopleTick">0</span> people every <span id="secondTick">0</span> seconds.<br>
-		<button class="button" onClick="makeSandwich(1)">Make Sandwich</button></div><br>
-	<!-- currently selected + stats -->
-	<div id="currentlyStats" class="column">
+			Money: $<span class="numberJump" id="moneyCount">5.00</span><br>
+			Sandwiches in stock: <span id="sandwichCount">0</span><br>
+			Store traffic: <span id="peopleTick">0</span> people every <span id="secondTick">0</span> seconds.<br>
+			<button class="button" onClick="makeSandwich(1)">Make Sandwich</button>
+		</div><br>
+		<!-- currently selected + stats -->
+		<div id="currentlyStats" class="column">
 			<h1>Sandwich Statistics</h1>
-		Currently selected sandwich: <span id="currentSandwich">Water Sandwich</span><br>
-		Cost: $<span id="sandwichCost">0</span><br>
-		Sell Value: $<span id="sandwichSV">0</span>
+			Currently selected sandwich: <span id="currentSandwich">Water Sandwich</span><br>
+			Cost: $<span id="sandwichCost">0</span><br>
+			Sell Value: $<span id="sandwichSV">0</span>
 		</div>
 		<!-- milestones, thanks for the suggestion u/AshleyBitch -->
-		<div id="milestones"class="column">
+		<div id="milestones" class="column">
 			<h1>Milestones</h1>
 			Next unlock after:
 			<br><span id="unlock">$5.00</span><br>
 		</div>
-</div> <!-- End of Row -->
-<div class="row"> <!-- crafting statin -->
-	<div id="craftingStation" class="column">
-		<form id="sandwichForm"> <!-- Sandwich Creation -->
+	</div> <!-- End of Row -->
+	<div class="row"> <!-- crafting station, recipe book, automation -->
+		<!-- crafting statin -->
+		<div id="craftingStation" class="column">
+			<form id="sandwichForm">
+				<!-- Sandwich Creation -->
 				<fieldset style="display:flexbox">
-					<legend><h1 style="font-size:85%">Crafting Station</h1></legend>
-			<label style="font-size:100%">Sandwich Name:</label>
-			<input type="text" id="sname" autocomplete="off" required maxlength=25><br><label style="font-size:85%">Sandwich ingredients</label>
-			<div class="row">
-				<div class="column" id="opt" style="border:solid;max-height:350px;height:350px;overflow-y:scroll;overflow-x:hidden"><span id="ingredientSelect"></span></div>
-				<div class="column rainbow-text" id="bonusOutput" style="border:none;font-size:80%;"></div><br></div>	
-<!--				<span>Tastiness: </span><span id="tastinessReplace">?</span><br><br> do this later-->
-		  <input type="submit" value="Craft" class="button"><br>
-		</fieldset>
-		</form>
-	</div> <!-- end crafting -->
-	<div id="recipeBookSection" class="column">
-		<h3>Recipe Book</h3>
-		<button style="border-radius: 20px;outline: none" onclick="if(recipeBook.length>1){recipeBook.splice(recipeBookSelection.value, 1);refreshBook()}">x</button>
-		<select id="recipeBookSelection" oninput="swapRecipeBook(recipeBookSelection.value)">
-			<!-- recipe book section -->
-		   <option value='0'>Water Sandwich</option>
-	   </select><br><br>
-		<div style="max-height:440px;height:440px;overflow-y:scroll;border:solid">
-	<span id="recipeOutput">0</span>
-	</div>
-</div>
-<div style="flex:60%" id="Automation" class="column"> <!--automation column-->
-	<h1>Automation</h1>
-	<p style="font-size:67%">Automatically buys ingredients and
-		packages sandwiches for customers. Only buys when all bots can afford. When charge runs out, it sits idly.
-		When durability runs out, bot is destroyed.
-	</p>
-<table class="noborder">
-	<tr>
-		<td id="sandwichMakerCost" style="text-align:right">$100.00</td>
-		<td><button class = "button" onclick="buyAutomation()">Buy Auto-Sandwich Maker</button></td>
-	</tr>
-</table>
-<!--set false to true, viceversa      clear loop start loop-->
-<input type="checkbox" oninput="toggleMachinery=!toggleMachinery;clearTimeout(startLoop);startLoop = setTimeout(function() {autoMakerLoop();}, 4000/timeSpeed);">Toggle Machinery</input><br>
-<hr>
-<!-- machinery table -->
-	Machinery:
-<table>
-	<tbody id="automakerList">
-	</tbody>
-</table>
-</div>
-</div>
-<div id="logDiv" class="column">
-	<h1>Log</h1><label id="alertsBox">Ah, the age of automation!</label>
-</div>
-<div style="flex:60%" id="automationMobile" class="column"></div>
-	<!-- end recipe book section -->
-<div class="row"><!--shop, dark sandwich arts-->
-	<div id="shopSection"class="column"> <!-- shop -->
-	<h1>Shop</h1> 
-	<table class="noborder">
-		<tr>
-			<td id="ingrCost" style="text-align:right">$11.15</td>
-			<td><button class = "button" onclick="buyIngredient(2,Math.pow(ingredients.length-3,2.3)-1.365)">Buy random ingredient</button></td>
-		</tr>
-		<tr>
-			<td id="profitsCost" style="text-align:right">$10.00</td>
-			<td><button class = "button" onclick="buyProfits()">Increase Cost:Profits ratio</button></td>
-		</tr>
-		<tr>
-			<td id="speedCost" style="text-align:right">$25.00</td>
-			<td><button class = "button" onclick="upgradeBots(0)">Upgrade automaker speed</button></td>
-		</tr>
-		<tr>
-			<td id="durCost" style="text-align:right">$25.00</td>
-			<td><button class = "button" onclick="upgradeBots(1)">Upgrade automaker durability</button></td>
-		</tr>	
-		<td colspan="3">SP Shop</td>
-		<tr>
-			<td id="maxCost" style="text-align:right">SP:</td>
-			<td><button class = "button" onclick="buyMax()">+1 Max Ingredient</button></td>
-		</tr>
-	</table>
-	</div>
-
-	<div id="darkArts" class="column"> <!-- Sandwich sacrifice -->
-		<h1>Dark Sandwich Arts</h1>
-		<i>Divine Sacrifice</i><br>
-		SP/S: <span id="SandwichPerSecond">0</span><br>
-		Sandwich Points: <span id="SandwichPointCount">0</span>
-		<div style="text-align: center;">Altar</div><br>
-		<div class="altar">
-			<select  id="altarSelect" oninput="document.getElementById('hypotheticalSandwichPerSecond').innerHTML = calculateSandwichPoints(altarSelect.value)">
-			</select>
-		</div><br>
-		<div style="text-align: center;"><button onclick="sacrifice(altarSelect.value)" class="button">Sacrifice Ingredient for SP Income</button><br>
-		From Sacrifice: <span id="hypotheticalSandwichPerSecond">0</span> SP/S</div>
-		<p>Get rid of ingredients for Sandwich points. You cannot use the Sacrificed ingridient in any future recipies. Current recipies are not altered (for now).</p>
-	</div>
-	<div id="prestige" class="column">
-		<h1>Invocation</h1>
-		<i>Divine Resetting</i><br>
-		Prestige upon the calls of the Sandwich Lord Breadmortius, Master of Time and Sandwiches, 
-		Duke of the Universal Sandwich, Giver and Taker of Time and Lettuce.
-		<button id="prestigeButton"onclick="prestige()" class="scaryButton" disabled>Leave this Mortal Plane and be Rewarded with Time</button><br>
-		Gaineth: x<span id="timeGain">1</span> Time Speed<br>
-		Taketh: Possesions, but not things discovered Nor your Stages.<br>
-	</div>
-</div>
-</div>
-		<div class="bottomScreen">
-				<button class="button" onclick="window.location.href='https://forms.gle/5PA3GGUAnqnsWfWP9'">Feedback form</button>
-				<button class="button" onClick="save()">Save</button>
-				<button class="button" onClick="load()">Load</button>
-				<button style="background-color: darkred;color:white" class="button" onClick="if(confirm('Are you sure you want to Hard Reset? This cannot be undone.')){localStorage.removeItem(`saveData`);window.location.reload()}">Hard Reset</button>
-				<input id="autosaveBox" type="checkbox" oninput="autosaveEnabled = !autosaveEnabled;" checked>Autosave
-				<br><span style="font-size:20px;" class="rainbow-text">Dev Tools</span>
-				<div style="font-size:15px;">
-					<button class = "button" onClick="gameStage++;gameStageRender()">skip game stage</button>
-					<button class = "button" onClick="gameStage=7;gameStageRender()">max game stage</button>
-					<button class = "button" onClick="maxIngredientSelection++;setIngredientSelect()">+1 Max Ingredient</button>
-					<button class = "button" onclick="getIngredient(getRandomInt(ingredientBank.length,2))">Get random ingredient</button>
-					<button class = "button" onclick="money+=20;moneyTotal+=20;document.getElementById('moneyCount').innerHTML = money.toFixed(2);">+20 money</button>
-					<button class = "button" onclick="sandwichPoints+=5000;document.getElementById('SandwichPointCount').innerHTML = sandwichPoints;">+5000 SP</button>
-				</div>
+					<legend>
+						<h1 style="font-size:85%">Crafting Station</h1>
+					</legend>
+					<label style="font-size:100%">Sandwich Name:</label>
+					<input type="text" id="sname" autocomplete="off" required maxlength=25><br><label
+						style="font-size:85%">Sandwich ingredients</label>
+					<div class="row">
+						<div class="column" id="opt"
+							style="border:solid;max-height:350px;height:350px;overflow-y:scroll;overflow-x:hidden"><span
+								id="ingredientSelect"></span></div>
+						<div class="column rainbow-text" id="bonusOutput" style="border:none;font-size:80%;"></div><br>
+					</div>
+					<!--				<span>Tastiness: </span><span id="tastinessReplace">?</span><br><br> do this later-->
+					<input type="submit" value="Craft" class="button"><br>
+				</fieldset>
+			</form>
+		</div> <!-- end crafting -->
+		<div id="recipeBookSection" class="column">
+			<h3>Recipe Book</h3>
+			<button style="border-radius: 20px;outline: none"
+				onclick="if(recipeBook.length>1){recipeBook.splice(recipeBookSelection.value, 1);refreshBook()}">x</button>
+			<select id="recipeBookSelection" oninput="swapRecipeBook(recipeBookSelection.value)">
+				<!-- recipe book section -->
+				<option value='0'>Water Sandwich</option>
+			</select><br><br>
+			<div style="max-height:440px;height:440px;overflow-y:scroll;border:solid">
+				<span id="recipeOutput">0</span>
 			</div>
-			<script type="text/javascript" src="milestones.js" ></script>
-			<script type="text/javascript" src="ingredients.js" ></script>
-			<script type="text/javascript" src="savingLoading.js" ></script>
-			<script type="text/javascript" src="bonuscheck.js" ></script>
-			<script type="text/javascript" src="main.js" ></script>
-	</body>
-	<br><br><br><br>
+		</div>
+		<div style="flex:60%" id="Automation" class="column">
+			<!--automation column-->
+			<h1>Automation</h1>
+			<p style="font-size:67%">Automatically buys ingredients and
+				packages sandwiches for customers. Only buys when all bots can afford. When charge runs out, it sits
+				idly.
+				When durability runs out, bot is destroyed.
+			</p>
+			<table class="noborder">
+				<tr>
+					<td id="sandwichMakerCost" style="text-align:right">$100.00</td>
+					<td><button class="button" onclick="buyAutomation()">Buy Auto-Sandwich Maker</button></td>
+				</tr>
+			</table>
+			<!--set false to true, viceversa      clear loop start loop-->
+			<input type="checkbox"
+				oninput="toggleMachinery=!toggleMachinery;clearTimeout(startLoop);startLoop = setTimeout(function() {autoMakerLoop();}, 4000/timeSpeed);">Toggle
+			Machinery</input><br>
+			<hr>
+			<!-- machinery table -->
+			Machinery:
+			<table>
+				<tbody id="automakerList">
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div id="logDiv" class="column"><!-- Log -->
+		<h1>Log</h1><label id="alertsBox">You probably shouldn't be seeing this... but if you do, Hello!</label>
+	</div>
+	<div style="flex:60%" id="automationMobile" class="column"></div>
+	<!-- end recipe book section -->
+	<div class="row">		<!--shop, sacrifice -->
+		<div id="shopSection" class="column">
+			<!-- shop -->
+			<h1>Shop</h1>
+			<table class="noborder">
+				<tr>
+					<td id="ingrCost" style="text-align:right">$11.15</td>
+					<td><button class="button" onclick="buyIngredient(2,Math.pow(ingredients.length-3,2.3)-1.365)">Buy
+							random ingredient</button></td>
+				</tr>
+				<tr>
+					<td id="profitsCost" style="text-align:right">$10.00</td>
+					<td><button class="button" onclick="buyProfits()">Increase Cost:Profits ratio</button></td>
+				</tr>
+				<tr>
+					<td id="speedCost" style="text-align:right">$25.00</td>
+					<td><button class="button" onclick="upgradeBots(0)">Upgrade automaker speed</button></td>
+				</tr>
+				<tr>
+					<td id="durCost" style="text-align:right">$25.00</td>
+					<td><button class="button" onclick="upgradeBots(1)">Upgrade automaker durability</button></td>
+				</tr>
+				<td colspan="3">SP Shop</td>
+				<tr>
+					<td id="maxCost" style="text-align:right">SP:</td>
+					<td><button class="button" onclick="buyMax()">+1 Max Ingredient</button></td>
+				</tr>
+			</table>
+		</div>
+
+		<div id="darkArts" class="column">
+			<!-- Sandwich sacrifice -->
+			<h1>Dark Sandwich Arts</h1>
+			<i>Divine Sacrifice</i><br>
+			SP/S: <span id="SandwichPerSecond">0</span><br>
+			Sandwich Points: <span id="SandwichPointCount">0</span>
+			<div style="text-align: center;">Altar</div><br>
+			<div class="altar">
+				<select id="altarSelect"
+					oninput="document.getElementById('hypotheticalSandwichPerSecond').innerHTML = calculateSandwichPoints(altarSelect.value)">
+				</select>
+			</div><br>
+			<div style="text-align: center;"><button onclick="sacrifice(altarSelect.value)" class="button">Sacrifice
+					Ingredient for SP Income</button><br>
+				From Sacrifice: <span id="hypotheticalSandwichPerSecond">0</span> SP/S</div>
+			<p>Get rid of ingredients for Sandwich points. You cannot use the Sacrificed ingridient in any future
+				recipies. Current recipies are not altered (for now).</p>
+		</div>
+		<div id="prestige" class="column">
+			<h1>Invocation</h1>
+			<i>Divine Resetting</i><br>
+			Prestige upon the calls of the Sandwich Lord Breadmortius, Master of Time and Sandwiches,
+			Duke of the Universal Sandwich, Giver and Taker of Time and Lettuce.
+			<button id="prestigeButton" onclick="prestige()" class="scaryButton" disabled>Leave this Mortal Plane and be
+				Rewarded with Time</button><br>
+			Gaineth: x<span id="timeGain">1</span> Time Speed<br>
+			Taketh: Possesions, but not things discovered Nor your Stages.<br>
+		</div>
+	</div>
+	</div>
+	<div class="bottomScreen"> 		<!--form, devtools, save/load-->
+		<button class="button" onclick="window.location.href='https://forms.gle/5PA3GGUAnqnsWfWP9'">Feedback
+			form</button>
+		<button class="button" onClick="save()">Save</button>
+		<button class="button" onClick="load()">Load</button>
+		<button style="background-color: darkred;color:white" class="button"
+			onClick="if(confirm('Are you sure you want to Hard Reset? This cannot be undone.')){localStorage.removeItem(`saveData`);window.location.reload()}">Hard
+			Reset</button>
+		<input id="autosaveBox" type="checkbox" oninput="autosaveEnabled = !autosaveEnabled;" checked>Autosave
+		<br><span style="font-size:20px;" class="rainbow-text">Dev Tools</span>
+		<div style="font-size:15px;">
+			<button class="button" onClick="gameStage++;gameStageRender()">skip game stage</button>
+			<button class="button" onClick="gameStage=7;gameStageRender()">max game stage</button>
+			<button class="button" onClick="maxIngredientSelection++;setIngredientSelect()">+1 Max Ingredient</button>
+			<button class="button" onclick="getIngredient(getRandomInt(ingredientBank.length,2))">Get random
+				ingredient</button>
+			<button class="button"
+				onclick="money+=20;moneyTotal+=20;document.getElementById('moneyCount').innerHTML = money.toFixed(2);">+20
+				money</button>
+			<button class="button"
+				onclick="sandwichPoints+=5000;document.getElementById('SandwichPointCount').innerHTML = sandwichPoints;">+5000
+				SP</button>
+		</div>
+	</div>
+	<script type="text/javascript" src="milestones.js"></script>
+	<script type="text/javascript" src="ingredients.js"></script>
+	<script type="text/javascript" src="savingLoading.js"></script>
+	<script type="text/javascript" src="bonuscheck.js"></script>
+	<script type="text/javascript" src="main.js"></script>
+</body>
+<br><br><br><br>
+
 </html>
