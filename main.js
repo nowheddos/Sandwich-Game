@@ -194,9 +194,6 @@ function buyIngredient(rns, price) {
 //function updateCraftPreview(){
 //} do later :)
 // loop
-function calculateSandwichPoints(bam) { //calculates amnt of Sandwich points/second for ingredient sacrificed
-    return Math.floor(ingredients[bam][1] * ingredients[bam][2] * 50)
-};
 
 function sacrifice(val) {
     document.getElementById('hypotheticalSandwichPerSecond').innerHTML = calculateSandwichPoints(altarSelect.value)
@@ -268,9 +265,6 @@ function buyAutomation() {
         document.getElementById("alertsBox").innerHTML = "Not enough! Need $" + (Math.pow(5.25, machinery.length) + 94.75).toFixed(2) + ", you only have $" + money.toFixed(2) + ".";
     }
 }
-document.getElementById('maxCost').innerHTML = "SP:" + Math.floor(Math.pow(maxIngredientSelection, 8));
-document.getElementById('hypotheticalSandwichPerSecond').innerHTML = calculateSandwichPoints(altarSelect.value)
-setTimeout(function() { loop(); }, Number(5000 / Math.pow(timeSpeed, sandwichTastiness / 5)))
 
 function upgradeBots(val) {
     switch (val) {
@@ -423,6 +417,7 @@ function prestige() {
         load();
     }, 500); //wait 500ms
 }
+setTimeout(function() { loop(); }, Number(5000 / Math.pow(timeSpeed, sandwichTastiness / 5)))
 
 function SPloop() {
     sandwichPoints += SPS;

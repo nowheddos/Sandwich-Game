@@ -1,3 +1,15 @@
+function makeInvis() { // makes all unlockables invisible
+    document.getElementById("recipeBookSection").className = "invisible";
+    document.getElementById("craftingStation").className = "invisible";
+    document.getElementById("logDiv").className = "invisible";
+    document.getElementById("currentlyStats").className = "invisible";
+    document.getElementById("shopSection").className = "invisible";
+    document.getElementById("darkArts").className = "invisible";
+    document.getElementById("Automation").className = "invisible";
+    document.getElementById("prestige").className = "invisible";
+    document.getElementById("shopStats").className = "invisible";
+    document.getElementById("milestones").className = "invisible";
+} //this is here because i am adumbass. 
 function save() {
     var saveData = {
         sandwiches: sandwiches,
@@ -21,12 +33,13 @@ function save() {
         timeSpeed: timeSpeed,
         moneyTotal: moneyTotal,
         botUpgrades: botUpgrades
-    };  //saves everything to an object
+    }; //saves everything to an object
     localStorage.setItem("saveData", JSON.stringify(saveData)); //sets the string in the local storage
     console.log("Game saved");
     var d = new Date(); //gets date & time
     document.getElementById("alertsBox").innerHTML = "Saved at " + d.getMinutes() + ":" + d.getSeconds() + ":" + d.getMilliseconds();
 };
+
 function load() {
     var savegame = JSON.parse(localStorage.getItem("saveData")); //looks for save data object
     timeSpeed = savegame.timeSpeed;
@@ -69,5 +82,10 @@ function load() {
     var d = new Date();
     document.getElementById("alertsBox").innerHTML = "Loaded at " + d.getMinutes() + ":" + d.getSeconds() + ":" + d.getMilliseconds();
     refreshMachineryFull();
-}; if (localStorage.getItem("saveData") !== null) { window.onload = load() } else { makeInvis(); gameStageRender(); }
+};
+if (localStorage.getItem("saveData") !== null) { window.onload = load() } else {
+    makeInvis();
+    gameStageRender();
+}
 setIngredientSelect();
+document.getElementById('maxCost').innerHTML = "SP:" + Math.floor(Math.pow(maxIngredientSelection, 8));

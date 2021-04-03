@@ -1,16 +1,4 @@
 // suprisingly not as horrible looking as it used to be
-function makeInvis() { // makes all unlockables invisible
-    document.getElementById("recipeBookSection").className = "invisible";
-    document.getElementById("craftingStation").className = "invisible";
-    document.getElementById("logDiv").className = "invisible";
-    document.getElementById("currentlyStats").className = "invisible";
-    document.getElementById("shopSection").className = "invisible";
-    document.getElementById("darkArts").className = "invisible";
-    document.getElementById("Automation").className = "invisible";
-    document.getElementById("prestige").className = "invisible";
-    document.getElementById("shopStats").className = "invisible";
-    document.getElementById("milestones").className = "invisible";
-}
 
 function gameStageRender() { //game unlocks
     var alreadyOutput = true;
@@ -46,7 +34,7 @@ function gameStageRender() { //game unlocks
         case 4:
             if (alreadyOutput) {
                 milestone("$35.00");
-                document.getElementById("alertsBox").innerHTML = "Shop unlocked! I wonder what's next?";
+                document.getElementById("alertsBox").innerHTML = "Shop unlocked! The higher the ingredient number, the better the value!";
                 alreadyOutput = !alreadyOutput
             }
             document.getElementById("shopSection").className = "column";

@@ -1,12 +1,12 @@
 // ingredient types: bread,meat,cheese,vegetable,sauce
 // name tastiness cost
 var ingredients = [
-        ["White Bread", 1.15, 0.35, "bread"],
-        ["American Cheese", 1.2, 0.50, "cheese"],
-        ["Turkey", 1.4, 0.8, "meat"],
-        ["Homemade Mustard", 1.2, 1, "mustard"],
-        ["Discount Lettuce", 1.35, 1, "lettuce"],
-        ["Water", 1, 0, "sauce"]
+        ["White Bread | 1", 1.15, 0.35, "bread"],
+        ["American Cheese | 2", 1.2, 0.50, "cheese"],
+        ["Turkey | 3", 1.4, 0.8, "meat"],
+        ["Homemade Mustard | 4", 1.2, 1, "mustard"],
+        ["Discount Lettuce | 5", 1.35, 1, "lettuce"],
+        ["Water | 0", 1, 0, "sauce"]
     ]
     //ingredients get better & rarer the farther on the list they are.
     // name tastiness cost type
@@ -60,6 +60,9 @@ var ingredientBank = [
     ["Steak", 2.3, 2.2, "meat"],
     ["High Quality Roll", 2.6, 2.55, "bread"],
 ]
+for (i = 6; i < ingredientBank.length + 6; i++) {
+    ingredientBank[i - 6][0] = ingredientBank[i - 6][0] + " | " + i
+}
 var ingredientsSacrificed = new Array;
 
 function getIngredient(ingrNumber) {
@@ -72,3 +75,8 @@ function getIngredient(ingrNumber) {
         document.getElementById("alertsBox").innerHTML = "No more ingredients to get."
     }
 }
+document.getElementById('hypotheticalSandwichPerSecond').innerHTML = calculateSandwichPoints(altarSelect.value)
+    // used to cause problems, fixed here
+function calculateSandwichPoints(bam) { //calculates amnt of Sandwich points/second for ingredient sacrificed
+    return Math.floor(ingredients[bam][1] * ingredients[bam][2] * 50)
+};
