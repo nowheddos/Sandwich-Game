@@ -8,11 +8,15 @@ function makeInvis(){ // makes all unlockables invisible
 	document.getElementById("darkArts").className = "invisible";
 	document.getElementById("Automation").className = "invisible";
 	document.getElementById("prestige").className = "invisible";
+	document.getElementById("shopStats").className = "invisible";
+	document.getElementById("milestones").className = "invisible";
 }
 function gameStageRender() { //game unlocks
 	var alreadyOutput = true;
 	switch(gameStage){
 		case 0:
+			document.getElementById("milestones").className = "column";
+			document.getElementById("shopStats").className = "column";
 			milestone("$5.50")
 			console.log("0")
 			break;
@@ -21,7 +25,6 @@ function gameStageRender() { //game unlocks
 			document.getElementById("alertsBox").innerHTML = "They said to never mess with the old gods of Sandwiches. But how could you resist?";
 			alreadyOutput = !alreadyOutput}
 			document.getElementById("prestige").className = "column";	
-			autoMakerLoop()	
 		case 6:
 			if(alreadyOutput){milestone("$300.00");
 			document.getElementById("alertsBox").innerHTML = "Ah, the age of sandwich automation!";
@@ -55,6 +58,8 @@ function gameStageRender() { //game unlocks
 			console.log("1")
 			document.getElementById("currentlyStats").className = "column";
 			document.getElementById("craftingStation").className = "column";
+			document.getElementById("milestones").className = "column";
+			document.getElementById("shopStats").className = "column";
 
 	}
 }

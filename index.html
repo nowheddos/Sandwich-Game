@@ -9,7 +9,7 @@
 
 <body>
 <div class="row">
-	<div class="column"> <!-- money/sandwich section -->
+	<div id="shopStats" class="column"> <!-- money/sandwich section -->
 			<h1>Shop Statistics</h1>
 		Money: $<span class="numberJump" id="moneyCount">5.00</span><br>
 		Sandwiches in stock: <span id="sandwichCount">0</span><br>
@@ -23,7 +23,7 @@
 		Sell Value: $<span id="sandwichSV">0</span>
 		</div>
 		<!-- milestones, thanks for the suggestion u/AshleyBitch -->
-		<div class="column">
+		<div id="milestones"class="column">
 			<h1>Milestones</h1>
 			Next unlock after:
 			<br><span id="unlock">$5.00</span><br>
@@ -74,17 +74,6 @@
 	Machinery:
 <table>
 	<tbody id="automakerList">
-	<tr>
-		<td>Name</td>
-		<td>Durability</td>
-		<td colspan="2">Charge</td>
-	</tr>
-	<tr>
-		<td style="font-size:70%">Automaker 1</td>
-		<td style="padding:0"><div style="font-size:80%;text-align: center;height:100%;width:70%;background: rgb(0, 212, 0);">70%</div></td>
-		<td style="padding:0;width:45%"><div style="font-size:80%;text-align: center;height:100%;width:35%;background: rgb(0, 212, 0);">35%</div></td>
-		<td style="padding:0"><button onclick="recharge(1)" class="button">Charge<br>SP:5000</button></td>
-	</tr>
 	</tbody>
 </table>
 </div>
@@ -139,10 +128,9 @@
 	<div id="prestige" class="column">
 		<h1>Invocation</h1>
 		<i>Divine Resetting</i><br>
-		not implemented yet sorry!
-Prestige upon the calls of the Sandwich Lord Breadmortius, Master of Time and Sandwiches, 
+		Prestige upon the calls of the Sandwich Lord Breadmortius, Master of Time and Sandwiches, 
 		Duke of the Universal Sandwich, Giver and Taker of Time and Lettuce.
-		<button onclick="prestige()" class="scaryButton" disabled>Leave this Mortal Plane and be Rewarded with Time</button><br>
+		<button id="prestigeButton"onclick="prestige()" class="scaryButton" disabled>Leave this Mortal Plane and be Rewarded with Time</button><br>
 		Gaineth: x<span id="timeGain">1</span> Time Speed<br>
 		Taketh: Possesions, but not things discovered Nor your Stages.<br>
 	</div>
@@ -157,7 +145,7 @@ Prestige upon the calls of the Sandwich Lord Breadmortius, Master of Time and Sa
 				<br><span style="font-size:20px;" class="rainbow-text">Dev Tools</span>
 				<div style="font-size:15px;">
 					<button class = "button" onClick="gameStage++;gameStageRender()">skip game stage</button>
-					<button class = "button" onClick="gameStage=6;gameStageRender()">max game stage</button>
+					<button class = "button" onClick="gameStage=7;gameStageRender()">max game stage</button>
 					<button class = "button" onClick="maxIngredientSelection++;setIngredientSelect()">+1 Max Ingredient</button>
 					<button class = "button" onclick="getIngredient(getRandomInt(ingredientBank.length,2))">Get random ingredient</button>
 					<button class = "button" onclick="money+=20;moneyTotal+=20;document.getElementById('moneyCount').innerHTML = money.toFixed(2);">+20 money</button>
@@ -166,6 +154,7 @@ Prestige upon the calls of the Sandwich Lord Breadmortius, Master of Time and Sa
 			</div>
 			<script type="text/javascript" src="milestones.js" ></script>
 			<script type="text/javascript" src="ingredients.js" ></script>
+			<script type="text/javascript" src="savingLoading.js" ></script>
 			<script type="text/javascript" src="bonuscheck.js" ></script>
 			<script type="text/javascript" src="main.js" ></script>
 	</body>

@@ -127,83 +127,7 @@ function updateRecipe(name,tastiness,cost){ //update stats
 	document.getElementById("moneyCount").innerHTML = money.toFixed(2);
 }; //updateRecipe("Water Sandwich", 1.05, 1.95);
 //saving & loading
-function save(){
-	var saveData = {
-		sandwiches: sandwiches,
-		money: money,
-		sandwichTastiness: sandwichTastiness,
-		sandwichCost: sandwichCost,
-		selectedSandwich: selectedSandwich,
-		ingredients: ingredients,
-		recipeBook: recipeBook,
-		autosaveEnabled: autosaveEnabled,
-		gameStage:gameStage,
-		ingredientBank:ingredientBank,
-		maxIngredientSelection:maxIngredientSelection,
-		sellRatio:sellRatio,
-		profitsCost:profitsCost,
-		profitsAmount:profitsAmount,
-		sandwichPoints:sandwichPoints,
-		SPS:SPS,
-		ingredientsSacrificed:ingredientsSacrificed,
-		machinery:machinery,
-		timeSpeed:timeSpeed,
-		moneyTotal:moneyTotal,
-		botUpgrades:botUpgrades
-	}; 
-	localStorage.setItem("saveData",JSON.stringify(saveData));
-	console.log("Game saved");
-	var d = new Date();
-	document.getElementById("alertsBox").innerHTML = "Saved at " + d.getMinutes() + ":" + d.getSeconds() + ":" + d.getMilliseconds();
-};
-function load(){
-	var savegame = JSON.parse(localStorage.getItem("saveData"));
-	timeSpeed = savegame.timeSpeed;
-	moneyTotal = savegame.moneyTotal;
-	money = savegame.money;
-	sandwiches = savegame.sandwiches;
-	sandwichTastiness = savegame.sandwichTastiness;
-	sandwichCost = savegame.sandwichCost;
-	selectedSandwich = savegame.selectedSandwich;
-	ingredients = savegame.ingredients;
-	recipeBook = savegame.recipeBook; 
-	autosaveEnabled = savegame.autosaveEnabled; 
-	gameStage = savegame.gameStage;
-	ingredientBank = savegame.ingredientBank;
-	maxIngredientSelection = savegame.maxIngredientSelection;
-	sellRatio = savegame.sellRatio;
-	profitsCost = savegame.profitsCost;
-	profitsAmount = savegame.profitsAmount;
-	sandwichPoints = savegame.sandwichPoints;
-	ingredientsSacrificed = savegame.ingredientsSacrificed;
-	SPS = savegame.SPS;
-	machinery = savegame.machinery;
-	botUpgrades = savegame.botUpgrades;
-		if(botUpgrades[2]){
-			
-		}
-	document.getElementById("speedCost").innerHTML = "$" + (Math.pow(botUpgrades[0],2.8)+25).toFixed(2)
-	document.getElementById("durCost").innerHTML = "$" + (Math.pow(botUpgrades[0],2.5)+25).toFixed(2)
-	document.getElementById("sandwichMakerCost").innerHTML = "$" + (Math.pow(5.25,machinery.length)+94.75).toFixed(2);
-	document.getElementById('profitsCost').innerHTML = "$" + profitsCost.toFixed(2);
-	document.getElementById('maxCost').innerHTML = "SP:" + Math.floor(Math.pow(maxIngredientSelection,8));
-	document.getElementById('SandwichPerSecond').innerHTML = SPS;
-	document.getElementById('ingrCost').innerHTML = "$" + Math.abs(Math.pow(ingredients.length-3,2.3)-1.365).toFixed(2)
-	makeInvis()
-	gameStageRender()
-	if(!autosaveEnabled){document.getElementById("autosaveBox").outerHTML = '<input id="autosaveBox" type="checkbox" oninput="autosaveEnabled = !autosaveEnabled;">'}; //check if autosave is disabled, replace if it is
-	console.log(recipeBook);
-	console.log(savegame.recipeBook);
-		document.getElementById("sandwichCount").innerHTML = sandwiches;
-		document.getElementById("moneyCount").innerHTML = money.toFixed(2);
-		refreshBook();
-		updateRecipe(String(selectedSandwich),sandwichTastiness,sandwichCost);
-		console.log("game loaded successfully, money: " + money);
-	var d = new Date();
-	document.getElementById("alertsBox").innerHTML = "Loaded at " + d.getMinutes() + ":" + d.getSeconds() + ":" + d.getMilliseconds();
-	refreshMachineryFull();
-}; if(localStorage.getItem("saveData") !== null){window.onload = load()} else {makeInvis();gameStageRender();}
-setIngredientSelect(); 
+
 //recipe book shit
 function swapRecipeBook(e){
 	updateRecipe(recipeBook[e][0],recipeBook[e][1],recipeBook[e][2])
@@ -431,12 +355,51 @@ function loop(){ //looping thing
 					}
 					break;
 			}
-	document.getElementById("timeGain").innerHTML = (0.0001 * moneyTotal +1).toFixed(3);
+	document.getElementById("timeGain").innerHTML = (0.00000025 * (moneyTotal * SPS) +1).toFixed(3);
+			if(.00000025 * (moneyTotal * SPS) +1>=1.3){
+				document.getElementById("prestigeButton").disabled = false;
+				document.getElementById("alertsBox").innerHTML = "It's time.";
+			}
 	document.getElementById("sandwichCount").innerHTML = sandwiches;
 	document.getElementById("moneyCount").innerHTML = money.toFixed(2);
 	setTimeout(function() {loop();}, Number(5000/Math.pow(timeSpeed,sandwichTastiness/5)))
 }; //1000 = 1000ms = 1s
-
+function prestige(){
+	moneyTotal = 5;
+	money = 5;
+	sandwiches = 0;
+	SPS = 0;
+	sandwichPoints = 0;
+ 	autosaveEnabled = true;
+ 	sandwichTastiness = 1;
+	sandwichCost = 1;
+ 	selectedSandwich = "Water Sandwich";
+ 	maxIngredientSelection = 4;
+	recipeBook = new Array(["Water Sandwich", 1.85, 2.45,["White Bread", "Water", "White Bread"],["bread","sauce","bread"]]);
+ 	timeSpeed = 1.30;
+ 	sellRatio = 8/7;
+	profitsCost = 10;
+ 	profitsAmount = 1;
+	machinery = [[100,100]];
+	botUpgrades = [1,1,false];
+	ingredientBank = ingredientBank.concat(ingredients.concat(ingredientsSacrificed))
+	ingredientsSacrificed=[]
+	ingredients = [
+		["White Bread", 1.15, 0.35,"bread"],
+		["American Cheese", 1.2, 0.50,"cheese"],
+		["Turkey", 1.4, 0.8,"meat"],
+		["Homemade Mustard", 1.2, 1,"mustard"],
+		["Discount Lettuce",1.35,1,"lettuce"],
+		["Water", 1, 0,"sauce"]
+	] //reset EVERYTHING!!!!!!!!!!!!
+	timeSpeed *= 0.00000025 * (moneyTotal * SPS) +1;
+	// time speed added
+	makeInvis(); //make sreen invios
+	setTimeout(function(){
+		save();
+		load();
+	},500); //wait 500ms
+}
 function SPloop(){
 	sandwichPoints += SPS;
 	document.getElementById('SandwichPointCount').innerHTML = sandwichPoints
